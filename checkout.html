@@ -58,36 +58,46 @@
         <span class="badge-kabwa">1</span>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <script>
-        document.getElementById('btn-continuer').addEventListener('click', function() {
-            let nimewo = document.getElementById('whatsapp').value;
-            if(nimewo === "") {
-                alert("Silvouplè antre nimewo WhatsApp ou a");
-            } else {
-                alert("Nimewo a antre: " + nimewo + ". N ap konekte baz de done a byento!");
-            }
-        });
-        // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+      // Konfigirasyon Firebase pa w la nèt
+      const firebaseConfig = {
+        apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+        authDomain: "mwstore-526d1.firebaseapp.com",
+        projectId: "mwstore-526d1",
+        storageBucket: "mwstore-526d1.firebasestorage.app",
+        messagingSenderId: "901851187874",
+        appId: "1:901851187874:web:a5936637da5cfa925325fb",
+        measurementId: "G-5H72KDEHD9"
+      };
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
-  authDomain: "mwstore-526d1.firebaseapp.com",
-  projectId: "mwstore-526d1",
-  storageBucket: "mwstore-526d1.firebasestorage.app",
-  messagingSenderId: "901851187874",
-  appId: "1:901851187874:web:a5936637da5cfa925325fb",
-  measurementId: "G-5H72KDEHD9"
-};
+      // Inisyalize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+      // Koute lè moun klike sou bouton an
+      document.getElementById('btn-continuer').addEventListener('click', function() {
+          let nimewo = document.getElementById('whatsapp').value;
+          
+          if (nimewo === "") {
+              alert("Silvouplè antre nimewo WhatsApp ou a");
+              return;
+          }
 
+          // Anrejistre nimewo a nan Firestore nan koleksyon "commandes"
+          db.collection("commandes").add({
+              whatsapp: nimewo,
+              date: new Date()
+          })
+          .then(function() {
+              alert("Kòmand ou anrejistre avèk siksè!");
+          })
+          .catch(function(error) {
+              alert("Gen yon erè ki pase: " + error.message);
+          });
+      });
     </script>
 </body>
+</html>
