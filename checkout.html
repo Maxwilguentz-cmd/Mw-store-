@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finaliser ma commande</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Ikòn pou ti kabwa a ak flèch yo -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Ba Navigasyon anlè a -->
     <div class="header-checkout">
         <div class="logo-checkout">Mw<span>Store</span></div>
         <div class="menu-icons">
@@ -20,9 +22,11 @@
         </div>
     </div>
 
+    <!-- Kontni Prensipal la -->
     <div class="container-checkout">
         <h1 class="titre-checkout">Finaliser ma commande</h1>
 
+        <!-- Liy Etap yo (1, 2, 3) -->
         <div class="etapes-barre">
             <div class="etape active">
                 <span class="num-etape">1</span>
@@ -38,13 +42,14 @@
             </div>
         </div>
 
+        <!-- Kat fòm nan -->
         <div class="carte-formulaire">
             <h2>Informations de livraison</h2>
             
             <div class="boite-input-group">
                 <span class="badge-input">INFOS — PROFIL PARTAGÉ</span>
                 <label for="whatsapp">Numéro WhatsApp</label>
-                <input type="number" id="whatsapp" placeholder="Ex: 38019657 (sans +509)" required>
+                <input type="number" id="whatsapp" placeholder="Ex: 35730041 (sans +509)" required>
             </div>
 
             <button type="button" class="btn-continuer" id="btn-continuer">
@@ -53,11 +58,13 @@
         </div>
     </div>
 
+    <!-- Ti bouton kabwa k ap flote anba a gòch la -->
     <div class="kabwa-flottant">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="badge-kabwa">1</span>
     </div>
 
+    <!-- Enpòtasyon Firebase vèsyon konpatib pou Navigatè Web -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
@@ -92,6 +99,11 @@
               date: new Date()
           })
           .then(function() {
+              // Sere nimewo a nan memwa navigatè a pou paj peman an ka itilize li
+              localStorage.setItem('whatsapp_kliyan', nimewo);
+              
+              alert("Kòmand ou anrejistre avèk siksè!");
+              // Redirije otomatikman sou dezyèm paj la
               window.location.href = "paiement.html";
           })
           .catch(function(error) {
