@@ -39,57 +39,123 @@
         </div>
 
         <div class="carte-formulaire">
-            <h2>Mode de paiement</h2>
             
-            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Sélectionnez votre option de paiement :</p>
-
-            <div class="boite-input-group opsyon-peman" onclick="chwaziPeman('moncash')">
-                <span class="badge-input">HAITI — MOBILE MONEY</span>
-                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                    <input type="radio" name="metod_peman" value="moncash" style="width: auto; margin: 0;">
-                    MonCash
-                </label>
+            <div class="boite-opsyon-peman" id="btn-moncash" onclick="chwaziMetod('moncash')">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>MonCash ⚡</span>
             </div>
 
-            <div class="boite-input-group opsyon-peman" onclick="chwaziPeman('natcash')">
-                <span class="badge-input">HAITI — MOBILE MONEY</span>
-                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                    <input type="radio" name="metod_peman" value="natcash" style="width: auto; margin: 0;">
-                    NatCash
-                </label>
+            <div class="bwat-instructions-peman d-none" id="bwat-moncash">
+                <h3>Instructions pour MonCash:</h3>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                
+                <div class="nimewo-kopie">
+                    <span>+509 38019657</span>
+                    <i class="fa-regular fa-copy" onclick="kopieNimewo('+50938019657')" style="cursor: pointer;"></i>
+                </div>
+                <p class="non-moun">Nom: Maxime Wilguentz</p>
+
+                <div class="boite-txn-input">
+                    <label for="txn_id_moncash">Transaction ID MonCash (Txn ID)</label>
+                    <input type="text" id="txn_id_moncash" placeholder="Ex: 003087615746" maxlength="12">
+                    <span class="ti-detay-anba">12 chiffres, commence par 003. ⚡</span>
+                </div>
             </div>
 
-            <button type="button" class="btn-continuer" id="btn-payer" style="margin-top: 10px;">
-                Suivant <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <div class="boite-opsyon-peman" id="btn-natcash" onclick="chwaziMetod('natcash')">
+                <i class="fa-solid fa-wallet"></i>
+                <span>NatCash ⚡</span>
+            </div>
+
+            <div class="bwat-instructions-peman d-none" id="bwat-natcash">
+                <h3>Instructions pour NatCash:</h3>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                
+                <div class="nimewo-kopie">
+                    <span>+509 40807923</span>
+                    <i class="fa-regular fa-copy" onclick="kopieNimewo('+50940807923')" style="cursor: pointer;"></i>
+                </div>
+                <p class="non-moun">Nom: Maxime Wilguentz</p>
+
+                <div class="boite-txn-input">
+                    <label for="txn_id_natcash">Transaction ID NatCash (Txn ID)</label>
+                    <input type="text" id="txn_id_natcash" placeholder="Ex: Numéro de transaction">
+                </div>
+            </div>
+
+            <div class="kabwa-flottant">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge-kabwa">1</span>
+            </div>
+
+            <div class="goup-boutons-anba">
+                <button type="button" class="btn-retour" onclick="window.location.href='checkout.html'">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </button>
+                <button type="button" class="btn-continuer-peman" id="btn-swiv-recap">
+                    Continuer <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Fonksyon pou koche radyo a lè w klike sou tout bwat la
-        function chwaziPeman(id) {
-            const radyo yo = document.getElementsByName('metod_peman');
-            radyo yo.forEach(radio => {
-                if(radio.value === id) radio.checked = true;
-            });
+        let metodChwazi = "";
+
+        function chwaziMetod(metod) {
+            metodChwazi = metod;
+            
+            const bwatMoncash = document.getElementById('bwat-moncash');
+            const bwatNatcash = document.getElementById('bwat-natcash');
+            const btnMoncash = document.getElementById('btn-moncash');
+            const btnNatcash = document.getElementById('btn-natcash');
+
+            bwatMoncash.classList.add('d-none');
+            bwatNatcash.classList.add('d-none');
+            btnMoncash.classList.remove('aktive');
+            btnNatcash.classList.remove('aktive');
+
+            if(metod === 'moncash') {
+                bwatMoncash.classList.remove('d-none');
+                btnMoncash.classList.add('aktive');
+            } else if(metod === 'natcash') {
+                bwatNatcash.classList.remove('d-none');
+                btnNatcash.classList.add('aktive');
+            }
         }
 
-        document.getElementById('btn-payer').addEventListener('click', function() {
-            const radyo yo = document.getElementsByName('metod_peman');
-            let chwa = "";
-            
-            radyo yo.forEach(radio => {
-                if(radio.checked) {
-                    chwa = radio.value;
-                }
-            });
+        function kopieNimewo(nimewo) {
+            navigator.clipboard.writeText(nimewo);
+            alert("Nimewo a kopye: " + nimewo);
+        }
 
-            if(chwa === "") {
-                alert("Silvouplè chwazi yon fason pou w peye!");
-            } else {
-                alert("Ou chwazi: " + chwa.toUpperCase() + ". N ap pase nan dènye etap la byento!");
-                // Pita isit la ap mennen nan paj récapitulatif la
+        document.getElementById('btn-swiv-recap').addEventListener('click', function() {
+            if (metodChwazi === "") {
+                alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
+                return;
             }
+
+            let txnId = "";
+            if (metodChwazi === "moncash") {
+                txnId = document.getElementById('txn_id_moncash').value;
+                if(txnId.length < 12 || !txnId.startsWith("003")) {
+                    alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
+                    return;
+                }
+            } else {
+                txnId = document.getElementById('txn_id_natcash').value;
+            }
+
+            if (txnId === "") {
+                alert("Silvouplè antre Transaksyon ID la pou nou ka verifye peman an.");
+                return;
+            }
+
+            localStorage.setItem('metod_peman', metodChwazi);
+            localStorage.setItem('txn_id_kliyan', txnId);
+            
+            window.location.href = "recapitulatif.html";
         });
     </script>
 </body>
