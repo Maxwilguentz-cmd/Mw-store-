@@ -1,0 +1,777 @@
+/* ==========================================================================
+   1. RESET JENERALE AK STIL BODY (KÒ PAJ LA)
+   ========================================================================== */
+
+/* Reset jeneral pou tout eleman nan paj la */
+* {
+    margin: 0; /* Retire tout maj pa defo ki sou bor eleman yo */
+    padding: 0; /* Retire tout espas andedan pa defo ki sou eleman yo */
+    box-sizing: border-box; /* Fè kalkil lajè eleman an enkli padding ak bordi pou anyen pa debòde */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografi jeneral si lòt yo pa chaje */
+}
+
+/* Stil pou background ak tout kò paj la (Konsève dimansyon ak espas nèt) */
+body {
+    text-align: left; 
+    color: white; 
+    font-family: Arial, Helvetica, sans-serif; 
+    background-color: black; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    margin: 0; 
+    padding-bottom: 150px; /* Espas anba pou footer a */
+}
+
+
+/* ==========================================================================
+   2. SEKSYON TIT AK SOU-TIT YO
+   ========================================================================== */
+
+/* Pou tit prensipal la */
+.soustitre p, h1 {
+    text-align: center; 
+    opacity: 0.7; 
+    margin-bottom: 5px; 
+}
+
+/* Dezyèm tit (Etikèt Catalogue) */
+.tag-catalogue {
+    color: #D4AF37; 
+    margin-bottom: 2px; 
+    font-size: 0.85em; 
+    letter-spacing: 2px; 
+    padding-left: 5%; 
+}
+
+/* Twazyèm tit (Kategori) */
+.titre-categories {
+    text-align: left !important; 
+    padding-left: 5%; 
+    font-size: 2em; 
+    font-weight: bold; 
+    letter-spacing: 1px; 
+    margin-top: 0; 
+    text-transform: uppercase; 
+}
+
+
+/* ==========================================================================
+   3. GRID AK PARAMÈTRE KOTE POU FE ACHA (STORE GRID)
+   ========================================================================== */
+
+/* Anplasmant ak paramèt kote pou fè acha a */
+.store-grid {
+    display: flex; 
+    justify-content: flex-start; 
+    gap: 20px; 
+    width: 90%; 
+    max-width: 1200px; 
+    margin: 30px auto; 
+    padding-bottom: 15px; 
+    scrollbar-width: none;}
+
+/* Kache ba scroll la sou Chrome, Safari ak Edge pou l rete bèl */
+.store-grid::-webkit-scrollbar {
+    display: none; }
+
+
+/* ==========================================================================
+   4. STIL JENERAL POU KAT YO (JEUX AK STREAMING)
+   ========================================================================== */
+
+/* Paramèt orijinal yo pou kat jwèt ak sèvis streaming yo */
+.card-freefire, .card-call-of-dutty, .card-dls, .card-pubg, .card-netflix, .card-disney, .card-prime, .card-crunchyroll {
+    position: relative; 
+    flex: 1; 
+    height: 180px; 
+    border-radius: 20px; 
+    padding: 25px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    cursor: pointer; 
+    overflow: hidden; 
+    transition: all 0.4s ease; 
+    background-size: cover; 
+    background-position: center; 
+    background-color: #0b0b0b; 
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.9); }
+
+/* Paramètre spesifik pou gwo bwat yo ki nan paj index la */
+.streaming, .jeux, .cartedebit {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px; 
+    border: 1px solid gray; 
+    transition: all 0.4s ease;
+    width: 90%;
+    max-width: 800px;
+    height: 200px; 
+    margin: 20px auto; 
+}
+
+
+/* ==========================================================================
+   5. BÒDI AK KOULÈ ESPESIFIK POU CHAK KAT
+   ========================================================================== */
+
+/* Koulè bòdi pou bwat Free Fire la */
+.card-freefire { border: 2px solid rgba(229, 9, 20, 0.4); }
+
+/* Koulè bòdi pou Call Of Duty la */
+.card-call-of-dutty { border: 2px solid lightblue; }
+
+/* Koulè bòdi pou DLS la */
+.card-dls { border: 2px solid lightcoral; }
+
+/* Koulè bòdi pou PUBG a */
+.card-pubg { border: 2px solid lightgray; }
+
+/* Koulè bòdi pou Netflix la nan paj streaming */
+.card-netflix { border: 2px solid rgba(229, 9, 20, 0.4); }
+
+/* Koulè bòdi pou Disney la nan paj streaming */
+.card-disney { border: 2px solid rgba(0, 99, 229, 0.4); }
+
+/* Koulè bòdi pou Amazon Prime la */
+.card-prime { border: 2px solid rgba(0, 168, 225, 0.4); }
+
+/* Koulè bòdi pou Crunchyroll la */
+.card-crunchyroll { border: 2px solid rgba(244, 117, 33, 0.4); }
+
+
+/* ==========================================================================
+   6. TÈKS AK TIT ANNDAN KAT YO
+   ========================================================================== */
+
+/* Paramètre pou tit ki nan grid nan premye paj yo */
+.titre-pour-jeux {
+    position: absolute; 
+    bottom: 5px; 
+    left: 10px; 
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Swit tit jwèt h2 */
+.titre-pour-jeux h2 { margin: 0 0 5px 0; }
+
+/* Swit tit jwèt h6 */
+.titre-pour-jeux h6 {
+    margin-top: 0;
+    font-size: 0.85em;
+    color: #888; 
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+/* Tèks anndan kat yo nan dezyèm ak twazyèm paj yo */
+.card-texte h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.6em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Dezyèm tèks h6 la nan dezyèm ak twazyèm paj yo */
+.card-texte h6 {
+    margin: 0;
+    font-size: 0.85em;
+    color: #888;
+    font-weight: normal;
+}
+
+
+/* ==========================================================================
+   7. EFÈ HOVER (ANNDAN AK DEYÒ) LÈ SOURIT LA PASE SOU KAT YO
+   ========================================================================== */
+
+/* Lè w pase sou zòn Streaming */
+.streaming:hover {
+    box-shadow: 0 0 8px gray;
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou zòn Jeux */
+.jeux:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 8px lightblue;
+}
+
+/* Lè w pase sou zòn Carte Debit */
+.cartedebit:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 8px white;
+}
+
+/* Lè w pase sou Free Fire */
+.card-freefire:hover {
+    border-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou Call Of Duty */
+.card-call-of-dutty:hover {
+    border-color: blue;
+    box-shadow: 0 0 25px lightblue;
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou DLS */
+.card-dls:hover {
+    border-color: coral;
+    box-shadow: 0 0 25px lightcoral;
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou PUBG */
+.card-pubg:hover {
+    border-color: gray;
+    box-shadow: 0 0 25px lightgray;
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou Netflix */
+.card-netflix:hover {
+    border-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou Disney */
+.card-disney:hover {
+    border-color: #0063e5;
+    box-shadow: 0 0 25px rgba(0, 99, 229, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou Amazon Prime */
+.card-prime:hover {
+    border-color: #00a8e1;
+    box-shadow: 0 0 25px rgba(0, 168, 225, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Lè w pase sou Crunchyroll */
+.card-crunchyroll:hover {
+    border-color: #f47521;
+    box-shadow: 0 0 25px rgba(244, 117, 33, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Kòd pou bouton wonn flèch la lè w pase sou kat yo */
+.streaming:hover .arrow-btn, .jeux:hover .arrow-btn, .cartedebit:hover .arrow-btn, 
+.card-freefire:hover .arrow-btn, .card-call-of-dutty:hover .arrow-btn, .card-dls:hover .arrow-btn, 
+.card-pubg:hover .arrow-btn, .card-netflix:hover .arrow-btn, .card-disney:hover .arrow-btn, 
+.card-prime:hover .arrow-btn, .card-crunchyroll:hover .arrow-btn {
+    background-color: white; 
+    color: black; 
+    border-color: white; 
+}
+
+/* Kòd pou imaj background yo anime */
+.streaming:hover .card-bg-img, .jeux:hover .card-bg-img, .cartedebit:hover .card-bg-img, 
+.card-freefire:hover .card-bg-img, .card-call-of-dutty:hover .card-bg-img, .card-dls:hover .card-bg-img, 
+.card-pubg:hover .card-bg-img, .card-netflix:hover .card-bg-img, .card-disney:hover .card-bg-img, 
+.card-prime:hover .card-bg-img, .card-crunchyroll:hover .card-bg-img {
+    opacity: 0.6; 
+    transform: scale(1.05); 
+}
+
+
+/* ==========================================================================
+   8. ELEMAN KI ANDAN KAT YO (BADJ, FLÈCH, IMAJ BG)
+   ========================================================================== */
+
+/* Ti badj disponiblite ki anlè a dwat nan kat yo */
+.badge-dispo {
+    position: absolute;
+    top: 15px; 
+    right: 15px; 
+    background-color: rgba(212, 175, 55, 0.15); 
+    color: #D4AF37; 
+    border: 1px solid rgba(212, 175, 55, 0.4); 
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 8px; 
+}
+
+/* Ti bouton wonn ki gen flèch la */
+.arrow-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    color: white;
+    font-size: 0.95em;
+    transition: 0.3s;
+}
+
+/* Style pou imaj k ap sèvi kòm background anndan kat yo */
+.card-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: 1; 
+    opacity: 0.3; 
+    transition: 0.4s ease;
+}
+
+
+/* ==========================================================================
+   9. HERO SECTION (BANYÈ ANLÈ A - KÒD DEZYÈM PAJ ORIJINAL SAN CHANJMAN)
+   ========================================================================== */
+.hero-section {
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    padding: 20px 0 40px 0; 
+    border-bottom: 1px solid #222; 
+}
+
+.hero-bg {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-image: url('choix1.JPG'); 
+    background-size: cover; 
+    background-position: center; 
+    opacity: 0.3; 
+    z-index: -1; 
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.hero-top {
+    padding-left: 20px; 
+}
+
+.btn-back {
+    background: rgba(0, 0, 0, 0.6); 
+    border: 1px solid #444; 
+    color: white; 
+    padding: 8px 16px; 
+    border-radius: 20px; 
+    font-size: 1rem; 
+    cursor: pointer; 
+}
+
+.hero-text {
+    padding-left: 40px; 
+}
+
+.red-subtitle {
+    color: #e50914; 
+    font-size: 0.8rem; 
+    font-weight: 700; 
+    letter-spacing: 2px; 
+}
+
+.main-title {
+    font-size: 3.5rem; 
+    font-weight: bold; 
+    letter-spacing: 1px; 
+    margin-top: -5px; 
+}
+
+
+/* ==========================================================================
+   10. MAIN CONTENT AK KAD PWODWI LAYOUT ORIZONTAL (KÒD ORIJINAL PAJ NETFLIX)
+   ========================================================================== */
+.main-content {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 30px 20px 50px 20px; 
+}
+
+.section-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-end; 
+    margin-bottom: 30px; 
+}
+
+.red-subtitle-small {
+    color: #e50914; 
+    font-size: 0.75rem; 
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.section-title-group h2 {
+    font-size: 1.4rem; 
+    text-transform: uppercase; 
+    margin-top: 5px; 
+}
+
+.product-count {
+    color: #555; 
+    font-size: 0.9rem;
+}
+
+.cards-container {
+    display: flex; 
+    flex-direction: column; 
+    gap: 25px; 
+}
+
+.horizontal-card {
+    background: #121212; 
+    border: 1px solid white; 
+    border-radius: 25px; 
+    padding: 25px; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between; 
+    position: relative; 
+}
+
+.premium-card {
+    border-color: rgb(253, 253, 162); 
+    background: #1a1811; 
+}
+
+.badge {
+    position: absolute; 
+    top: -12px; 
+    left: 20px; 
+    background: #d4af37; 
+    color: #000; 
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px; 
+}
+
+.card-left {
+    flex: 1; 
+    min-width: 150px; 
+}
+
+.icon {
+    font-size: 1.8rem; 
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.plan-type {
+    font-size: 0.7rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.card-left h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #888; 
+}
+
+.premium-text { color: #dab745; }
+
+.card-middle {
+    flex: 2; 
+    padding: 0 20px; 
+}
+
+.card-middle ul {
+    list-style: none; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px 20px; 
+    max-width: 500px; 
+    margin: 0 auto; 
+}
+
+.card-middle li {
+    font-size: 0.85rem;
+}
+
+.checked { color: #aaa; } 
+
+.disabled { 
+    color: #444; 
+    text-decoration: line-through; 
+}
+
+.card-right {
+    flex: 0.5; 
+    text-align: right; 
+}
+
+.btn-choose1 {
+    background: #111; 
+    border: 1px solid #333; 
+    color: #aaa; 
+    padding: 12px 25px; 
+    cursor: pointer;
+    border-radius: 8px; 
+    font-size: 1rem;
+    transition: all 0.2s; 
+    white-space: nowrap; 
+}
+
+.btn-choose1:hover {
+    color: black; 
+    background-color: #2ecc71; 
+    border-color: #2ecc71; 
+}
+
+.premium-btn {
+    color: rgb(253, 253, 162); 
+    border-color: rgb(253, 253, 162); 
+}
+
+.highlight-green { 
+    color: #2ecc71; 
+}
+
+
+/* ==========================================================================
+   11. SÈKSYON TEMWAYAJ KLIYAN YO (ANBA)
+   ========================================================================== */
+
+.temoignages-section {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 140px; 
+}
+
+.temoignages-section h2 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+/* ==========================================================================
+   12. BARRE DE NAVIGATION (FOOTER)
+   ========================================================================== */
+
+.barre-nav {
+    display: flex;                  
+    justify-content: space-between; 
+    align-items: center;         
+    background-color: rgba(0, 0, 0, 0.80);      
+    border-radius: 20px;            
+    padding: 0;             
+    margin: 0;    
+    width: 90%;                     
+    max-width: 1200px;      
+    position: fixed;
+    left: 5%; 
+    bottom: 20px;
+    z-index: 1000;
+}
+
+.bloc-gauche {
+    background-color: #0e0e0e;
+    border: 1px solid #D4AF37;
+    border-radius: 20px;
+    padding: 10px 15px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-retour {
+    background-color: transparent;
+    color: #D4AF37;
+    border: 2px solid #D4AF37;
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+}   
+
+.btn-retour:hover {
+    background-color: #D4AF37;
+    color: black;
+}  
+    
+.bloc-milieu {
+    display: flex;
+    gap: 15px; 
+    background-color: rgba(0, 0, 0, 0.30);  
+    border: 1px solid #D4AF37;   
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.btn-milieu {
+    background-color: rgba(212, 175, 55, 0.1); 
+    color: white;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}   
+
+.btn-milieu:hover {
+    border-color: #D4AF37;
+    background-color: rgba(212, 175, 55, 0.2); 
+}    
+
+.bloc-droite {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-social {
+    color: white;
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: 0.3s;
+}    
+
+.icon-social:hover {
+    color: #D4AF37;
+}    
+
+
+/* ==========================================================================
+   13. STIL RESPONSIVITE POU TELEFÒN (KÒD ORIJINAL DEZYÈM PAJ)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .horizontal-card {
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 20px; 
+    }
+    
+    .card-middle, .card-right {
+        width: 100%; 
+        padding: 0; 
+    }
+    
+    .card-middle ul {
+        grid-template-columns: 1fr; 
+    }
+
+    .card-right {
+        text-align: left; 
+    }
+
+    .btn-choose1 {
+        width: 100%; 
+    }
+}
+
+
+
+
+
+/* ==========================================================================
+   ZOÒN RESPONSIVITE POU TABLÈT (Ekran ki pi piti pase 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    /* Pou Grid jwèt yo (Free fire, PUBG...) pa vin twò kwense */
+    .store-grid {
+        width: 95%; /* Nou laji zòn nan pou l pran plis espas sou tablèt */
+        gap: 15px;  /* Nou rasi espas ant kat yo yon ti kras */
+    }
+
+    .card-freefire, .card-call-of-dutty, .card-dls, .card-pubg, 
+    .card-netflix, .card-disney, .card-prime, .card-crunchyroll {
+        height: 160px; /* Nou mete yon wotè ki pi adapte ak tablèt */
+        padding: 15px; /* Nou rasi espas andedan an */
+    }
+}
+
+/* ==========================================================================
+   ZOÒN RESPONSIVITE POU TELEFÒN (Ekran ki pi piti pase 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Gwo bwat ki nan paj index la (Streaming, Jeux, Carte debit) */
+    .streaming, .jeux, .cartedebit {
+        width: 92%;      /* L lwen bò gòch ak bò dwat ekran an pa 4% */
+        height: 180px;   /* Nou desann wotè a a 180px pou l pa pran twòp plas nan longè */
+    }
+
+    /* Grid paj jwèt yo ap tounen yon liy vètikal si yo pa t ka kenbe sou liy lan */
+    .store-grid {
+        flex-direction: column; 
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Kat jwèt yo ap pran preske tout lajè telefòn lan kounye a */
+    .card-freefire, .card-call-of-dutty, .card-dls, .card-pubg, 
+    .card-netflix, .card-disney, .card-prime, .card-crunchyroll {
+        width: 90%;
+        height: 150px; /* Wotè parfe pou telefòn */
+    }
+
+    /* Pou kad orizontal yo (Plan Netflix) */
+    .horizontal-card {
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 20px; 
+        width: 92%;
+        margin: 0 auto; /* Santre kad yo nan mitan ekran an */
+    }
+    
+    .card-middle, .card-right {
+        width: 100%; 
+        padding: 0; 
+    }
+    
+    .card-middle ul {
+        grid-template-columns: 1fr; /* Lis la tounen yon sèl kolòn */
+    }
+
+    .card-right {
+        text-align: left; 
+    }
+
+    .btn-choose1 {
+        width: 100%; /* Bouton an pran tout lajè a pou moun ka klike fasil */
+    }
+
+    /* Ba navigasyon an (Footer a) bezwen vin pi piti pou l pa kache kontni */
+    .barre-nav {
+        width: 95%;
+        left: 2.5%;
+        padding: 5px;
+    }
+    
+    .btn-milieu, .btn-retour {
+        padding: 8px 12px; /* Rasi bouton yo pou yo ka kenbe ansanm sou yon ti ekran */
+        font-size: 0.85rem;
+    }
+}
+
+
+
