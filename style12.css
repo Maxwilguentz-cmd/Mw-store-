@@ -1,0 +1,649 @@
+/* Reset jeneral pou tout eleman nan paj la */
+* {
+    margin: 0; /* Retire tout maj pa defo ki sou bor eleman yo */
+    padding: 0; /* Retire tout espas andedan pa defo ki sou eleman yo */
+    box-sizing: border-box; /* Fè kalkil lajè eleman an enkli padding ak bordi pou anyen pa debòde */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografi jeneral si lòt yo pa chaje */
+}
+
+/* Stil pou background ak tout kò paj la */
+body {
+    text-align: left; /* Tèks yo ap aliyen a gòch pa defo */
+    color: white; /* Tout tèks nan paj la ap blan pa defo */
+    font-family: Arial, Helvetica, sans-serif; /* Chwa tipografi prensipal la */
+    background-color: black; /* Koulè background paj la ap nwa fiks */
+    height: 100vh; /* Paj la ap pran tout wotè ekran an nèt */
+    margin: 0; /* Netwaye maj deyò yo */
+    padding-bottom: 150px; /* Bay yon espas anba pou footer a pa kache kontni an lè w ap scrolle */
+}
+
+/* === HERO SECTION (Banyè Anlè a) === */
+.hero-section {
+    position: relative; /* Pèmèt nou pozisyone lòt eleman andedan l an 'absolute' parapò ak li */
+    height: 350px; /* Wotè fiks banyè anlè a */
+    display: flex; /* Aktive flexbox pou jere pozisyon eleman yo */
+    flex-direction: column; /* Ranmase eleman yo vètikalman (yonn anba lòt) */
+    justify-content: space-between; /* Pouse premye eleman an anlè nèt ak dezyèm lan anba nèt */
+    padding: 20px 0 40px 0; /* Espas andedan (anlè ak anba) */
+    border-bottom: 1px solid #222; /* Yon ti liy gri fonse anba banyè a */
+}
+
+/* Stil pou imaj k ap nan background banyè a */
+.hero-bg {
+    position: absolute; /* Detache imaj la nan koule nòmal la pou l ka gaye nan tout bwat la */
+    top: 0; /* Kole l anlè nèt */
+    left: 0; /* Kole l a gòch nèt */
+    width: 100%; /* Pran tout lajè banyè a */
+    height: 100%; /* Pran tout wotè banyè a */
+    background-image: url('choix1.JPG'); /* Lyen kote imaj la soti a */
+    background-size: cover; /* Fòse imaj la kouvri tout bwat la nèt san l pa fòse fòm li */
+    background-position: center; /* Santre mitan imaj la nan bwat la */
+    opacity: 0.3; /* Diminye klète imaj la pou l vin som pou tèks blan an ka parèt byen */
+    z-index: -1; /* Mete imaj la dèyè tèks yo pou l pa kache yo */
+    /* De liy sa yo fè imaj la fè yon efè fennen (fade) lè l ap rive anba */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.hero-top {
+    padding-left: 20px; /* Pouse bouton 'Catégories' a pou l pa kole sou bò gòch ekran an */
+}
+
+.btn-back {
+    background: rgba(0, 0, 0, 0.6); /* Background nwa transparan */
+    border: 1px solid #444; /* Ti bordi gri */
+    color: white; /* Tèks bouton an blan */
+    padding: 8px 16px; /* Espas andedan bouton an */
+    border-radius: 20px; /* Fè kwen bouton an won */
+    font-size: 1rem; /* Gwosè tèks la */
+    cursor: pointer; /* Fè sourit la tounen yon ti men lè w pase sou li */
+}
+
+.hero-text {
+    padding-left: 40px; /* Pouse tit NETFLIX la yon ti jan lwen bò gòch la tou */
+}
+
+.red-subtitle {
+    color: #e50914; /* Koulè wouj Netflix la */
+    font-size: 0.8rem; /* Ti gwosè tèks */
+    font-weight: 700; /* Mete tèks la gra */
+    letter-spacing: 2px; /* Espase lèt yo yonn ak lòt */
+}
+
+.main-title {
+    font-size: 3.5rem; /* Gwo lèt pou tit la */
+    font-weight: bold; /* Mete l gra anpil */
+    letter-spacing: 1px; /* Yon ti espas ant lèt yo */
+    margin-top: -5px; /* Rale tit la moute yon ti kras bò kot ti sous-tit la */
+}
+
+/* === MAIN CONTENT (Zòn Pwodwi yo) === */
+.main-content {
+    max-width: 1200px; /* Lajè maksimòm zòn nan pou l pa tro laj sou gwo ekran */
+    margin: 0 auto; /* Santre tout zòn nan parfe nan mitan ekran an */
+    padding: 30px 20px 50px 20px; /* Espas andedan (anlè, sou kote, ak anba) */
+}
+
+.section-header {
+    display: flex; /* Mete tit la ak kantite pwodwi sou menm liy */
+    justify-content: space-between; /* Pouse tit la a gòch nèt epi kantite pwodwi a a dwat nèt */
+    align-items: flex-end; /* Aliyen yo deba sou menm nivo anba */
+    margin-bottom: 30px; /* Bay yon espas anba anvan kad yo kòmanse */
+}
+
+.red-subtitle-small {
+    color: #e50914; /* Koulè wouj */
+    font-size: 0.75rem; /* Ti gwosè */
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.section-title-group h2 {
+    font-size: 1.4rem; /* Gwosè tit la */
+    text-transform: uppercase; /* Fòse tèks la ekri an majiskil */
+    margin-top: 5px; /* Ti espas anlè h2 a */
+}
+
+.product-count {
+    color: #555; /* Koulè gri fonse pou l sekondè */
+    font-size: 0.9rem;
+}
+
+/* === KAD YO (Layout Orizontal) === */
+.cards-container {
+    display: flex; /* Aktive flexbox */
+    flex-direction: column; /* Ranje kad yo yonn anba lòt vètikalman */
+    gap: 25px; /* Mete yon espas 25px ant de kad yo */
+}
+
+.horizontal-card {
+    background: #121212; /* Background nwa lejè pou kad la parèt sou background jeneral la */
+    border: 1px solid white; /* Ti bordi blan pou delimite kad la */
+    border-radius: 25px; /* Kwen kad yo byen won */
+    padding: 25px; /* Espas andedan kad la pou kontni an respire */
+    display: flex; /* Mete pati gòch, mitan, ak dwat sou menm liy orizontal */
+    flex-direction: row; /* Fòse eleman yo rete sou liy orizontal */
+    align-items: center; /* Santre tout 3 blòk yo sou menm liy vètikal nan mitan */
+    justify-content: space-between; /* Distribiye espas la egal ego ant 3 blòk yo */
+    position: relative; /* Pèmèt badj yo ka fikse 'absolute' sou li */
+}
+
+
+/* Stil espesyal pou kad Premium lan */
+.premium-card {
+    border-color:rgb(253, 253, 162); /* Chanje bordi a an jòn/ò */
+    background: #1a1811; /* Background nwa ki gen yon ti nuans jòn */
+}
+
+/* Badj jòn TOP la */
+.badge {
+    position: absolute; /* Detache badj la pou l mete l egzakteman kote nou vle */
+    top: -12px; /* Fè l monte chita sou bordi anlè a */
+    left: 20px; /* Pouse l a 20px depi sou bò gòch */
+    background: #d4af37; /* Background jòn  */
+    color: #000; /* Tèks anndan l nwa */
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px; /* Kwen yon ti jan won */
+}
+
+/* Badj Disponibilite a */
+.badge-dispo {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background-color: #0b0b0b;
+    color: #D4AF37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* Seksyon Gòch Kad la (Tit ak pri) */
+.card-left {
+    flex: 1; /* Pran 1 pati nan espas ki disponib la */
+    min-width: 150px; /* Lajè minimòm pou eleman yo pa kwense */
+}
+
+.icon {
+    font-size: 1.8rem; /* Gwosè ikòn yo */
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.plan-type {
+    font-size: 0.7rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.card-left h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #888; /* Ti lèt 'G' a ap gri */
+}
+
+/* Klas pou koulè jòn ò */
+.premium-text { color: #dab745; }
+
+/* Seksyon Mitan (Lis avantaj yo) */
+.card-middle {
+    flex: 2; /* Pati mitan an ap pran de fwa plis espas paske lis la long */
+    padding: 0 20px; /* Ti espas sou kote yo pou l pa kole ak pri oswa bouton */
+}
+
+/* Grid de kolòn pou lis la */
+.card-middle ul {
+    list-style: none; /* Retire puces yo */
+    display: grid; /* Aktive CSS Grid */
+    grid-template-columns: 1fr 1fr; /* Divize zòn nan an de kolòn parfe egal */
+    gap: 10px 20px; /* 10px espas vètikal ant liy yo, 20px espas horizontal ant de kolòn yo */
+    max-width: 500px; /* Lajè maksimòm lis la */
+    margin: 0 auto; /* Santre lis la parfe nan mitan blòk .card-middle a */
+}
+
+.card-middle li {
+    font-size: 0.85rem;
+}
+
+/* Stil pou avantaj ki tcheke yo */
+.checked { color: #aaa; } /* Koulè gri klè */
+
+/* Stil pou sa ki pa disponib yo */
+.disabled { 
+    color: #444; /* Gri trè fonse */
+    text-decoration: line-through; /* Bare tèks la pou montre li pa ladan l */
+}
+
+/* Seksyon Dwat (Zòn Bouton an) */
+.card-right {
+    flex: 0.5; /* Pran yon ti pati nan espas la */
+    text-align: right; /* Aliyen bouton an nèt ale a dwat */
+}
+
+.btn-choose1 {
+    background: #111; /* Background nwa tou pre gri */
+    border: 1px solid #333; /* Bordi gri fonse */
+    color: #aaa; /* Tèks gri klè */
+    padding: 12px 25px; /* Lajè ak wotè andedan bouton an */
+    cursor: pointer;
+    border-radius: 8px; /* Kwen bouton an yon ti jan won */
+    font-size: 1rem;
+    transition: all 0.2s; /* Animasyon dous lè w pase sourit sou li */
+    white-space: nowrap; /* Anpeche tèks bouton an brize fè de liy si espas la piti */
+}
+
+/* Efè lè sourit la sou bouton an */
+.btn-choose1:hover {
+    color: black; /* Tèks la vin nwa */
+    background-color: #2ecc71; /* Background nan vin vèt */
+    border-color: #2ecc71; /* Bordi a vin vèt tou */
+}
+
+/* Bouton espesyal pou plan Premium lan */
+.premium-btn {
+    color:rgb(253, 253, 162) ; /* Tèks la ap jòn ò pa defo */
+    border-color: rgb(253, 253, 162); /* Bordi a ap jòn ò pa defo */
+}
+
+/* RESPONSIVITE: Stil k ap aplike sèlman sou ekran ki pi piti pase 768px (Telefòn) */
+@media (max-width: 768px) {
+    .horizontal-card {
+        flex-direction: column; /* Kad yo p ap sou liy ankò, y ap pase yonn anba lòt */
+        align-items: flex-start; /* Aliyen tout blòk yo nèt a gòch */
+        gap: 20px; /* Espas ant blòk yo anndan kad la */
+    }
+    
+    .card-middle, .card-right {
+        width: 100%; /* Yo pran tout lajè kad la nèt */
+        padding: 0; /* Retire padding yo */
+    }
+    
+    .card-middle ul {
+        grid-template-columns: 1fr; /* Lis la p ap fè de kolòn ankò, l ap fè yon sèl kolòn vètikal */
+    }
+
+    .card-right {
+        text-align: left; /* Bouton an ap pase a gòch sou telefòn */
+    }
+
+    .btn-choose1 {
+        width: 100%; /* Bouton an ap pran tout lajè ekran telefòn lan nèt pou l pi fasil pou klike */
+    }
+}
+/* === ZOÒN PWODWI / KAD ORAL (Pati CSS ki jere koulè kado a) === */
+
+/* Klas sa a chanje koulè pri a oswa tèks yo an vèt klere (#2ecc71) */
+.highlight-green { 
+    color: #2ecc71; /* Koulè vèt fliyoresan ki bay efè siksè oswa disponiblite otomatik */
+}
+
+/* Nou asire tou ke lè itilizatè a pase sou bouton twazyèm plan sa a, li bay menm efè vèt la */
+.btn-choose1:hover {
+    color: black; /* Tèks bouton an ap vin nwa lè w pase sou li */
+    background-color: #2ecc71; /* Background bouton an ap tounen vèt pou match ak Gift Card la */
+    border-color: #2ecc71; /* Bordi a ap vin vèt tou */
+}
+
+
+
+
+
+
+body{
+    text-align: left;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    padding-bottom: 150px;}
+
+/*pou titre principale*/
+.soustitre p, h1{
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 5px;}
+/*2e titre*/
+ .tag-catalogue {
+    color: #D4AF37;
+    margin-bottom: 2px;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    padding-left: 5%;} 
+/*3e titre*/
+.titre-categories {
+    text-align: left !important;
+    padding-left: 5%;
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 0;
+    text-transform: uppercase;}
+
+/*anplasmant ak parametre kote pou fe acha */    
+.store-grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding-bottom: 15px;
+    scrollbar-width: none;} 
+
+/* Kache ba scroll la sou Chrome, Safari ak Edge pou l rete bèl */
+.store-grid::-webkit-scrollbar {
+    display: none;}    
+
+/* parametre espesifik pou pati freefire la ak pati callof la epi pati dls la   */
+.card-freefire ,.card-call-of-dutty, .card-dls, .card-pubg,.card-netflix,.card-disney,.card-prime,.card-crunchyroll{
+    position: relative;
+    flex: 1;
+    height: 180px;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background-size: cover;
+    background-position: center;
+    background-color: #0b0b0b;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.9);} 
+ 
+/*parametre spesifik pou pati ki nan page index la */    
+.streaming,.jeux,.cartedebit{
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    border: 1px solid gray;
+    transition: all 0.4s ease;
+    width: 90%;
+    max-width: 800px;
+    height: 200px;
+    margin: 20px auto;}    
+   
+/*coule bordi pou pati ff la */
+.card-freefire{
+    border: 2px solid rgba(229, 9,20, 0.4);} 
+/*coule bordi pou callof la */
+.card-call-of-dutty{
+    border: 2px solid lightblue;}  
+/*coule bodi dls la */    
+.card-dls{
+    border:2px solid lightcoral;}
+/*coule pati pou pubG a*/    
+.card-pubg{
+    border: 2px solid lightgray;}
+/*coule pati netflix la nan paj streming */    
+.card-netflix {
+    border: 2px solid rgba(229, 9, 20, 0.4);} 
+/*koulh pati disney la nan paj streaming*/
+.card-disney {
+    border: 2px solid rgba(0, 99, 229, 0.4);}
+/*pou primr nan*/    
+.card-prime {
+    border: 2px solid rgba(0, 168, 225, 0.4);}    
+/* Style espesifik pou Crunchyroll (Koulè zoranj) */
+.card-crunchyroll {
+    border: 2px solid rgba(244, 117, 33, 0.4);}
+
+/*parametre pou titre kinan grid nan 1e paj yo*/
+.titre-pour-jeux{
+    position: absolute ;
+    bottom: 5px;
+    left: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;}
+/*suit*/    
+.titre-pour-jeux h2{ 
+    margin:0 0 5px 0;}
+/*suit*/    
+.titre-pour-jeux h6{
+    margin-top: 0;
+    font-size: 0.85em;
+    color: #888;
+    font-weight: normal;
+    opacity: 0.7;  }    
+/* Tèks anndan kat yo nan 2e 3e paj yo */
+.card-texte h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.6em;
+    font-weight: bold;
+    letter-spacing: 1px;}
+/*2e texte la nan 2e 3e paj yo*/
+.card-texte h6 {
+    margin: 0;
+    font-size: 0.85em;
+    color: #888;
+    font-weight: normal;}
+
+/*lew klike sou pati streaming kod sa fe bordi a anime el fe yon ombre gray*/
+.streaming:hover{
+    box-shadow: 0 0 8px gray;
+    transform:translateY(-5px);}  
+/*lew klike sou pati jeux kod sa fe bodi a anime el fe yon ombre lightblue*/
+.jeux:hover{
+    transform:translateY(-5px) ;
+    box-shadow:0 0 8px lightblue;}   
+/*lew klike sou pati carte debit kod sa fe bodi a anime el fe yon ombre white*/  
+.cartedebit:hover{
+    transform:translateY(-5px) ;
+    box-shadow:0 0 8px white;}        
+/*lew klike sou pati ff kod sa fe bordu a anime el fe yon ombre red*/
+.card-freefire:hover { 
+    border-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); 
+    transform: translateY(-5px);}  
+/*lew klike sou pati callof sa fe bodi a anime el fe yon ombre blue*/
+.card-call-of-dutty:hover{
+    border-color:  blue;
+    box-shadow: 0 0 25px lightblue;
+    transform: translateY(-5px);} 
+/*lew klike sou pati dls la sa fe bodi a anime el fe yon ombre green*/    
+.card-dls:hover{
+    border-color: coral;
+    box-shadow:0 0 25px lightcoral;
+    transform: translateY(-5px);}    
+/*lew klike sou pati pubg a sa fe bodi a anime el fe yon ombre gray */
+.card-pubg:hover{
+    border-color:gray;
+    box-shadow: 0 0 25px lightgray;
+    transform: translateY(-5px);}
+/*pou netflix la nan paj streaming*/    
+.card-netflix:hover { 
+    border-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); 
+    transform: translateY(-5px); }    
+/*pou disney la nan paj streaming*/
+.card-disney:hover { 
+    border-color: #0063e5;
+    box-shadow: 0 0 25px rgba(0, 99, 229, 0.4); 
+    transform: translateY(-5px);}
+/*pou prime la nan paj streaming */ 
+.card-prime:hover { 
+    border-color: #00a8e1;
+    box-shadow: 0 0 25px rgba(0, 168, 225, 0.4); 
+    transform: translateY(-5px);}
+/*pou scrunchyroll nan paj streaming*/
+.card-crunchyroll:hover { 
+    border-color: #f47521;
+    box-shadow: 0 0 25px rgba(244, 117, 33, 0.4); 
+    transform: translateY(-5px);}    
+
+/*lew peze sou pati ff ou pati callof la ou dls la ou pubj akod ki jere sa ti bouton an fe*/   
+.streaming:hover .arrow-btn,.jeux:hover .arrow-btn,.cartedebit:hover .arrow-btn,.card-freefire:hover .arrow-btn, .card-call-of-dutty:hover .arrow-btn, .card-dls:hover .arrow-btn,.card-pubg:hover .arrow-btn,.card-netflix:hover .arrow-btn,.card-disney:hover .arrow-btn,.card-prime:hover .arrow-btn ,.card-crunchyroll:hover .arrow-btn{
+    background-color: white;
+    color: black;
+    border-color: white;}    
+
+/*barre de navigation an*/
+.barre-nav{
+    display: flex;                  /* Aliyen 3 gwo blòk yo sou menm liy */
+    justify-content: space-between; /* Mete yonn a gòch, yonn nan mitan, yonn a dwat */
+    align-items: center;         /* Santre tout bagay nan sans wotè */
+    background-color:rgba(0, 0,0, 0.80);      /* Yon koulè nwa ki fon anpil */
+    border-radius: 20px;            /* Kwen yo awondi jan sa ye nan foto a */
+    padding: 0;             /* Espas anndan ba a (anlè/anba ak gòch/dwat) */
+    margin:0;    /* Marge deyò pou l pa kole ak banyè yo */
+    width: 90%;                     /* Lajè ba a parapò ak ekran an */
+    max-width: 1200px;      
+    position:fixed;
+    left: 5%; 
+    bottom: 20px;
+    transform: translateY();
+    z-index: 1000;}
+/*pati gauche barre navigation an*/
+.bloc-gauche{
+    background-color: #0e0e0e;
+    border: 1px solid #D4AF37;
+    border-radius: 20px;
+    padding: 10px 15px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+/* 1. Kad separe pou bouton retour a sèlman */
+.bloc-gauche{
+    display: flex;
+    align-items: center;}    
+/*aparans bouton ki pemet ou ale nan premier paj la */
+.btn-retour {
+    background-color: transparent;
+    color: #D4AF37;
+    border: 2px solid #D4AF37;
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;}   
+
+/* Lè sourit la sou li, li vin jòn tèks la vin nwa */
+.btn-retour:hover {
+    background-color: #D4AF37;
+    color: black;}  
+    
+/* Pati mitan: aparans pati milieu a  */
+.bloc-milieu{
+    display: flex;
+    gap: 15px;   
+    background-color:rgba(0, 0,0, 0.30);  
+    border: 1px solid #D4AF37;   
+    border-radius: 20px;
+    padding: 10px 20px;} /*pou bouton yo ka gn espas antre yo*/
+
+ /* Style pou bouton nan mitan yo */
+.btn-milieu {
+    background-color: rgba(212, 175, 55, 0.1); /* Yon ti fon dore transparan */
+    color: white;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s}
+
+ /*lew klike sou bouton milieu navigate yo*/   
+.btn-milieu:hover {
+    border-color: #D4AF37;
+    background-color: rgba(212, 175, 55, 0.2); }    
+
+/*1e aparans pati adwat la */    
+.bloc-droite{
+    display: flex;
+    gap: 20px;}
+
+/*2e aparans pati adwat la*/   
+.icon-social{
+    color: white;
+    text-decoration: none;          /* Retire liy ki konn anba lyen yo */
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: 0.3s;}    
+
+/*kod pou kijan imaj yo reaji nan paj jeux ak streaming */
+.streaming:hover .card-bg-img,.jeux:hover .card-bg-img,.cartedebit:hover .card-bg-img,.card-freefire:hover .card-bg-img,.card-call-of-dutty:hover.card-bg-img,.card-dls:hover .card-bg-img,.card-pubg:hover .card-bg-img,.card-netflix:hover .card-bg-img,.card-disney:hover .card-bg-img,.card-prime:hover .card-bg-img,.card-crunchyroll:hover .card-bg-img{
+    opacity: 0.6;
+    transform:scale(1.05);}   
+
+/*lew klike sou pati icon yo*/    
+.icon-social:hover {
+    color: #D4AF37;}    
+
+/* Ti badj ki anlè a */
+.badge-dispo {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(212, 175, 55, 0.15);
+    color: #D4AF37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 8px;}    
+
+/* Ti bouton wonn ak flèch la */
+.arrow-btn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.95em;
+    transition: 0.3s;}    
+
+/* Seksyon Temwayaj anba */
+.temoignages-section{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 140px;} /* Lese espas pou l pa al anba footer a */
+/*Seksyon Temwanyaj anba */
+.temoignages-section h2{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;}    
+
+/* Style pou imaj k ap sèvi kòm background anndan kat yo */
+.card-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* Sa a fè imaj la pa kraze/fòse */
+    z-index: 1;          /* Li mete imaj la anba nèt */
+    opacity: 0.3;        /* Li ba l yon ti transparans pou tèks la ka parèt byen fon */
+    transition: 0.4s ease;}
+
+
+
