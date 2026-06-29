@@ -1018,3 +1018,159 @@ body {
 .opsyon-peman:hover {
     background-color: #261e13;
 }
+
+/* ==========================================================================
+   PAJ PAIEMENT DINAMIK (MONCASH / NATCASH)
+   ========================================================================== */
+
+.d-none {
+    display: none !important;
+}
+
+.boite-opsyon-peman {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    background-color: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 15px;
+    padding: 18px 20px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.boite-opsyon-peman.aktive {
+    border-color: #d1b052;
+    background-color: #121212;
+}
+
+.bwat-instructions-peman {
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: -5px;
+    margin-bottom: 20px;
+    background-color: #0d0d0d;
+}
+
+.bwat-instructions-peman h3 {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.voye-lajan {
+    text-align: center;
+    font-size: 1.1rem;
+    color: white;
+    margin: 15px 0;
+}
+
+.montant-jaune {
+    color: #d1b052;
+    font-weight: bold;
+}
+
+.nimewo-kopie {
+    background-color: #141414;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #d1b052;
+    margin-bottom: 15px;
+}
+
+.non-moun {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.boite-txn-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.boite-txn-input label {
+    font-size: 0.95rem;
+    color: white;
+}
+
+.boite-txn-input input {
+    background-color: #141414;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ti-detay-anba {
+    color: #666;
+    font-size: 0.75rem;
+}
+
+/* Layout ak Stil pou bouton anba yo */
+.goup-boutons-anba {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
+
+.btn-retour {
+    background-color: #050505;
+    color: white;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 15px 25px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-retour:hover {
+    background-color: #111;
+}
+
+.btn-continuer-peman {
+    background-color: #d1b052;
+    color: black;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.btn-continuer-peman:hover {
+    background-color: #bfa043;
+}
