@@ -784,3 +784,226 @@ body {
         font-size: 0.85rem;
     }
 }
+/* ==========================================================================
+   PAJ CHECKOUT (FINALISER COMMANDE)
+   ========================================================================== */
+
+.header-checkout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: transparent;
+}
+
+.logo-checkout {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-checkout span {
+    color: #D4AF37;
+}
+
+.menu-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-icons i {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.barres-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.barres-menu span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: white;
+}
+
+.container-checkout {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.titre-checkout {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+/* Stil pou etap yo 1, 2, 3 */
+.etapes-barre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+}
+
+.etapes-barre::-webkit-scrollbar {
+    display: none;
+}
+
+.etape {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+}
+
+.etape.active {
+    opacity: 1;
+}
+
+.num-etape {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.etape.active .num-etape {
+    border-color: #D4AF37;
+    background-color: #D4AF37;
+    color: black;
+}
+
+.texte-etape {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Kat fòm nan */
+.carte-formulaire {
+    background-color: #121212;
+    border: 1px solid #222;
+    border-radius: 25px;
+    padding: 30px 20px;
+}
+
+.carte-formulaire h2 {
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+/* Zòn jaden input la */
+.boite-input-group {
+    background-color: #1a150e;
+    border: 1px solid #332615;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.badge-input {
+    color: #a88534;
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.boite-input-group label {
+    font-size: 1rem;
+    color: white;
+}
+
+.boite-input-group input {
+    background-color: #0d0d0d;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.boite-input-group input::placeholder {
+    color: #444;
+}
+
+/* Bouton Kontiye Jòn lan */
+.btn-continuer {
+    background-color: #d1b052;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s ease;
+}
+
+.btn-continuer:hover {
+    background-color: #bfa043;
+}
+
+/* Ti kabwa k ap flote a */
+.kabwa-flottant {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #d1b052;
+    color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 999;
+}
+
+.badge-kabwa {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: #e53935;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
