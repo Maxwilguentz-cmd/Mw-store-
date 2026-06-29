@@ -784,6 +784,9 @@ body {
         font-size: 0.85rem;
     }
 }
+
+
+
 /* ==========================================================================
    PAJ CHECKOUT (FINALISER COMMANDE)
    ========================================================================== */
@@ -1006,4 +1009,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.opsyon-peman {
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.opsyon-peman:hover {
+    background-color: #261e13;
 }
