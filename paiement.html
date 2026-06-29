@@ -100,8 +100,26 @@
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <script>
         let metodChwazi = "";
+
+        // Konfigirasyon Firebase pa w la nèt
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb",
+            measurementId: "G-5H72KDEHD9"
+        };
+
+        // Inisyalize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
         function chwaziMetod(metod) {
             metodChwazi = metod;
@@ -152,10 +170,28 @@
                 return;
             }
 
-            localStorage.setItem('metod_peman', metodChwazi);
-            localStorage.setItem('txn_id_kliyan', txnId);
-            
-            window.location.href = "recapitulatif.html";
+            // N ap pran nimewo WhatsApp kliyan an te mete nan premye paj la (si li la nan memwa)
+            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+
+            // ANREJISTRE PÈMAN AN NAN FIREBASE TOUTBON VRE
+            db.collection("paiements").add({
+                whatsapp: whatsappKliyan,
+                methode: metodChwazi,
+                transaction_id: txnId,
+                montant: "500 G",
+                date: new Date()
+            })
+            .then(function() {
+                // Sove enfòmasyon yo tou nan localStorage pou paj recapitulatif la ka afiche yo pita
+                localStorage.setItem('metod_peman', metodChwazi);
+                localStorage.setItem('txn_id_kliyan', txnId);
+                
+                // Ale nan dènye paj la
+                window.location.href = "recapitulatif.html";
+            })
+            .catch(function(error) {
+                alert("Erreur database: " + error.message);
+            });
         });
     </script>
 </body>
