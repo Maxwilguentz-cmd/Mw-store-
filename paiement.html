@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement de la commande</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-checkout">
+        <h1 class="titre-checkout">Finaliser ma commande</h1>
+
+        <div class="etapes-barre">
+            <div class="etape">
+                <span class="num-etape">1</span>
+                <span class="texte-etape">Informations</span>
+            </div>
+            <div class="etape active">
+                <span class="num-etape">2</span>
+                <span class="texte-etape">Paiement</span>
+            </div>
+            <div class="etape">
+                <span class="num-etape">3</span>
+                <span class="texte-etape">Récapitulatif</span>
+            </div>
+        </div>
+
+        <div class="carte-formulaire">
+            <h2>Mode de paiement</h2>
+            
+            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">Sélectionnez votre option de paiement :</p>
+
+            <div class="boite-input-group opsyon-peman" onclick="chwaziPeman('moncash')">
+                <span class="badge-input">HAITI — MOBILE MONEY</span>
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="radio" name="metod_peman" value="moncash" style="width: auto; margin: 0;">
+                    MonCash
+                </label>
+            </div>
+
+            <div class="boite-input-group opsyon-peman" onclick="chwaziPeman('natcash')">
+                <span class="badge-input">HAITI — MOBILE MONEY</span>
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="radio" name="metod_peman" value="natcash" style="width: auto; margin: 0;">
+                    NatCash
+                </label>
+            </div>
+
+            <button type="button" class="btn-continuer" id="btn-payer" style="margin-top: 10px;">
+                Suivant <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Fonksyon pou koche radyo a lè w klike sou tout bwat la
+        function chwaziPeman(id) {
+            const radyo yo = document.getElementsByName('metod_peman');
+            radyo yo.forEach(radio => {
+                if(radio.value === id) radio.checked = true;
+            });
+        }
+
+        document.getElementById('btn-payer').addEventListener('click', function() {
+            const radyo yo = document.getElementsByName('metod_peman');
+            let chwa = "";
+            
+            radyo yo.forEach(radio => {
+                if(radio.checked) {
+                    chwa = radio.value;
+                }
+            });
+
+            if(chwa === "") {
+                alert("Silvouplè chwazi yon fason pou w peye!");
+            } else {
+                alert("Ou chwazi: " + chwa.toUpperCase() + ". N ap pase nan dènye etap la byento!");
+                // Pita isit la ap mennen nan paj récapitulatif la
+            }
+        });
+    </script>
+</body>
+</html>
