@@ -17,3 +17,6 @@ function cartedebit(){
 function netflix(){
     window.location.href="Netflix.html"
 }
+function chek(){
+    window.location.href="checkout.html"
+}
