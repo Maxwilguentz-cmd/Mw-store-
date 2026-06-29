@@ -1,6 +1,7 @@
 <!DOCTYPE html> <html lang="fr"> <head>
     <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Boutique - MWStore</title> <link rel="stylesheet" href="style12.css"> </head>
-<body> <header class="hero-section">
+<body> 
+    <header class="hero-section">
         <div class="hero-bg"></div> <div class="hero-top">
             <button class="btn-back">← Catégories</button> </div>
         <div class="hero-text">
@@ -35,7 +36,8 @@
                 </div>
 
                 <div class="card-right">
-                    <button class="btn-choose1">Choisir →</button> </div>
+                    <button class="btn-choose1" onclick="chek()">Choisir →</button> </div>
+
             </div> <div class="horizontal-card premium-card">
                 <div class="badge">★ TOP</div> <div class="card-left">
                     <span class="icon">🔒</span> <p class="plan-type">POUR</p>
@@ -54,7 +56,7 @@
                 </div>
                 
                 <div class="card-right">
-                    <button class="btn-choose1 premium-btn">Choisir →</button>
+                    <button class="btn-choose1 premium-btn" onclick="chek()" >Choisir →</button>
                 </div>
             </div> <div class="horizontal-card"> <div class="card-left"> <span class="icon">🎁</span> <p class="plan-type">LE</p> <h3>GIFT CARD 15$ USA</h3> <div class="price highlight-green">2 350 <span>G</span></div> </div>
                 
@@ -67,8 +69,11 @@
                     </ul>
                 </div>
                 
-                <div class="card-right"> <button class="btn-choose1">Choisir →</button> </div>
-            </div> </div> </main>    
+                <div class="card-right"> 
+                    <button class="btn-choose1" onclick="chek()">Choisir →</button> </div>
+            </div> 
+        </div> 
+        </main>    
 
     <div class="temoignages-section" style="padding: 40px 20px; text-align: center;">
         <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
@@ -91,5 +96,6 @@
         </div>
     </footer> 
 
-    <script src="script.js"></script> </body>
+    <script src="script.js"></script> 
+</body>
 </html>
