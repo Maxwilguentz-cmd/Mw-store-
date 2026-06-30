@@ -58,44 +58,22 @@
         <span class="badge-kabwa">1</span>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
     <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
-        authDomain: "mwstore-526d1.firebaseapp.com",
-        projectId: "mwstore-526d1",
-        storageBucket: "mwstore-526d1.firebasestorage.app",
-        messagingSenderId: "901851187874",
-        appId: "1:901851187874:web:a5936637da5cfa925325fb",
-        measurementId: "G-5H72KDEHD9"
-      };
-
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-
+      // ISIT LA NOU RETIRE FIREBASE NÈT.
+      // Kòd la ap jis sere nimewo a nan memwa navigatè a epi chanje paj la.
       document.getElementById('btn-continuer').addEventListener('click', function() {
-          let nimewo = document.getElementById('whatsapp').value;
+          let nimewo = document.getElementById('whatsapp').value.trim();
           
           if (nimewo === "") {
               alert("Silvouplè antre nimewo WhatsApp ou a");
               return;
           }
 
-          db.collection("commandes").add({
-              whatsapp: nimewo,
-              date: new Date()
-          })
-          .then(function() {
-              localStorage.setItem('whatsapp_kliyan', nimewo);
-              window.location.href = "paiement.html";
-          })
-          .catch(function(error) {
-              // Menm si rezo a ta bay pwoblèm la, nou toujou sere l nan memwa a pou l ka kontinye
-              localStorage.setItem('whatsapp_kliyan', nimewo);
-              window.location.href = "paiement.html";
-          });
+          // Sere nimewo a sèlman nan localStorage (memwa) pou paj 3 a ka pran l pita
+          localStorage.setItem('whatsapp_kliyan', nimewo);
+          
+          // Ale dirèk nan paj peman an san voye anyen nan data a
+          window.location.href = "paiement.html";
       });
     </script>
 </body>
