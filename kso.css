@@ -1,0 +1,640 @@
+/* ==========================================================================
+   1. RESET JENERALE AK STIL BODY (KÒ PAJ LA)
+   ========================================================================== */
+
+/* Reset jeneral pou tout eleman nan paj la */
+* {
+    margin: 0; /* Retire tout maj pa defo ki sou deyò bor eleman yo */
+    padding: 0; /* Retire tout espas andedan pa defo ki sou eleman yo */
+    box-sizing: border-box; /* Enkli padding ak bordi nan lajè total la pou anyen pa debòde */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Chwazi font jeneral sa a si lòt yo pa chaje */
+}
+
+/* Stil pou background ak tout kò paj la */
+body {
+    text-align: left; /* Aliyen tout tèks yo bò gòch pa defo */
+    color: white; /* Mete tout tèks ki nan body a an blan */
+    font-family: Arial, Helvetica, sans-serif; /* Aplike tipografi sa a pou tout kò paj la */
+    background-color: black; /* Mete fon dèyè paj la an nwa nèt */
+    background-size: cover; /* Fè imaj background nan kouvri tout ekran an nèt san l pa kase */
+    background-position: center; /* Santre imaj background nan nan mitan ekran an */
+    background-repeat: no-repeat; /* Anpeche imaj background nan repete si ekran an gwo */
+    height: 100vh; /* Fè wotè body a pran 100% nan wotè ekran aparèy la */
+    margin: 0; /* Sere maj deyò yo ak zewo pou evite espas initil */
+    padding-top: 60px; /* Kite yon espas 60px anlè pou header a pa kache kontni an */
+    padding-bottom: 150px; /* Kite yon espas 150px anba pou footer a pa kache kontni an */
+}
+
+
+/* ==========================================================================
+   2. SEKSYON TIT AK SOU-TIT YO
+   ========================================================================== */
+
+/* Pou tit prensipal la ki nan klas .soustitre */
+.soustitre h1 {
+    margin-top: 5px; /* Bay tit h1 lan yon ti maj 5px anlè li */
+}
+
+/* Pou paragraf sou-tit la */
+.soustitre p {
+    opacity: 0.3; /* Fè tèks la parèt yon ti jan transparan (fennen) nan nivo 0.3 */
+    font-size: 0.80em; /* Diminye gwosè lèt yo pou l vin pi piti pase nòmal */
+    margin-bottom: 60px; /* Kite yon gwo espas 60px anba paragraf la */
+}
+
+/* Pou paragraf ak tit h1 ki ansanm nan klas la */
+.soustitre p, h1 {
+    margin-bottom: 15px; /* Bay tou de eleman sa yo yon maj 15px anba yo */
+    text-align: center; /* Santre tou de tèks sa yo nan mitan ekran an */
+}
+
+/* Dezyèm tit (Etikèt Catalogue) */
+.tag-catalogue {
+    color: #D4AF37; /* Mete koulè tèks la an jòn lò */
+    margin-bottom: 2px; /* Kite yon ti maj de 2px sèlman anba l */
+    font-size: 0.85em; /* Diminye gwosè lèt yo yon ti kras */
+    letter-spacing: 2px; /* Laji espas ki ant chak lèt yo pou yo parèt bèl */
+    padding-left: 5%; /* Repouse tèks la bò gòch ak yon espas 5% nan lajè ekran an */
+}
+
+/* Twazyèm tit (Kategori) */
+.titre-categories {
+    text-align: left !important; /* Fòse tèks sa a aliyen bò gòch nèt menm si gen lòt lòd */
+    padding-left: 5%; /* Repouse kontni an bò gòch ak yon espas 5% */
+    font-size: 2em; /* Grose lèt yo de fwa plis pase gwosè nòmal la */
+    font-weight: bold; /* Mete lèt yo gra (fonse) */
+    letter-spacing: 1px; /* Laji ti espas ki ant chak lèt yo */
+    margin-top: 0; /* Retire maj ki te ka genyen anlè li */
+    margin-bottom: 0; /* Retire maj ki te ka genyen anba l */
+    text-transform: uppercase; /* Chanje tout lèt yo an gwo lèt (MAJISKIL) */
+}
+
+
+/* ==========================================================================
+   3. GRID AK PARAMÈTRE KOTE POU FE ACHA (STORE GRID)
+   ========================================================================== */
+
+/* Anplasmant ak paramèt kote pou fè acha a */
+.store-grid {
+    display: flex; /* Aktive mòd Flexbox pou eleman ki anndan yo ka ranje sou yon liy */
+    justify-content: flex-start; /* Aliyen kat yo kòmanse nan kòmansman liy lan bò gòch */
+    gap: 20px; /* Mete yon espas presi 20px ant chak kat yo */
+    width: 90%; /* Fè zòn grid la pran 90% nan lajè ekran an */
+    max-width: 1200px; /* Limite lajè maksimòm nan ak 1200px pou gwo ekran */
+    margin: 5px auto; /* Bay 5px maj anlè/anba epi santre grid la nèt sou ekran an */
+    padding-bottom: 15px; /* Mete yon espas andedan 15px anba grid la */
+    scrollbar-width: none; /* Kache ba defileman an (scrollbar) sou navigatè Firefox */
+}
+
+/* Kache ba scroll la sou Chrome, Safari ak Edge pou l rete bèl */
+.store-grid::-webkit-scrollbar {
+    display: none; /* Kache ba defileman an nèt sou navigatè sa yo */
+}
+
+
+/* ==========================================================================
+   4. STIL JENERAL POU KAT YO (JEUX AK STREAMING)
+   ========================================================================== */
+
+/* Paramèt jeneral pou tout kat jwèt ak sèvis streaming yo */
+.card-freefire, .card-call-of-dutty, .card-dls, .card-pubg, .card-netflix, .card-disney, .card-prime, .card-crunchyroll {
+    position: relative; /* Pèmèt nou mete lòt eleman anndan l ki gen pozisyon "absolute" */
+    flex: 1; /* Fè kat yo separe espas liy lan fason ki egal */
+    height: 180px; /* Fixe wotè chak kat yo ak 180px */
+    border-radius: 20px; /* Siyonnen kat yo nan kat kwen yo ak yon wonn 20px */
+    padding: 25px; /* Mete yon espas andedan 25px pou kontni an pa kole sou bor yo */
+    display: flex; /* Sèvi ak flexbox anndan kat la pou jere kontni l */
+    flex-direction: column; /* Ranje eleman ki anndan yo vertikalman (yonn anba lòt) */
+    justify-content: flex-end; /* Pouse tout tèks ak bouton yo anba nèt nan kat la */
+    cursor: pointer; /* Chanje aparans sourit la an fòm ti men lè w pase sou li */
+    overflow: hidden; /* Kache tout sa ki ta debòde deyò fòm wonn kat la */
+    transition: all 0.4s ease; /* Fè tout animasyon (hover) yo fèt dousman pandan 0.4 segond */
+    background-size: cover; /* Fè imaj ki dèyè kat la kouvri tout kat la nèt */
+    background-position: center; /* Santre imaj background nan nan mitan kat la */
+    background-color: #0b0b0b; /* Mete yon fon nwa fonse si imaj la poko chaje */
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.9); /* Mete yon lonbray nwa anndan kat la pou tèks yo ka paret */
+}
+
+/* Gwo bwat yo ki nan paj index la */
+.streaming, .jeux, .cartedebit {
+    position: relative; /* Pèmèt nou plase imaj ak bouton absolute anndan l */
+    overflow: hidden; /* Koupe anyen ki depase kad bwat la */
+    border-radius: 30px; /* Siyonnen kat kwen yo ak yon bèl wonn 30px */
+    border: 1px solid gray; /* Mete yon ti bordi gri tou mens toutotou bwat la */
+    transition: all 0.4s ease; /* Fè tout chanjman oswa animasyon fèt dousman nan 0.4s */
+    width: 90%; /* Fè bwat sa yo pran 90% nan lajè ekran an */
+    max-width: 800px; /* Limite lajè yo pou yo pa depase 800px sou gwo ekran */
+    height: 200px; /* Fixe wotè gwo bwat sa yo ak 200px */
+    margin: 5px auto; /* Bay 5px maj anlè/anba epi santre bwat yo nan mitan paj la */
+}
+
+
+/* ==========================================================================
+   5. BÒDI AK KOULÈ ESPESIFIK POU CHAK KAT
+   ========================================================================== */
+
+.card-freefire { border: 2px solid rgba(229, 9, 20, 0.4); } /* Mete yon bòdi wouj transparan pou Free Fire */
+.card-call-of-dutty { border: 2px solid lightblue; } /* Mete yon bòdi ble klè pou Call Of Duty */
+.card-dls { border: 2px solid lightcoral; } /* Mete yon bòdi woz/kòray klè pou DLS */
+.card-pubg { border: 2px solid lightgray; } /* Mete yon bòdi gri klè pou PUBG */
+.card-netflix { border: 2px solid rgba(229, 9, 20, 0.4); } /* Mete yon bòdi wouj transparan pou Netflix */
+.card-disney { border: 2px solid rgba(0, 99, 229, 0.4); } /* Mete yon bòdi ble maren transparan pou Disney */
+.card-prime { border: 2px solid rgba(0, 168, 225, 0.4); } /* Mete yon bòdi ble syèl transparan pou Amazon Prime */
+.card-crunchyroll { border: 2px solid rgba(244, 117, 33, 0.4); } /* Mete yon bòdi zoranj transparan pou Crunchyroll */
+
+
+/* ==========================================================================
+   6. TÈKS AK TIT ANNDAN KAT YO
+   ========================================================================== */
+
+/* Pozisyon pou blòk tit jwèt yo */
+.titre-pour-jeux {
+    position: absolute; /* Fixe blòk la nan yon plas presi anndan kat la */
+    bottom: 5px; /* Plase l nan distans 5px sèlman ak anba kat la */
+    left: 10px; /* Repouse l 10px parapò ak bò gòch kat la */
+    font-weight: bold; /* Mete tèks yo an gra */
+    letter-spacing: 1px; /* Laji ti espas ant lèt yo */
+}
+
+/* Tit h2 ki nan jwèt yo */
+.titre-pour-jeux h2 { 
+    margin: 0 0 5px 0; /* Retire maj yo, kite sèlman yon maj 5px anba tit la */
+}
+
+/* Sou-tit h6 ki nan jwèt yo */
+.titre-pour-jeux h6 {
+    margin-top: 0; /* Retire maj ki anlè li */
+    font-size: 0.85em; /* Mete lèt yo yon ti jan piti */
+    color: #888; /* Chanje koulè tèks la an gri */
+    font-weight: normal; /* Retire estil gra a pou lèt yo mens */
+    opacity: 0.7; /* Rann li yon ti kras fennen nan nivo 0.7 */
+}
+
+/* Tit h2 anndan kat dezyèm ak twazyèm paj yo */
+.card-texte h2 {
+    margin: 0 0 5px 0; /* Zewo maj toupatou, sèlman 5px anba */
+    font-size: 1.6em; /* Agrandi lèt yo pou yo parèt byen fò */
+    font-weight: bold; /* Mete lèt yo an gra nèt */
+    letter-spacing: 1px; /* Bay yon ti espas ant lèt yo */
+}
+
+/* Sou-tit h6 nan dezyèm ak twazyèm paj yo */
+.card-texte h6 {
+    margin: 0; /* Retire tout kalite maj nèt sou eleman sa a */
+    font-size: 0.85em; /* Diminye gwosè tèks la */
+    color: #888; /* Mete koulè a an gri */
+    font-weight: normal; /* Kite lèt yo parèt fen san yo pa gra */
+}
+
+
+/* ==========================================================================
+   7. EFÈ HOVER (LÈ SOURIT LA PASE SOU KAT YO)
+   ========================================================================== */
+
+.streaming:hover {
+    box-shadow: 0 0 8px gray; /* Bay yon bèl limyè (lonbray) gri toutotou l lè sourit la sou li */
+    transform: translateY(-5px); /* Pouse bwat la monte anlè pa 5px pou l bay efè k ap flote a */
+}
+
+.jeux:hover {
+    transform: translateY(-5px); /* Pouse bwat jwèt la monte anlè pa 5px */
+    box-shadow: 0 0 8px lightblue; /* Limine toutotou bwat la ak yon koulè ble klè */
+}
+
+.cartedebit:hover {
+    transform: translateY(-5px); /* Pouse bwat kat kredi a monte anlè pa 5px */
+    box-shadow: 0 0 8px white; /* Limine l ak yon bèl ti limyè blan */
+}
+
+.card-freefire:hover {
+    border-color: #e50914; /* Chanje koulè bòdi a an wouj klè lè w pase sou li */
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); /* Mete yon gwo limyè wouj flou toutotou l */
+    transform: translateY(-5px); /* Fè kat Free Fire la monte anlè pa 5px */
+}
+
+.card-call-of-dutty:hover {
+    border-color: blue; /* Chanje bòdi a an ble */
+    box-shadow: 0 0 25px lightblue; /* Limine l ak yon gwo lonbray ble klè */
+    transform: translateY(-5px); /* Fè kat la monte anlè pa 5px */
+}
+
+.card-dls:hover {
+    border-color: coral; /* Chanje bòdi a an kòray */
+    box-shadow: 0 0 25px lightcoral; /* Limine l ak yon lonbray kòray klè */
+    transform: translateY(-5px); /* Fè kat DLS la monte 5px */
+}
+
+.card-pubg:hover {
+    border-color: gray; /* Chanje bòdi a an gri */
+    box-shadow: 0 0 25px lightgray; /* Limine l ak yon lonbray gri klè */
+    transform: translateY(-5px); /* Fè kat PUBG a monte 5px */
+}
+
+.card-netflix:hover {
+    border-color: #e50914; /* Chanje bòdi a an wouj Netflix */
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); /* Limine l ak yon gwo limyè wouj */
+    transform: translateY(-5px); /* Fè kat la monte 5px */
+}
+
+.card-disney:hover {
+    border-color: #0063e5; /* Chanje bòdi a an ble Disney */
+    box-shadow: 0 0 25px rgba(0, 99, 229, 0.4); /* Limine l ak yon limyè ble transparan */
+    transform: translateY(-5px); /* Fè kat Disney a monte 5px */
+}
+
+.card-prime:hover {
+    border-color: #00a8e1; /* Chanje bòdi a an ble Amazon */
+    box-shadow: 0 0 25px rgba(0, 168, 225, 0.4); /* Limine l ak yon limyè ble syèl */
+    transform: translateY(-5px); /* Fè kat Amazon an monte 5px */
+}
+
+.card-crunchyroll:hover {
+    border-color: #f47521; /* Chanje bòdi a an zoranj Crunchyroll */
+    box-shadow: 0 0 25px rgba(244, 117, 33, 0.4); /* Limine l ak yon limyè zoranj */
+    transform: translateY(-5px); /* Fè kat la monte 5px */
+}
+
+/* Lè sourit la pase sou nenpòt kat, chanje aparans ti bouton flèch wonn lan */
+.streaming:hover .arrow-btn, .jeux:hover .arrow-btn, .cartedebit:hover .arrow-btn, 
+.card-freefire:hover .arrow-btn, .card-call-of-dutty:hover .arrow-btn, .card-dls:hover .arrow-btn, 
+.card-pubg:hover .arrow-btn, .card-netflix:hover .arrow-btn, .card-disney:hover .arrow-btn, 
+.card-prime:hover .arrow-btn, .card-crunchyroll:hover .arrow-btn {
+    background-color: white; /* Chanje fon ti bouton wonn lan an blan nèt */
+    color: black; /* Chanje koulè ti flèch la an nwa pou l ka parèt sou blan an */
+    border-color: white; /* Fè bòdi ti sèk la vin blan tou */
+}
+
+/* Lè sourit la pase sou kat la, bay imaj background nan yon animasyon */
+.streaming:hover .card-bg-img, .jeux:hover .card-bg-img, .cartedebit:hover .card-bg-img, 
+.card-freefire:hover .card-bg-img, .card-call-of-dutty:hover .card-bg-img, .card-dls:hover .card-bg-img, 
+.card-pubg:hover .card-bg-img, .card-netflix:hover .card-bg-img, .card-disney:hover .card-bg-img, 
+.card-prime:hover .card-bg-img, .card-crunchyroll:hover .card-bg-img {
+    opacity: 0.6; /* Ogmante klète imaj la soti nan 0.3 rive nan 0.6 pou l vin pi klè */
+    transform: scale(1.05); /* Zoom imaj la yon ti kras (5% plis) pou bay yon bèl efè dinamik */
+}                                                           
+
+
+/* ==========================================================================
+   8. ELEMAN KI ANDAN KAT YO (BADJ, FLÈCH, IMAJ BG)
+   ========================================================================== */
+
+/* Ti badj "Disponible" ki anlè a dwat nan kat yo */
+.badge-dispo {
+    position: absolute; /* Plase badj la yon kote fiks nan kat la */
+    top: 15px; /* Distans 15px parapò ak anlè kat la */
+    right: 15px; /* Distans 15px parapò ak bò dwat kat la */
+    background-color: rgba(212, 175, 55, 0.15); /* Mete yon fon jòn lò ki trè transparan */
+    color: #D4AF37; /* Mete tèks la an jòn lò solid */
+    border: 1px solid rgba(212, 175, 55, 0.4); /* Mete yon ti bòdi jòn tou mens epi transparan */
+    font-size: 0.75em; /* Rann lèt yo piti */
+    font-weight: bold; /* Mete lèt yo an gra */
+    padding: 4px 10px; /* Espas andedan: 4px anlè/anba ak 10px sou kote yo */
+    border-radius: 8px; /* Bor badj la yon ti jan wonn pa 8px */
+}
+
+/* Ti bouton wonn ki gen flèch la anba a dwat */
+.arrow-btn {
+    position: absolute; /* Plase bouton an yon kote fiks */
+    bottom: 20px; /* Distans 20px ak anba kat la */
+    right: 20px; /* Distans 20px ak bò dwat kat la */
+    width: 32px; /* Fixe lajè ti bouton an ak 32px */
+    height: 32px; /* Fixe wotè ti bouton an ak 32px pou l fè yon sèk pafè */
+    border: 1px solid rgba(255,255,255,0.2); /* Bay yon ti bòdi blan trè transparan */
+    border-radius: 50%; /* Fè bouton an fòme yon sèk nèt (wonn) */
+    display: flex; /* Aktive flexbox anndan sèk la */
+    align-items: center; /* Santre flèch la vertikalman nan mitan sèk la */
+    justify-content: center; /* Santre flèch la horizontalman nan mitan sèk la */
+    color: white; /* Mete flèch la an blan */
+    font-size: 0.95em; /* Gwosè flèch la */
+    transition: 0.3s; /* Fè chanjman koulè a pran 0.3s lè sourit la pase sou li */
+}
+
+/* Imaj k ap sèvi kòm background anndan bwat yo */
+.card-bg-img {
+    position: absolute; /* Plase imaj la nèt anndan kò bwat la */
+    top: 0; /* Kole imaj la nèt anlè */
+    left: 0; /* Kole imaj la nèt sou bò gòch */
+    width: 100%; /* Fè imaj la pran 100% nan lajè bwat la */
+    height: 100%; /* Fè imaj la pran 100% nan wotè bwat la */
+    object-fit: cover; /* Adapte imaj la pou l kouvri tout zòn nan san l pa defòme */
+    z-index: 1; /* Mete imaj la nan nivo 1 anba tèks yo */
+    opacity: 0.3; /* Rann imaj la fennen (0.3) pa defo pou tèks blan yo ka lizib */
+    transition: 0.4s ease; /* Fè animasyon zoom nan fèt dousman nan 0.4s */
+}
+
+
+/* ==========================================================================
+   9. HERO SECTION (BANYÈ ANLÈ A nan dezyèm paj yo)
+   ========================================================================== */
+
+.hero-section {
+    position: relative; /* Pèmèt nou plase background '.hero-bg' la anndan l */
+    display: flex; /* Aktive mòd flexbox */
+    flex-direction: column; /* Ranje eleman yo vertikalman */
+    justify-content: space-between; /* Distribiye espas yo egal parapò ak eleman yo */
+    padding: 20px 0 40px 0; /* Espas: 20px anlè, 40px anba, zewo sou kote yo */
+    border-bottom: 1px solid #222; /* Mete yon vye liy gri fonse tou mens anba banyè a */
+}
+
+.hero-bg {
+    position: absolute; /* Plase imaj background nan fiks nan zòn nan */
+    top: 0; /* Kole l anlè nèt */
+    left: 0; /* Kole l bò gòch nèt */
+    width: 100%; /* Lajè 100% */
+    height: 100%; /* Wotè 100% */
+    background-image: url('choix1.JPG'); /* Chaje imaj sa a kòm background */
+    background-size: cover; /* Fè imaj la pran tout zòn nan nèt */
+    background-position: center; /* Santre imaj la */
+    opacity: 0.3; /* Fè imaj la fennen nan nivo 0.3 */
+    z-index: -1; /* Pouse imaj la dèyè nèt anba tout tèks yo */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); /* Fè anba imaj la fennen jiskaske l disparèt nan fon nwa a */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); /* Menm fonksyon an pou navigatè Chrome/Safari */
+}
+
+.hero-top {
+    padding-left: 20px; /* Repouse kontni anlè a pa 20px parapò ak bò gòch la */
+}
+
+.btn-back {
+    background: rgba(0, 0, 0, 0.6); /* Mete yon fon nwa transparan pou bouton an */
+    border: 1px solid #444; /* Bay bouton an yon ti bòdi gri fonse */
+    color: white; /* Mete tèks bouton an an blan */
+    padding: 8px 16px; /* Espas andedan: 8px anlè/anba epi 16px sou kote yo */
+    border-radius: 20px; /* Siyonnen kat kwen yo pou bouton an vin wonn */
+    font-size: 1rem; /* Gwosè tèks la */
+    cursor: pointer; /* Sourit la ap tounen fòm ti men lè w sou li */
+}
+
+.hero-text {
+    padding-left: 40px; /* Repouse blòk tèks banyè a pa 40px parapò ak bò gòch la */
+}
+
+.red-subtitle {
+    color: #e50914; /* Mete koulè a an wouj klè */
+    font-size: 0.8rem; /* Ti gwosè tèks */
+    font-weight: 700; /* Mete lèt yo byen gra */
+    letter-spacing: 2px; /* Laji espas ant lèt yo pa 2px */
+}
+
+.main-title {
+    font-size: 3.5rem; /* Agrandi gwo tit la nèt (3.5rem) */
+    font-weight: bold; /* Mete gwo tit la an gra nèt */
+    letter-spacing: 1px; /* Espas ant lèt yo */
+    margin-top: -5px; /* Rapproche tit la yon ti kras ak sa k anlè l la */
+}
+
+
+/* ==========================================================================
+   10. MAIN CONTENT AK KAD PWODWI LAYOUT ORIZONTAL (paj tankou Netflix)
+   ========================================================================== */
+
+.main-content {
+    max-width: 1200px; /* Limite lajè maksimòm kontni prensipal la ak 1200px */
+    margin: 0 auto; /* Santre tout blòk la nan mitan paj la nèt */
+    padding: 30px 20px 50px 20px; /* Maj andedan: 30px anlè, 50px anba, 20px sou kote yo */
+}
+
+.section-header {
+    display: flex; /* Aktive mòd flexbox */
+    justify-content: space-between; /* Mete yon espas ant kontni gòch la ak dwat la */
+    align-items: flex-end; /* Aliyen eleman yo anba sou menm liy horizontal la */
+    margin-bottom: 30px; /* Kite yon espas 30px anba blòk header sa a */
+}
+
+.red-subtitle-small {
+    color: #e50914; /* Koulè wouj */
+    font-size: 0.75rem; /* Ti gwosè lèt */
+    font-weight: 700; /* Lèt gra */
+    letter-spacing: 1px; /* Espas ant lèt yo */
+}
+
+.section-title-group h2 {
+    font-size: 1.4rem; /* Gwosè tit la */
+    text-transform: uppercase; /* Fòse tit la ekri an MAJISKIL nèt */
+    margin-top: 5px; /* Bay yon ti maj 5px anlè li */
+}
+
+.product-count {
+    color: #555; /* Koulè gri fonse trè sekrè */
+    font-size: 0.9rem; /* Ti gwosè lèt */
+}
+
+.cards-container {
+    display: flex; /* Aktive flexbox */
+    flex-direction: column; /* Ranje kat pwodwi horizontal yo yonn anba lòt */
+    gap: 25px; /* Espas presi 25px ant chak kat yo */
+}
+
+.horizontal-card {
+    background: #121212; /* Fon bwat la ap yon ti gri ki trè fonse (pa nwa nèt) */
+    border: 1px solid white; /* Bòdi blan tou mens toutotou bwat la */
+    border-radius: 25px; /* Siyonnen kat kwen yo ak yon wonn 25px */
+    padding: 25px; /* Espas andedan 25px toupatou */
+    display: flex; /* Aktive flexbox */
+    flex-direction: row; /* Ranje eleman yo sou yon liy horizontal (gòch a dwat) */
+    align-items: center; /* Santre kontni yo vertikalman nan mitan kat la */
+    justify-content: space-between; /* Mete gwo espas nan mitan pou separe kontni gòch ak dwat */
+    position: relative; /* Pèmèt nou mete yon ti badj absolute anlè li */
+}
+
+.premium-card {
+    border-color: rgb(253, 253, 162); /* Chanje koulè bòdi a an jòn klè pou kat VIP yo */
+    background: #1a1811; /* Bay fon an yon ti tent jòn/mawon trè fonse */
+}
+
+.badge {
+    position: absolute; /* Plase badj la fiks sou kad la */
+    top: -12px; /* Pouse badj la mwatye deyò nan zòn anlè kat la (-12px) */
+    left: 20px; /* Repouse l 20px parapò ak bò gòch la */
+    background: #d4af37; /* Fon jòn lò solid */
+    color: #000; /* Tèks an nwa nèt anndan badj la */
+    font-size: 0.7rem; /* Ti gwosè lèt */
+    font-weight: bold; /* Mete lèt yo byen gra */
+    padding: 4px 10px; /* Espas andedan: 4px anlè/anba, 10px sou kote yo */
+    border-radius: 4px; /* Ti wonn nan kat kwen badj la pa 4px */
+}
+
+.card-left {
+    flex: 1; /* Fè pati gòch kat la pran tout espas li kapab */
+    min-width: 150px; /* Limite lajè minimòm li pou l pa janm pi piti pase 150px */
+}
+
+.icon {
+    font-size: 1.8rem; /* Agrandi ti icone a */
+    display: inline-block; /* Fè l aji tankou yon blòk tèks pou l ka pran maj */
+    margin-bottom: 5px; /* Bay yon maj 5px anba icone a */
+}
+
+.etapes-barre::-webkit-scrollbar {
+    display: none; /* Kache ba scroll la nèt sou Chrome/Safari pou zòn etap yo */
+}
+
+.etape {
+    display: flex; /* Aktive flexbox */
+    align-items: center; /* Santre eleman yo vertikalman */
+    gap: 8px; /* Espas 8px ant ti nimewo wonn lan ak tèks etap la */
+    opacity: 0.4; /* Rann etap la fennen anpil (0.4) pa defo lè l poko aktif */
+}
+
+.etape.active {
+    opacity: 1; /* Lè etap la aktif, rann li klere nèt nan nivo 1 (solid) */
+}
+
+.num-etape {
+    display: flex; /* Aktive flexbox */
+    align-items: center; /* Santre nimewo a vertikalman nan sèk la */
+    justify-content: center; /* Santre nimewo a horizontalman nan sèk la */
+    width: 28px; /* Lajè ti sèk nimewo a ak 28px */
+    height: 28px; /* Wotè ti sèk la ak 28px pou l fè yon ronn pafè */
+    border-radius: 50%; /* Fè fòm nan tounen yon sèk nèt */
+    border: 2px solid white; /* Bay ti sèk la yon bòdi blan de 2px */
+    font-weight: bold; /* Mete nimewo a an gra */
+    font-size: 0.9rem; /* Gwosè nimewo a */
+}
+
+.etape.active .num-etape {
+    border-color: #D4AF37; /* Si etap la aktif, chanje bòdi ti sèk la an jòn lò */
+    background-color: #D4AF37; /* Ranpli anndan ti sèk la ak koulè jòn lò tou */
+    color: black; /* Chanje koulè nimewo a an nwa pou l ka parèt byen sou jòn nan */
+}
+
+.texte-etape {
+    font-size: 1rem; /* Gwosè tèks etap la */
+    font-weight: 500; /* Tèks la ap yon ti jan gra (semi-bold) */
+}
+
+/* Kat fòm nan (Bwat kote fòm nan ye a) */
+.carte-formulaire {
+    background-color: #121212; /* Fon bwat fòm nan ap yon ti gri trè fonse */
+    border: 1px solid #222; /* Yon ti bòdi gri fonse trè sekrè */
+    border-radius: 25px; /* Siyonnen kat kwen yo ak yon wonn 25px */
+    padding: 30px 20px; /* Maj andedan: 30px anlè/anba ak 20px sou kote yo */
+}
+
+.carte-formulaire h2 {
+    font-size: 1.8rem; /* Gwosè tit fòm nan */
+    font-weight: normal; /* Retire stil gra a sou tit sa a */
+    margin-top: 0; /* Retire maj ki anlè l */
+    margin-bottom: 25px; /* Kite yon espas 25px anba tit la */
+    line-height: 1.3; /* Bay yon bèl espas vètikal ant liy tèks yo */
+}
+
+/* Zòn jaden input la (bwat mawon fonse a) */
+.boite-input-group {
+    background-color: #1a150e; /* Bay fon bwat la yon bèl koulè mawon trè fonse */
+    border: 1px solid #332615; /* Mete yon bòdi mawon yon ti jan pi klè toutotou l */
+    border-radius: 15px; /* Siyonnen kat kwen bwat la ak 15px */
+    padding: 15px; /* Maj andedan 15px toupatou */
+    display: flex; /* Aktive flexbox */
+    flex-direction: column; /* Ranje etikèt, label ak input yo vertikalman */
+    gap: 8px; /* Bay yon espas 8px ant chak eleman sa yo */
+    margin-bottom: 25px; /* Kite yon espas 25px anba tout blòk jaden sa a */
+}
+
+.badge-input {
+    color: #a88534; /* Mete koulè ti tèks enfòmasyon sa a an jòn/mawon kò kòk */
+    font-size: 0.65rem; /* Ti gwosè lèt trè serye */
+    font-weight: bold; /* Mete l an gra */
+    letter-spacing: 1px; /* Espas 1px ant chak lèt yo */
+}
+
+.boite-input-group label {
+    font-size: 1rem; /* Gwosè tèks ki di kisa pou moun nan ekri a */
+    color: white; /* Mete tèks la an blan */
+}
+
+.boite-input-group input {
+    background-color: #0d0d0d; /* Mete fon ti kaz kote moun nan ap tape a an nwa nèt */
+    border: none; /* Retire tout bòdi pa defo ki sou jaden an */
+    border-radius: 10px; /* Siyonnen kat kwen ti kaz input la ak 10px */
+    padding: 12px; /* Maj andedan 12px pou tèks moun nan ap tape a pa kole */
+    color: white; /* Fè tèks moun nan ap tape a ekri an blan */
+    font-size: 1rem; /* Gwosè lèt yo lè moun nan ap tape */
+    outline: none; /* Retire gwo bòdi ble oubyen blan ki konn parèt lè w klike sou li a */
+    width: 100%; /* Fè input la pran 100% nan lajè bwat la */
+    box-sizing: border-box; /* Fòse lajè a rete 100% san l pa debòde ak padding a */
+}
+
+.boite-input-group input::placeholder {
+    color: #444; /* Mete tèks egzanp lan (placeholder) nan yon koulè gri trè fonse */
+}
+
+/* Bouton Kontiye Jòn lan */
+.btn-continuer {
+    background-color: #d1b052; /* Fon bouton an ap jòn lò */
+    color: black; /* Tèks la ap ekri an nwa nèt pou l ka parèt byen fò */
+    border: none; /* Retire bòdi pa defo bouton an */
+    border-radius: 15px; /* Siyonnen kat kwen bouton an ak 15px */
+    width: 100%; /* Fè bouton an pran tout lajè fòm nan nèt */
+    padding: 15px; /* Espas andedan 15px anlè ak anba */
+    font-size: 1.1rem; /* Agrandi tèks bouton an a 1.1rem */
+    font-weight: bold; /* Mete tèks la byen gra nèt */
+    cursor: pointer; /* Sourit la ap tounen yon ti men lè w sou li */
+    display: flex; /* Aktive flexbox anndan bouton an */
+    align-items: center; /* Santre tèks la ak ti flèch la vertikalman */
+    justify-content: center; /* Santre yo horizontalman nan mitan bouton an */
+    gap: 10px; /* Mete yon espas 10px ant tèks la ak ti flèch la */
+    transition: background 0.3s ease; /* Fè chanjman koulè a fèt dousman nan 0.3s lè sourit la sou li */
+}
+
+.btn-continuer:hover {
+    background-color: #bfa043; /* Chanje jòn nan an yon jòn ki pi fonse lè w pase sourit la sou li */
+}
+
+/* Ti kabwa k ap flote anba a dwat la (Cart) */
+.kabwa-flottant {
+    position: fixed; /* Fixe ti kabwa a yon sèl plas sou ekran an, menm si w ap desann paj la */
+    bottom: 25px; /* Distans 25px pa rapò ak anba ekran an */
+    right: 25px; /* Distans 25px pa rapò ak bò dwat ekran an */
+    background-color: #d1b052; /* Fon ti sèk kabwa a ap jòn lò */
+    color: black; /* Ti icone kabwa a ap an nwa */
+    width: 60px; /* Fixe lajè ti bouton wonn sa a ak 60px */
+    height: 60px; /* Wotè 60px pou l fè yon ronn pafè */
+    border-radius: 50%; /* Fè l tounen yon bèl wonn nèt */
+    display: flex; /* Aktive flexbox */
+    align-items: center; /* Santre icone a vertikalman */
+    justify-content: center; /* Santre icone a horizontalman */
+    font-size: 1.3rem; /* Gwosè icone kabwa a */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Bay ti bouton wonn sa a yon bèl lonbray nwa flou anba l */
+    cursor: pointer; /* Sourit la ap tounen fòm ti men */
+    z-index: 999; /* Mete l nan nivo 999 pou l toujou rete anlè net sou tout kontni paj la */
+}
+
+.badge-kabwa {
+    position: absolute; /* Plase ti nimewo a fiks sou kabwa a */
+    top: -2px; /* Pouse ti nimewo a monte anlè yon ti kras sou bò sèk la */
+    right: -2px; /* Pouse ti nimewo a sou bò dwat yon ti kras */
+    background-color: #e53935; /* Fon ti sèk nimewo a ap wouj vif */
+    color: white; /* Nimewo anndan l ap ekri an blan */
+    font-size: 0.75rem; /* Ti gwosè lèt */
+    font-weight: bold; /* Mete nimewo a an gra */
+    width: 20px; /* Lajè ti wonn wouj la ak 20px */
+    height: 20px; /* Wotè 20px pou l fè yon ti wonn pafè */
+    border-radius: 50%; /* Fè l tounen yon sèk */
+    display: flex; /* Aktive flexbox */
+    align-items: center; /* Santre nimewo a vertikalman */
+    justify-content: center; /* Santre nimewo a horizontalman */
+}
+
+.opsyon-peman {
+    cursor: pointer; /* Chanje sourit la an ti men sou opsyon peman yo */
+    transition: background 0.2s ease; /* Fè animasyon background nan dousman nan 0.2s */
+}
+.opsyon-peman:hover {
+    background-color: #261e13; /* Lè sourit la pase sou li, bay fon an yon ti koulè mawon trè fonse */
+}
+
+
+/* ==========================================================================
+   11. PAJ PAIEMENT DINAMIK (MONCASH / NATCASH)
+   ========================================================================== */
+
+.d-none {
+    display: none !important; /* Klas sekrè sa a ap kache nenpòt eleman nèt sou paj la fòseman */
+}
+
+.boite-opsyon-peman {
+    display: flex; /* Aktive flexbox */
+    flex-direction: row; /* Ranje icone a ak tèks la horizontalman (bò kote lòt) */
+    align-items: center; /* Santre yo vertikalman nan mitan liy lan */
+    gap: 15px;} /* Espas 15px ant icone a ak tèks Mon

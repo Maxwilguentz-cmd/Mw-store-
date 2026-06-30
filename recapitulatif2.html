@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récapitulatif de la commande</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
     </div>
 
     <div class="container-checkout">
-        <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">commande</h1>
+        <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">Commande</h1>
 
         <div class="etapes-barre">
             <div class="etape">
@@ -33,7 +33,7 @@
                 <span class="texte-etape">Paiement</span>
             </div>
             <div class="etape active">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
+                <span class="num-etape">3</span>
                 <span class="texte-etape">Récapitulatif</span>
             </div>
         </div>
@@ -42,26 +42,46 @@
             <h2 style="font-size: 1.4rem; font-weight: normal; margin-bottom: 25px;">Récapitulatif de la commande</h2>
             
             <div class="liy-recap-pwodwi">
-                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Netflix Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
-                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">500 G</span>
+                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Netflix PRIVÉ <span style="color: #555; font-size: 0.9rem;">x1</span></span>
+                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">800 G</span>
             </div>
 
             <div class="bwat-infos-streaming">
                 <span class="ti-tit-bwat">INFOS STREAMING</span>
-                <div class="liy-detay-whatsapp">
+                <div class="liy-detay-whatsapp" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                     <span style="color: #555;">WhatsApp</span>
                     <span id="recap-whatsapp" style="color: #888;">Chargement...</span>
+                </div>
+                <div class="liy-detay-profil" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: #555;">Profil Netflix</span>
+                    <span id="recap-profil" style="color: #888;">Chargement...</span>
+                </div>
+                <div class="liy-detay-pin" style="display: flex; justify-content: space-between;">
+                    <span style="color: #555;">PIN Profil</span>
+                    <span id="recap-pin" style="color: #888;">Chargement...</span>
+                </div>
+            </div>
+
+            <div class="bwat-infos-streaming" style="margin-top: 15px;">
+                <span class="ti-tit-bwat">INFOS PAIEMENT</span>
+                <div class="liy-detay-peman" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: #555;">Méthode</span>
+                    <span id="recap-metod" style="color: #888;">Chargement...</span>
+                </div>
+                <div class="liy-detay-transaction" style="display: flex; justify-content: space-between;">
+                    <span style="color: #555;">ID Transaction</span>
+                    <span id="recap-transaction" style="color: #888;">Chargement...</span>
                 </div>
             </div>
 
             <div class="liy-recap-pri" style="margin-top: 30px; border-bottom: 1px solid #111; padding-bottom: 15px;">
                 <span style="color: #555;">Sous-total</span>
-                <span id="recap-sous-total" style="color: #555;">500 G</span>
+                <span id="recap-sous-total" style="color: #555;">800 G</span>
             </div>
 
             <div class="liy-recap-pri" style="margin-top: 15px; margin-bottom: 20px;">
                 <span style="color: white; font-size: 1.3rem; font-weight: bold;">Total à payer</span>
-                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">500 G</span>
+                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">800 G</span>
             </div>
 
             <div class="boite-checkbox-rules">
@@ -70,10 +90,10 @@
             </div>
 
             <div class="goup-boutons-anba">
-                <button type="button" class="btn-retour" onclick="window.location.href='paiement.html'">
+                <button type="button" class="btn-retour" onclick="window.location.href='paiement2.html'">
                     <i class="fa-solid fa-arrow-left"></i> Retour
                 </button>
-                <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled>
+                <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled style="opacity: 0.4;">
                     Valider ma commande
                 </button>
             </div>
@@ -89,7 +109,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Konfigirasyon Firebase pa w la nèt
+        // Konfigirasyon Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
             authDomain: "mwstore-526d1.firebaseapp.com",
@@ -104,17 +124,26 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Lè paj la fin chaje, ranmase done nan memwa pou afiche yo sou ekran an
+        // Lè paj la fin chaje, afiche tout done yo nèt
         document.addEventListener("DOMContentLoaded", function() {
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Privé";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "800 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+            let profilNetflix = localStorage.getItem('profil_netflix') || "Non spécifié";
+            let pinNetflix = localStorage.getItem('pin_netflix') || "****";
+            let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
+            let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
 
-            document.getElementById('recap-non-sèvis').innerHTML = nonSèvis;
+            // Afiche nan HTML la
+            document.getElementById('recap-non-sèvis').innerHTML = nonSèvis + ' <span style="color: #555; font-size: 0.9rem;">x1</span>';
             document.getElementById('recap-pri-anwo').innerText = priSèvis;
             document.getElementById('recap-sous-total').innerText = priSèvis;
             document.getElementById('recap-total-final').innerText = priSèvis;
             document.getElementById('recap-whatsapp').innerText = whatsappKliyan;
+            document.getElementById('recap-profil').innerText = profilNetflix;
+            document.getElementById('recap-pin').innerText = pinNetflix;
+            document.getElementById('recap-metod').innerText = metodPeman;
+            document.getElementById('recap-transaction').innerText = txnId;
         });
 
         // Kontwòl aktivasyon bouton an ak koche a
@@ -134,27 +163,38 @@
         // AKYON LÈ KLIYAN AN KLIKE SOU "VALIDER MA COMMANDE"
         document.getElementById('btn-finaliser').addEventListener('click', function() {
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
+            let profilNetflix = localStorage.getItem('profil_netflix') || "Inconnu";
+            let pinNetflix = localStorage.getItem('pin_netflix') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Privé";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "800 G";
 
-            // Voye tout blòk done a ansanm nan koleksyon "commandes_valibles"
+            // Enfim bouton an pou evite kliyan an klike plizyè fwa si rezo a dousman
+            document.getElementById('btn-finaliser').disabled = true;
+            document.getElementById('btn-finaliser').innerText = "Envoi en cours...";
+
+            // Voye blòk done konplè a nan Firestore
             db.collection("commandes_valides").add({
                 whatsapp: whatsappKliyan,
+                profil_netflix: profilNetflix,
+                pin_netflix: pinNetflix,
                 service: nonSèvis,
                 montant: priSèvis,
                 methode_peman: metodPeman,
                 transaction_id: txnId,
+                status: "En attente", // Yo ka swiv li pi fasil nan admin panel la
                 date: new Date()
             })
             .then(function() {
-                localStorage.clear(); // Netwaye memwa navigatè a apre operasyon an fin reyisi
-                window.location.href = "succes.html"; // Redirije dirèkteman sou bèl paj siksè a
+                localStorage.clear(); // Netwaye memwa navigatè a apre siksè
+                window.location.href = "succes.html"; // Al nan paj siksè
             })
             .catch(function(error) {
-                alert("Erreur Firebase: " + error.message);
-                console.error("Détails de l'erreur: ", error);
+                alert("Erreur lors de l'envoi : " + error.message);
+                document.getElementById('btn-finaliser').disabled = false;
+                document.getElementById('btn-finaliser').innerText = "Valider ma commande";
+                console.error("Détails: ", error);
             });
         });
     </script>

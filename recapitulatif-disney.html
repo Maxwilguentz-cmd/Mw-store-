@@ -70,7 +70,7 @@
             </div>
 
             <div class="goup-boutons-anba">
-                <button type="button" class="btn-retour" onclick="window.location.href='paiement.html'">
+                <button type="button" class="btn-retour" onclick="window.location.href='paiement-disney.html'">
                     <i class="fa-solid fa-arrow-left"></i> Retour
                 </button>
                 <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled>
@@ -106,7 +106,7 @@
 
         // Lè paj la fin chaje, ranmase done nan memwa pou afiche yo sou ekran an
         document.addEventListener("DOMContentLoaded", function() {
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
@@ -136,7 +136,7 @@
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
 
             // Voye tout blòk done a ansanm nan koleksyon "commandes_valibles"
