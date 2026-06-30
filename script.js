@@ -1,5 +1,5 @@
 function salut(){
-    alert("bonjour wilguentz");
+    alert("sevis sa poko disponib");
 }
 function tiktok(){
     window.open("https://www.tiktok.com","_blank");
@@ -20,3 +20,11 @@ function netflix(){
 function chek(){
     window.location.href="checkout.html"
 }
+function chek2(){
+    window.location.href="checkout2.html"
+}
+function chekdisney(){
+    window.location.href="checkout-disney.html"
+}
+
+
