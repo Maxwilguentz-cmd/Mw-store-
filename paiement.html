@@ -102,9 +102,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
-    <script>
-        let metodChwazi = "";
+   
+   <script>
+    let metodChwazi = "";
 
         // Konfigirasyon Firebase pa w la nèt
         const firebaseConfig = {
@@ -148,6 +148,7 @@
             alert("Nimewo a kopye: " + nimewo);
         }
 
+        // Koute lè moun nan klike sou kontinye
         document.getElementById('btn-swiv-recap').addEventListener('click', function() {
             if (metodChwazi === "") {
                 alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
@@ -170,29 +171,32 @@
                 return;
             }
 
-            // N ap pran nimewo WhatsApp kliyan an te mete nan premye paj la (si li la nan memwa)
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+            // Nou pran nimewo telefòn nan nan memwa a
+            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
 
-            // ANREJISTRE PÈMAN AN NAN FIREBASE TOUTBON VRE
-            db.collection("paiements").add({
+            // Nou voye done yo dirèkteman nan yon nouvo koleksyon "commandes_valides"
+            db.collection("commandes_valides").add({
                 whatsapp: whatsappKliyan,
-                methode: metodChwazi,
+                methode_peman: metodChwazi,
                 transaction_id: txnId,
                 montant: "500 G",
                 date: new Date()
             })
             .then(function() {
-                // Sove enfòmasyon yo tou nan localStorage pou paj recapitulatif la ka afiche yo pita
+                // Sove enfòmasyon yo tou nan localStorage pou dènye paj la
                 localStorage.setItem('metod_peman', metodChwazi);
                 localStorage.setItem('txn_id_kliyan', txnId);
                 
-                // Ale nan dènye paj la
+                // Redirije sou paj recapitulatif la
                 window.location.href = "recapitulatif.html";
             })
             .catch(function(error) {
-                alert("Erreur database: " + error.message);
+                alert("Erreur Firebase: " + error.message);
             });
         });
+
     </script>
+    
+    
 </body>
 </html>
