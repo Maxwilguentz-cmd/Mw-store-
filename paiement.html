@@ -111,64 +111,64 @@
     </div>
 
     <script>
-        let metodChwazi = "";
+    let metodChwazi = "";
 
-        function chwaziMetod(metod) {
-            metodChwazi = metod;
-            
-            const bwatMoncash = document.getElementById('bwat-moncash');
-            const bwatNatcash = document.getElementById('bwat-natcash');
-            const btnMoncash = document.getElementById('btn-moncash');
-            const btnNatcash = document.getElementById('btn-natcash');
+    function chwaziMetod(metod) {
+        metodChwazi = metod;
+        
+        const bwatMoncash = document.getElementById('bwat-moncash');
+        const bwatNatcash = document.getElementById('bwat-natcash');
+        const btnMoncash = document.getElementById('btn-moncash');
+        const btnNatcash = document.getElementById('btn-natcash');
 
-            bwatMoncash.classList.add('d-none');
-            bwatNatcash.classList.add('d-none');
-            btnMoncash.classList.remove('aktive');
-            btnNatcash.classList.remove('aktive');
+        bwatMoncash.classList.add('d-none');
+        bwatNatcash.classList.add('d-none');
+        btnMoncash.classList.remove('aktive');
+        btnNatcash.classList.remove('aktive');
 
-            if(metod === 'moncash') {
-                bwatMoncash.classList.remove('d-none');
-                btnMoncash.classList.add('aktive');
-            } else if(metod === 'natcash') {
-                bwatNatcash.classList.remove('d-none');
-                btnNatcash.classList.add('aktive');
-            }
+        if(metod === 'moncash') {
+            bwatMoncash.classList.remove('d-none');
+            btnMoncash.classList.add('aktive');
+        } else if(metod === 'natcash') {
+            bwatNatcash.classList.remove('d-none');
+            btnNatcash.classList.add('aktive');
+        }
+    }
+
+    function kopieNimewo(nimewo) {
+        navigator.clipboard.writeText(nimewo);
+        alert("Nimewo a kopye: " + nimewo);
+    }
+
+    document.getElementById('btn-swiv-recap').addEventListener('click', function() {
+        if (metodChwazi === "") {
+            alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
+            return;
         }
 
-        function kopieNimewo(nimewo) {
-            navigator.clipboard.writeText(nimewo);
-            alert("Nimewo a kopye: " + nimewo);
+        let txnId = "";
+        if (metodChwazi === "moncash") {
+            txnId = document.getElementById('txn_id_moncash').value.trim();
+            if(txnId.length < 12 || !txnId.startsWith("003")) {
+                alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
+                return;
+            }
+        } else {
+            txnId = document.getElementById('txn_id_natcash').value.trim();
         }
 
-        document.getElementById('btn-swiv-recap').addEventListener('click', function() {
-            if (metodChwazi === "") {
-                alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
-                return;
-            }
+        if (txnId === "") {
+            alert("Silvouplè antre Transaksyon ID la pou nou ka verifye peman an.");
+            return;
+        }
 
-            let txnId = "";
-            if (metodChwazi === "moncash") {
-                txnId = document.getElementById('txn_id_moncash').value.trim();
-                if(txnId.length < 12 || !txnId.startsWith("003")) {
-                    alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
-                    return;
-                }
-            } else {
-                txnId = document.getElementById('txn_id_natcash').value.trim();
-            }
-
-            if (txnId === "") {
-                alert("Silvouplè antre Transaksyon ID la pour nou ka verifye peman an.");
-                return;
-            }
-
-            // Nou jis sove chwa yo nan memwa pou kounye a
-            localStorage.setItem('metod_peman', metodChwazi);
-            localStorage.setItem('txn_id_kliyan', txnId);
-            
-            // Nou deplase sou paj recapitulatif la san n pa voye anyen nan Firebase ankò
-            window.location.href = "recapitulatif.html";
-        });
-    </script>
+        // MEN LIY KI TE MANKE YO: Sove tou de nan memwa a pibon fòma
+        localStorage.setItem('metod_peman', metodChwazi);
+        localStorage.setItem('txn_id_kliyan', txnId);
+        
+        window.location.href = "recapitulatif.html";
+    });
+</script>
 </body>
 </html>
+     
