@@ -29,4 +29,4 @@ function chekdisneypremium(){
 }
 
 function chekdisney(){
-    Window.location.href="checkout-disney.html"}
+    window.location.href="checkout-disney.html"}
