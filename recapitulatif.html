@@ -25,7 +25,7 @@
     <div class="container-checkout">
         <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">commande</h1>
 
-        <!-- Liy Etap yo (Yo tout gen chèk vèt kounye a) -->
+        <!-- Liy Etap yo -->
         <div class="etapes-barre">
             <div class="etape">
                 <span class="num-etape"><i class="fa-solid fa-check"></i></span>
@@ -56,7 +56,7 @@
                 <span class="ti-tit-bwat">INFOS STREAMING</span>
                 <div class="liy-detay-whatsapp">
                     <span style="color: #555;">WhatsApp</span>
-                    <span id="recap-whatsapp" style="color: #888;">50938019657</span>
+                    <span id="recap-whatsapp" style="color: #888;">Chargement...</span>
                 </div>
             </div>
 
@@ -71,10 +71,10 @@
                 <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">500 G</span>
             </div>
 
-            <!-- Ti kaz pou koche a (Checkbox Rules) -->
+            <!-- Ti kaz pou koche a -->
             <div class="boite-checkbox-rules">
                 <input type="checkbox" id="accept-rules" onchange="tchekeCheckbox()">
-                <label for="accept-rules">J'accepte les <a href="#" style="color: #d1b052; text-decoration: none;">règles anti-fraude</a> de CAOX.</label>
+                <label for="accept-rules">J'accepte les <a href="#" style="color: #d1b052; text-decoration: none;">règles anti-fraude</a> de MwStore.</label>
             </div>
 
             <!-- Bouton navigasyon yo kòt a kòt -->
@@ -89,20 +89,39 @@
         </div>
     </div>
 
-    <!-- Ti bouton kabwa k ap flote anba a dwat -->
+    <!-- Ti bouton kabwa -->
     <div class="kabwa-flottant">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="badge-kabwa">1</span>
     </div>
 
+    <!-- Enpòtasyon SDK Firebase nan dènye paj la pou l ka voye tout done yo ansanm -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <script>
+        // Konfigirasyon Firebase pa w la nèt
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb",
+            measurementId: "G-5H72KDEHD9"
+        };
+
+        // Inisyalize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         document.addEventListener("DOMContentLoaded", function() {
-            // Ranmase done ki nan memwa yo (Pita n ap mete yo depi nan paj akèy la)
+            // Ranmase done yo nan memwa a
             let nonSèvis = localStorage.getItem('s悪is_chwazi') || "Netflix Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
-            // Mete done yo nan plas yo otomatikman nan HTML la
+            // Mete yo nan HTML la otomatikman
             document.getElementById('recap-non-s悪is').innerHTML = nonSèvis;
             document.getElementById('recap-pri-anwo').innerText = priSèvis;
             document.getElementById('recap-sous-total').innerText = priSèvis;
@@ -110,7 +129,6 @@
             document.getElementById('recap-whatsapp').innerText = whatsappKliyan;
         });
 
-        // Fonksyon k ap kontwole si bouton an ka klike oswa non
         function tchekeCheckbox() {
             const checkbox = document.getElementById('accept-rules');
             const btnFinaliser = document.getElementById('btn-finaliser');
@@ -120,16 +138,35 @@
                 btnFinaliser.style.opacity = "1";
             } else {
                 btnFinaliser.disabled = true;
-                btnFinaliser.style.opacity = "0.4"; // Li vin flou lè l bloke
+                btnFinaliser.style.opacity = "0.4";
             }
         }
 
-        // Lè kliyan an klike sou "Valider ma commande"
+        // SE LÈ SÈVITÈ A KLIKE SOU BOUTON SA A POU TOUT DONE YO ALE NAN FIREBASE
         document.getElementById('btn-finaliser').addEventListener('click', function() {
-            alert("Félicitations! Votre commande a été validée avec succès.");
-            // Netwaye memwa a epi tounen nan akèy
-            localStorage.clear();
-            window.location.href = "index.html"; 
+            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "00000000";
+            let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
+            let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
+            let nonSèvis = localStorage.getItem('s悪is_chwazi') || "Netflix Partagé x1";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+
+            // Nou voye tout blòk la ansanm nan koleksyon "commandes_valides"
+            db.collection("commandes_valides").add({
+                whatsapp: whatsappKliyan,
+                service: nonSèvis,
+                montant: priSèvis,
+                methode_peman: metodPeman,
+                transaction_id: txnId,
+                date: new Date()
+            })
+            .then(function() {
+                alert("Félicitations! Votre commande a été enregistrée avec succès.");
+                localStorage.clear(); // Netwaye memwa a apre tou bagay fin regle
+                window.location.href = "index.html"; 
+            })
+            .catch(function(error) {
+                alert("Erreur Firebase: " + error.message);
+            });
         });
     </script>
 </body>
