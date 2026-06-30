@@ -30,3 +30,5 @@ function chekdisneypremium(){
 
 function chekdisney(){
     window.location.href="checkout-disney.html"}
+function chekprime(){
+    window.location.href="checkout-prime.html"}
