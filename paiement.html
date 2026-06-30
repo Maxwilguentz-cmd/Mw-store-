@@ -9,6 +9,7 @@
 </head>
 <body>
 
+    <!-- Ba Navigasyon anlè a -->
     <div class="header-checkout">
         <div class="logo-checkout">Mw<span>Store</span></div>
         <div class="menu-icons">
@@ -20,9 +21,11 @@
         </div>
     </div>
 
+    <!-- Kontni Prensipal la -->
     <div class="container-checkout">
         <h1 class="titre-checkout">Finaliser ma commande</h1>
 
+        <!-- Liy Etap yo -->
         <div class="etapes-barre">
             <div class="etape">
                 <span class="num-etape">1</span>
@@ -38,13 +41,16 @@
             </div>
         </div>
 
+        <!-- Kat Peman an -->
         <div class="carte-formulaire">
             
+            <!-- BOUTON MONCASH -->
             <div class="boite-opsyon-peman" id="btn-moncash" onclick="chwaziMetod('moncash')">
                 <i class="fa-solid fa-credit-card"></i>
                 <span>MonCash ⚡</span>
             </div>
 
+            <!-- ENSTRIKSYON MONCASH -->
             <div class="bwat-instructions-peman d-none" id="bwat-moncash">
                 <h3>Instructions pour MonCash:</h3>
                 <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
@@ -62,11 +68,13 @@
                 </div>
             </div>
 
+            <!-- BOUTON NATCASH -->
             <div class="boite-opsyon-peman" id="btn-natcash" onclick="chwaziMetod('natcash')">
                 <i class="fa-solid fa-wallet"></i>
                 <span>NatCash ⚡</span>
             </div>
 
+            <!-- ENSTRIKSYON NATCASH -->
             <div class="bwat-instructions-peman d-none" id="bwat-natcash">
                 <h3>Instructions pour NatCash:</h3>
                 <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
@@ -83,11 +91,13 @@
                 </div>
             </div>
 
+            <!-- Ti bouton kabwa k ap flote -->
             <div class="kabwa-flottant">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="badge-kabwa">1</span>
             </div>
 
+            <!-- Bouton navigasyon yo anba -->
             <div class="goup-boutons-anba">
                 <button type="button" class="btn-retour" onclick="window.location.href='checkout.html'">
                     <i class="fa-solid fa-arrow-left"></i> Retour
@@ -100,26 +110,8 @@
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
     <script>
         let metodChwazi = "";
-
-        // Konfigirasyon Firebase pa w la nèt
-        const firebaseConfig = {
-            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
-            authDomain: "mwstore-526d1.firebaseapp.com",
-            projectId: "mwstore-526d1",
-            storageBucket: "mwstore-526d1.firebasestorage.app",
-            messagingSenderId: "901851187874",
-            appId: "1:901851187874:web:a5936637da5cfa925325fb",
-            measurementId: "G-5H72KDEHD9"
-        };
-
-        // Inisyalize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
 
         function chwaziMetod(metod) {
             metodChwazi = metod;
@@ -166,32 +158,16 @@
             }
 
             if (txnId === "") {
-                alert("Silvouplè antre Transaksyon ID la pou nou ka verifye peman an.");
+                alert("Silvouplè antre Transaksyon ID la pour nou ka verifye peman an.");
                 return;
             }
 
-            // Sekirite: Si localStorage la vid pou kèlkeswa rezon an, nou mete yon valè tanporè pou kòd la pa kraze
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "00000000";
-
-            // Nou voye done yo nan koleksyon "commandes_valides"
-            db.collection("commandes_valides").add({
-                whatsapp: whatsappKliyan,
-                methode_peman: metodChwazi,
-                transaction_id: txnId,
-                montant: "500 G",
-                date: new Date()
-            })
-            .then(function() {
-                // Sere done yo pou dènye paj la ka itilize yo tou
-                localStorage.setItem('metod_peman', metodChwazi);
-                localStorage.setItem('txn_id_kliyan', txnId);
-                
-                // Ale sou paj recapitulatif la
-                window.location.href = "recapitulatif.html";
-            })
-            .catch(function(error) {
-                alert("Erreur Firebase: " + error.message);
-            });
+            // Nou jis sove chwa yo nan memwa pou kounye a
+            localStorage.setItem('metod_peman', metodChwazi);
+            localStorage.setItem('txn_id_kliyan', txnId);
+            
+            // Nou deplase sou paj recapitulatif la san n pa voye anyen nan Firebase ankò
+            window.location.href = "recapitulatif.html";
         });
     </script>
 </body>
