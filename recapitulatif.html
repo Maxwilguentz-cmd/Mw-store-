@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récapitulatif de la commande</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Ba Navigasyon anlè a -->
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kontni Prensipal la -->
+    <div class="container-checkout">
+        <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">commande</h1>
+
+        <!-- Liy Etap yo (Yo tout gen chèk vèt kounye a) -->
+        <div class="etapes-barre">
+            <div class="etape">
+                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
+                <span class="texte-etape">Informations</span>
+            </div>
+            <div class="etape">
+                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
+                <span class="texte-etape">Paiement</span>
+            </div>
+            <div class="etape active">
+                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
+                <span class="texte-etape">Récapitulatif</span>
+            </div>
+        </div>
+
+        <!-- Kat Rezime a -->
+        <div class="carte-formulaire">
+            <h2 style="font-size: 1.4rem; font-weight: normal; margin-bottom: 25px;">Récapitulatif de la commande</h2>
+            
+            <!-- Pati Dinamik: Sèvis ak Pri -->
+            <div class="liy-recap-pwodwi">
+                <span id="recap-non-s悪is" style="color: white; font-size: 1.1rem;">Netflix Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
+                <span id="recap-pri-anwo" class="montant-dinamik" style="color: white; font-weight: bold; font-size: 1.1rem;">500 G</span>
+            </div>
+
+            <!-- Bwat Infos Streaming lan -->
+            <div class="bwat-infos-streaming">
+                <span class="ti-tit-bwat">INFOS STREAMING</span>
+                <div class="liy-detay-whatsapp">
+                    <span style="color: #555;">WhatsApp</span>
+                    <span id="recap-whatsapp" style="color: #888;">50938019657</span>
+                </div>
+            </div>
+
+            <!-- Sous-total ak Total -->
+            <div class="liy-recap-pri" style="margin-top: 30px; border-bottom: 1px solid #111; padding-bottom: 15px;">
+                <span style="color: #555;">Sous-total</span>
+                <span id="recap-sous-total" style="color: #555;">500 G</span>
+            </div>
+
+            <div class="liy-recap-pri" style="margin-top: 15px; margin-bottom: 20px;">
+                <span style="color: white; font-size: 1.3rem; font-weight: bold;">Total à payer</span>
+                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">500 G</span>
+            </div>
+
+            <!-- Ti kaz pou koche a (Checkbox Rules) -->
+            <div class="boite-checkbox-rules">
+                <input type="checkbox" id="accept-rules" onchange="tchekeCheckbox()">
+                <label for="accept-rules">J'accepte les <a href="#" style="color: #d1b052; text-decoration: none;">règles anti-fraude</a> de CAOX.</label>
+            </div>
+
+            <!-- Bouton navigasyon yo kòt a kòt -->
+            <div class="goup-boutons-anba">
+                <button type="button" class="btn-retour" onclick="window.location.href='paiement.html'">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </button>
+                <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled>
+                    Valider ma commande
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ti bouton kabwa k ap flote anba a dwat -->
+    <div class="kabwa-flottant">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge-kabwa">1</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ranmase done ki nan memwa yo (Pita n ap mete yo depi nan paj akèy la)
+            let nonSèvis = localStorage.getItem('s悪is_chwazi') || "Netflix Partagé x1";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+
+            // Mete done yo nan plas yo otomatikman nan HTML la
+            document.getElementById('recap-non-s悪is').innerHTML = nonSèvis;
+            document.getElementById('recap-pri-anwo').innerText = priSèvis;
+            document.getElementById('recap-sous-total').innerText = priSèvis;
+            document.getElementById('recap-total-final').innerText = priSèvis;
+            document.getElementById('recap-whatsapp').innerText = whatsappKliyan;
+        });
+
+        // Fonksyon k ap kontwole si bouton an ka klike oswa non
+        function tchekeCheckbox() {
+            const checkbox = document.getElementById('accept-rules');
+            const btnFinaliser = document.getElementById('btn-finaliser');
+            
+            if (checkbox.checked) {
+                btnFinaliser.disabled = false;
+                btnFinaliser.style.opacity = "1";
+            } else {
+                btnFinaliser.disabled = true;
+                btnFinaliser.style.opacity = "0.4"; // Li vin flou lè l bloke
+            }
+        }
+
+        // Lè kliyan an klike sou "Valider ma commande"
+        document.getElementById('btn-finaliser').addEventListener('click', function() {
+            alert("Félicitations! Votre commande a été validée avec succès.");
+            // Netwaye memwa a epi tounen nan akèy
+            localStorage.clear();
+            window.location.href = "index.html"; 
+        });
+    </script>
+</body>
+</html>
