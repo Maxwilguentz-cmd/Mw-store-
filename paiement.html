@@ -102,9 +102,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-   
-   <script>
-    let metodChwazi = "";
+
+    <script>
+        let metodChwazi = "";
 
         // Konfigirasyon Firebase pa w la nèt
         const firebaseConfig = {
@@ -148,7 +148,6 @@
             alert("Nimewo a kopye: " + nimewo);
         }
 
-        // Koute lè moun nan klike sou kontinye
         document.getElementById('btn-swiv-recap').addEventListener('click', function() {
             if (metodChwazi === "") {
                 alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
@@ -157,13 +156,13 @@
 
             let txnId = "";
             if (metodChwazi === "moncash") {
-                txnId = document.getElementById('txn_id_moncash').value;
+                txnId = document.getElementById('txn_id_moncash').value.trim();
                 if(txnId.length < 12 || !txnId.startsWith("003")) {
                     alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
                     return;
                 }
             } else {
-                txnId = document.getElementById('txn_id_natcash').value;
+                txnId = document.getElementById('txn_id_natcash').value.trim();
             }
 
             if (txnId === "") {
@@ -171,10 +170,10 @@
                 return;
             }
 
-            // Nou pran nimewo telefòn nan nan memwa a
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
+            // Sekirite: Si localStorage la vid pou kèlkeswa rezon an, nou mete yon valè tanporè pou kòd la pa kraze
+            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "00000000";
 
-            // Nou voye done yo dirèkteman nan yon nouvo koleksyon "commandes_valides"
+            // Nou voye done yo nan koleksyon "commandes_valides"
             db.collection("commandes_valides").add({
                 whatsapp: whatsappKliyan,
                 methode_peman: metodChwazi,
@@ -183,20 +182,17 @@
                 date: new Date()
             })
             .then(function() {
-                // Sove enfòmasyon yo tou nan localStorage pou dènye paj la
+                // Sere done yo pou dènye paj la ka itilize yo tou
                 localStorage.setItem('metod_peman', metodChwazi);
                 localStorage.setItem('txn_id_kliyan', txnId);
                 
-                // Redirije sou paj recapitulatif la
+                // Ale sou paj recapitulatif la
                 window.location.href = "recapitulatif.html";
             })
             .catch(function(error) {
                 alert("Erreur Firebase: " + error.message);
             });
         });
-
     </script>
-    
-    
 </body>
 </html>
