@@ -29,13 +29,13 @@ body {
 }
 
 /* Stil pou imaj k ap nan background banyè a */
-.hero-bg {
+.hero-bg-disney {
     position: absolute; /* Detache imaj la nan koule nòmal la pou l ka gaye nan tout bwat la */
     top: 0; /* Kole l anlè nèt */
     left: 0; /* Kole l a gòch nèt */
     width: 100%; /* Pran tout lajè banyè a */
     height: 100%; /* Pran tout wotè banyè a */
-    background-image: url('choix1.JPG'); /* Lyen kote imaj la soti a */
+    background-image: url('font-akey.JPG'); /* Lyen kote imaj la soti a */
     background-size: cover; /* Fòse imaj la kouvri tout bwat la nèt san l pa fòse fòm li */
     background-position: center; /* Santre mitan imaj la nan bwat la */
     opacity: 0.3; /* Diminye klète imaj la pou l vin som pou tèks blan an ka parèt byen */
@@ -70,6 +70,13 @@ body {
     letter-spacing: 2px; /* Espase lèt yo yonn ak lòt */
 }
 
+.bleu-subtitle {
+    color: blue; /* Koulè wouj Netflix la */
+    font-size: 0.8rem; /* Ti gwosè tèks */
+    font-weight: 700; /* Mete tèks la gra */
+    letter-spacing: 2px; /* Espase lèt yo yonn ak lòt */
+}
+
 .main-title {
     font-size: 3.5rem; /* Gwo lèt pou tit la */
     font-weight: bold; /* Mete l gra anpil */
@@ -91,8 +98,8 @@ body {
     margin-bottom: 30px; /* Bay yon espas anba anvan kad yo kòmanse */
 }
 
-.red-subtitle-small {
-    color: #e50914; /* Koulè wouj */
+.bleu-subtitle-small {
+    color: blue; /* Koulè wouj */
     font-size: 0.75rem; /* Ti gwosè */
     font-weight: 700;
     letter-spacing: 1px;
@@ -300,350 +307,6 @@ body {
 }
 
 
-
-
-
-
-body{
-    text-align: left;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black ;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    padding-bottom: 150px;}
-
-/*pou titre principale*/
-.soustitre p, h1{
-    text-align: center;
-    opacity: 0.7;
-    margin-bottom: 5px;}
-/*2e titre*/
- .tag-catalogue {
-    color: #D4AF37;
-    margin-bottom: 2px;
-    font-size: 0.85em;
-    letter-spacing: 2px;
-    padding-left: 5%;} 
-/*3e titre*/
-.titre-categories {
-    text-align: left !important;
-    padding-left: 5%;
-    font-size: 2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-top: 0;
-    text-transform: uppercase;}
-
-/*anplasmant ak parametre kote pou fe acha */    
-.store-grid {
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding-bottom: 15px;
-    scrollbar-width: none;} 
-
-/* Kache ba scroll la sou Chrome, Safari ak Edge pou l rete bèl */
-.store-grid::-webkit-scrollbar {
-    display: none;}    
-
-/* parametre espesifik pou pati freefire la ak pati callof la epi pati dls la   */
-.card-freefire ,.card-call-of-dutty, .card-dls, .card-pubg,.card-netflix,.card-disney,.card-prime,.card-crunchyroll{
-    position: relative;
-    flex: 1;
-    height: 180px;
-    border-radius: 20px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    background-size: cover;
-    background-position: center;
-    background-color: #0b0b0b;
-    box-shadow: inset 0 0 80px rgba(0,0,0,0.9);} 
- 
-/*parametre spesifik pou pati ki nan page index la */    
-.streaming,.jeux,.cartedebit{
-    position: relative;
-    overflow: hidden;
-    border-radius: 30px;
-    border: 1px solid gray;
-    transition: all 0.4s ease;
-    width: 90%;
-    max-width: 800px;
-    height: 200px;
-    margin: 20px auto;}    
-   
-/*coule bordi pou pati ff la */
-.card-freefire{
-    border: 2px solid rgba(229, 9,20, 0.4);} 
-/*coule bordi pou callof la */
-.card-call-of-dutty{
-    border: 2px solid lightblue;}  
-/*coule bodi dls la */    
-.card-dls{
-    border:2px solid lightcoral;}
-/*coule pati pou pubG a*/    
-.card-pubg{
-    border: 2px solid lightgray;}
-/*coule pati netflix la nan paj streming */    
-.card-netflix {
-    border: 2px solid rgba(229, 9, 20, 0.4);} 
-/*koulh pati disney la nan paj streaming*/
-.card-disney {
-    border: 2px solid rgba(0, 99, 229, 0.4);}
-/*pou primr nan*/    
-.card-prime {
-    border: 2px solid rgba(0, 168, 225, 0.4);}    
-/* Style espesifik pou Crunchyroll (Koulè zoranj) */
-.card-crunchyroll {
-    border: 2px solid rgba(244, 117, 33, 0.4);}
-
-/*parametre pou titre kinan grid nan 1e paj yo*/
-.titre-pour-jeux{
-    position: absolute ;
-    bottom: 5px;
-    left: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;}
-/*suit*/    
-.titre-pour-jeux h2{ 
-    margin:0 0 5px 0;}
-/*suit*/    
-.titre-pour-jeux h6{
-    margin-top: 0;
-    font-size: 0.85em;
-    color: #888;
-    font-weight: normal;
-    opacity: 0.7;  }    
-/* Tèks anndan kat yo nan 2e 3e paj yo */
-.card-texte h2 {
-    margin: 0 0 5px 0;
-    font-size: 1.6em;
-    font-weight: bold;
-    letter-spacing: 1px;}
-/*2e texte la nan 2e 3e paj yo*/
-.card-texte h6 {
-    margin: 0;
-    font-size: 0.85em;
-    color: #888;
-    font-weight: normal;}
-
-/*lew klike sou pati streaming kod sa fe bordi a anime el fe yon ombre gray*/
-.streaming:hover{
-    box-shadow: 0 0 8px gray;
-    transform:translateY(-5px);}  
-/*lew klike sou pati jeux kod sa fe bodi a anime el fe yon ombre lightblue*/
-.jeux:hover{
-    transform:translateY(-5px) ;
-    box-shadow:0 0 8px lightblue;}   
-/*lew klike sou pati carte debit kod sa fe bodi a anime el fe yon ombre white*/  
-.cartedebit:hover{
-    transform:translateY(-5px) ;
-    box-shadow:0 0 8px white;}        
-/*lew klike sou pati ff kod sa fe bordu a anime el fe yon ombre red*/
-.card-freefire:hover { 
-    border-color: #e50914;
-    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); 
-    transform: translateY(-5px);}  
-/*lew klike sou pati callof sa fe bodi a anime el fe yon ombre blue*/
-.card-call-of-dutty:hover{
-    border-color:  blue;
-    box-shadow: 0 0 25px lightblue;
-    transform: translateY(-5px);} 
-/*lew klike sou pati dls la sa fe bodi a anime el fe yon ombre green*/    
-.card-dls:hover{
-    border-color: coral;
-    box-shadow:0 0 25px lightcoral;
-    transform: translateY(-5px);}    
-/*lew klike sou pati pubg a sa fe bodi a anime el fe yon ombre gray */
-.card-pubg:hover{
-    border-color:gray;
-    box-shadow: 0 0 25px lightgray;
-    transform: translateY(-5px);}
-/*pou netflix la nan paj streaming*/    
-.card-netflix:hover { 
-    border-color: #e50914;
-    box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); 
-    transform: translateY(-5px); }    
-/*pou disney la nan paj streaming*/
-.card-disney:hover { 
-    border-color: #0063e5;
-    box-shadow: 0 0 25px rgba(0, 99, 229, 0.4); 
-    transform: translateY(-5px);}
-/*pou prime la nan paj streaming */ 
-.card-prime:hover { 
-    border-color: #00a8e1;
-    box-shadow: 0 0 25px rgba(0, 168, 225, 0.4); 
-    transform: translateY(-5px);}
-/*pou scrunchyroll nan paj streaming*/
-.card-crunchyroll:hover { 
-    border-color: #f47521;
-    box-shadow: 0 0 25px rgba(244, 117, 33, 0.4); 
-    transform: translateY(-5px);}    
-
-/*lew peze sou pati ff ou pati callof la ou dls la ou pubj akod ki jere sa ti bouton an fe*/   
-.streaming:hover .arrow-btn,.jeux:hover .arrow-btn,.cartedebit:hover .arrow-btn,.card-freefire:hover .arrow-btn, .card-call-of-dutty:hover .arrow-btn, .card-dls:hover .arrow-btn,.card-pubg:hover .arrow-btn,.card-netflix:hover .arrow-btn,.card-disney:hover .arrow-btn,.card-prime:hover .arrow-btn ,.card-crunchyroll:hover .arrow-btn{
-    background-color: white;
-    color: black;
-    border-color: white;}    
-
-/*barre de navigation an*/
-.barre-nav{
-    display: flex;                  /* Aliyen 3 gwo blòk yo sou menm liy */
-    justify-content: space-between; /* Mete yonn a gòch, yonn nan mitan, yonn a dwat */
-    align-items: center;         /* Santre tout bagay nan sans wotè */
-    background-color:rgba(0, 0,0, 0.80);      /* Yon koulè nwa ki fon anpil */
-    border-radius: 20px;            /* Kwen yo awondi jan sa ye nan foto a */
-    padding: 0;             /* Espas anndan ba a (anlè/anba ak gòch/dwat) */
-    margin:0;    /* Marge deyò pou l pa kole ak banyè yo */
-    width: 90%;                     /* Lajè ba a parapò ak ekran an */
-    max-width: 1200px;      
-    position:fixed;
-    left: 5%; 
-    bottom: 20px;
-    transform: translateY();
-    z-index: 1000;}
-/*pati gauche barre navigation an*/
-.bloc-gauche{
-    background-color: #0e0e0e;
-    border: 1px solid #D4AF37;
-    border-radius: 20px;
-    padding: 10px 15px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;}
-
-/* 1. Kad separe pou bouton retour a sèlman */
-.bloc-gauche{
-    display: flex;
-    align-items: center;}    
-/*aparans bouton ki pemet ou ale nan premier paj la */
-.btn-retour {
-    background-color: transparent;
-    color: #D4AF37;
-    border: 2px solid #D4AF37;
-    border-radius: 12px;
-    padding: 8px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1em;
-    transition: 0.3s;
-    border: 2px solid #D4AF37;
-    color: #D4AF37;}   
-
-/* Lè sourit la sou li, li vin jòn tèks la vin nwa */
-.btn-retour:hover {
-    background-color: #D4AF37;
-    color: black;}  
-    
-/* Pati mitan: aparans pati milieu a  */
-.bloc-milieu{
-    display: flex;
-    gap: 15px;   
-    background-color:rgba(0, 0,0, 0.30);  
-    border: 1px solid #D4AF37;   
-    border-radius: 20px;
-    padding: 10px 20px;} /*pou bouton yo ka gn espas antre yo*/
-
- /* Style pou bouton nan mitan yo */
-.btn-milieu {
-    background-color: rgba(212, 175, 55, 0.1); /* Yon ti fon dore transparan */
-    color: white;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    border-radius: 12px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s}
-
- /*lew klike sou bouton milieu navigate yo*/   
-.btn-milieu:hover {
-    border-color: #D4AF37;
-    background-color: rgba(212, 175, 55, 0.2); }    
-
-/*1e aparans pati adwat la */    
-.bloc-droite{
-    display: flex;
-    gap: 20px;}
-
-/*2e aparans pati adwat la*/   
-.icon-social{
-    color: white;
-    text-decoration: none;          /* Retire liy ki konn anba lyen yo */
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: 0.3s;}    
-
-/*kod pou kijan imaj yo reaji nan paj jeux ak streaming */
-.streaming:hover .card-bg-img,.jeux:hover .card-bg-img,.cartedebit:hover .card-bg-img,.card-freefire:hover .card-bg-img,.card-call-of-dutty:hover.card-bg-img,.card-dls:hover .card-bg-img,.card-pubg:hover .card-bg-img,.card-netflix:hover .card-bg-img,.card-disney:hover .card-bg-img,.card-prime:hover .card-bg-img,.card-crunchyroll:hover .card-bg-img{
-    opacity: 0.6;
-    transform:scale(1.05);}   
-
-/*lew klike sou pati icon yo*/    
-.icon-social:hover {
-    color: #D4AF37;}    
-
-/* Ti badj ki anlè a */
-.badge-dispo {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: rgba(212, 175, 55, 0.15);
-    color: #D4AF37;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    font-size: 0.75em;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 8px;}    
-
-/* Ti bouton wonn ak flèch la */
-.arrow-btn{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 0.95em;
-    transition: 0.3s;}    
-
-/* Seksyon Temwayaj anba */
-.temoignages-section{
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 140px;} /* Lese espas pou l pa al anba footer a */
-/*Seksyon Temwanyaj anba */
-.temoignages-section h2{
-    font-size: 2em;
-    font-weight: bold;
-    margin: 0;}    
-
-/* Style pou imaj k ap sèvi kòm background anndan kat yo */
-.card-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;   /* Sa a fè imaj la pa kraze/fòse */
-    z-index: 1;          /* Li mete imaj la anba nèt */
-    opacity: 0.3;        /* Li ba l yon ti transparans pou tèks la ka parèt byen fon */
-    transition: 0.4s ease;}
 
 
 
