@@ -1256,3 +1256,150 @@ body {
     color: black;
     cursor: pointer;
 }
+/* ==========================================================================
+   STIL POU PAJ SIKSÈ (COMMANDE ENREGISTRÉE)
+   ========================================================================== */
+
+.container-succes {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.carte-succes {
+    background-color: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 24px;
+    padding: 35px 25px;
+    text-align: center;
+}
+
+/* Sèk vèt la ak efè neon */
+.boite-grand-check {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.ti-sèk-vèt {
+    width: 90px;
+    height: 90px;
+    border: 5px solid #00cc66;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00cc66;
+    font-size: 2.5rem;
+    box-shadow: 0 0 20px rgba(0, 204, 102, 0.2);
+}
+
+.titre-succes {
+    color: white;
+    font-size: 1.8rem;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.sous-titre-succes {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 40px;
+}
+
+/* Timeline nan */
+.timeline-suivi {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    text-align: left;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+
+.etape-suivi {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+/* Liy vètikal ki konekte pwen yo */
+.etape-suivi:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background-color: #222;
+}
+
+.etape-suivi.aktif:not(:last-child)::after {
+    background-color: #004d26; /* Liy lan vin vèt fonse si l pase */
+}
+
+.rond-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #222;
+    background-color: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+.etape-suivi.aktif .rond-icone {
+    border-color: #00cc66;
+    color: #00cc66;
+    background-color: rgba(0, 204, 102, 0.05);
+}
+
+.tèks-suivi h3 {
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.etape-suivi.aktif .tèks-suivi h3 {
+    color: white;
+}
+
+.tèks-suivi p {
+    color: #444;
+    font-size: 0.88rem;
+}
+
+.etape-suivi.aktif .tèks-suivi p {
+    color: #777;
+}
+
+/* Bouton Jòn anba a */
+.btn-voir-commandes {
+    width: 100%;
+    background-color: #d1b052;
+    color: black;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.ti-not-anba {
+    color: #8c7333;
+    font-size: 0.82rem;
+}
