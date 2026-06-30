@@ -28,5 +28,5 @@ function chek3(){
     window.location.href="checkout-disney-premium.html"
 }
 
-function chekd2(){
+function chekd4(){
     window.location.href="checkout-disney.html"}
