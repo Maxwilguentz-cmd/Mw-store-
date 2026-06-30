@@ -1174,3 +1174,85 @@ body {
 .btn-continuer-peman:hover {
     background-color: #bfa043;
 }
+
+/* ==========================================================================
+   STIL POU PAJ RECAPITULATIF (DYNAMIK)
+   ========================================================================== */
+
+.liy-recap-pwodwi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.bwat-infos-streaming {
+    background-color: #080808;
+    border: 1px solid #1c1a15; /* Ti rebò nwa/mawon fonse */
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ti-tit-bwat {
+    font-size: 0.75rem;
+    color: #bfa043; /* Koulè lò/jòn an tèt bwat la */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.liy-detay-whatsapp {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.liy-recap-pri {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Stil pou ti kaz pou koche a */
+.boite-checkbox-rules {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.boite-checkbox-rules input[type="checkbox"] {
+    accent-color: #d1b052; /* Pou chèk la ka jòn */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Bouton Jòn pou Valider (Dezaktive pa defo) */
+.btn-valider-commande {
+    background-color: #bfa043;
+    color: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4; /* Li parèt fèmen nèt nan foto a */
+    transition: all 0.2s ease;
+}
+
+.btn-valider-commande:not([disabled]) {
+    background-color: #d1b052;
+    color: black;
+    cursor: pointer;
+}
