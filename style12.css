@@ -377,7 +377,313 @@ body {
     background-color: #2ecc71; /* Background bouton an ap tounen vèt pou match ak Gift Card la */
     border-color: #2ecc71; /* Bordi a ap vin vèt tou */
 }
+/* STIL JENERAL */
+body {
+    background-color: #030303;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+/* HEADER (STIL PREMIUM) */
+.header-historik {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #000;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.logo-caox { color: #ffffff; }
+.logo-store { color: #D4AF37; }
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-notif {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.menu-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.menu-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: white;
+}
+
+/* KONTENÈ PRENSIPAL */
+.container-historik {
+    padding: 10px 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.instruction-text {
+    text-align: center;
+    color: #888888;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* ONGLÈ FILTRAJ YO (Dapre foto a) */
+.tabs-container {
+    display: flex;
+    background-color: #0f0f11;
+    border-radius: 12px;
+    padding: 6px;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #777779;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background-color: #cca43b; /* Koulè jòn lò ki nan foto a */
+    color: #000000;
+    font-weight: bold;
+}
+
+/* REFRESH */
+.refresh-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+.btn-refresh {
+    background-color: #0f0f11;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* LIS KAT KÒMAND YO */
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    background-color: #0c0d14; /* Koulè ble lannwit fon fon an */
+    border: 1px solid #161925;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.service-info h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.order-id-date {
+    color: #535766;
+    font-size: 0.85rem;
+}
+
+/* BADJ ESTANTI YO */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-validation {
+    background-color: rgba(204, 164, 59, 0.15);
+    color: #cca43b;
+}
+
+.status-valide {
+    background-color: rgba(0, 204, 102, 0.15);
+    color: #00cc66;
+}
+
+.status-refuse {
+    background-color: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+}
+
+/* DETAY SOU PRI AK PEMAN */
+.order-meta {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 25px;
+}
+
+.meta-label {
+    display: block;
+    color: #535766;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+}
+
+.meta-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* BWAT ENFÒMASYON VÈT LA (WhatsApp) */
+.info-box-green {
+    background-color: #04140f;
+    border: 1px solid #08291e;
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.info-title {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-desc {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+/* BOUTON WHATSAPP LA */
+.btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #00cc66;
+    color: black;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #00b359;
+}
+
+/* BOUTON DETAY */
+.btn-details-toggle {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #1c2035;
+    color: #94a3b8;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-details-toggle:hover {
+    background-color: #111424;
+    color: white;
+}
+
+/* DROPDOWN DETAY KACHE A */
+.order-details-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.order-details-dropdown.open {
+    max-height: 200px; /* Lajè maksimòm bwat detay la ka louvri */
+}
+
+.details-content {
+    padding: 15px 5px 5px 5px;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-top: 1px dashed #1c2035;
+    margin-top: 15px;
+}
+
+/* Lè kont lan livre */
+.data-delivered {
+    background-color: #090b11;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.data-delivered h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: #cca43b;
+}
+
+.account-field {
+    margin-bottom: 8px;
+    background-color: #121624;
+    padding: 8px;
+    border-radius: 6px;
+    color: white;
+}
+
+.ti-not-detay {
+    font-size: 0.75rem;
+    color: #535766;
+    margin: 5px 0 0 0;
+}
 
 
 
