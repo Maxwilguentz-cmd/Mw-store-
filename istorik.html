@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istorik Kòmand - Caox Store</title>
+    <!-- Font Awesome pou bèl ikòn yo (anlè ak nan WhatsApp) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.12">
+</head>
+<body>
+
+    <!-- HEADER PAJ LA -->
+    <header class="header-historik">
+        <div class="logo">
+            <span class="logo-caox">MW</span><span class="logo-store"> Store</span>
+        </div>
+        <div class="header-right">
+            <button class="btn-notif"><i class="fa-regular fa-bell"></i></button>
+            <div class="menu-hamburger">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-historik">
+        <!-- SOU-TIT -->
+        <p class="instruction-text">Suivez l'état de vos achats et retrouvez vos codes livrés.</p>
+
+        <!-- ONGLÈ FILTRAJ YO (Dapre IMG_9743[2].jpg) -->
+        <div class="tabs-container">
+            <button class="tab-btn active" data-filter="toutes">Toutes</button>
+            <button class="tab-btn" data-filter="valide">Validées</button>
+            <button class="tab-btn" data-filter="encour">En cours</button>
+            <button class="tab-btn" data-filter="refuse">Refusées</button>
+        </div>
+
+        <!-- BOUTON REFRESH LA -->
+        <div class="refresh-container">
+            <button class="btn-refresh"><i class="fa-solid fa-arrows-rotate"></i></button>
+        </div>
+
+        <!-- LIS KÒMAND YO -->
+        <div class="orders-list">
+
+            <!-- 1. KAT NETFLIX (EN COURS / VALIDATION) -->
+            <div class="order-card" data-status="encour">
+                <div class="order-header">
+                    <div class="service-info">
+                        <h2>Netflix Partagé</h2>
+                        <span class="order-id-date">LS-6510 | 2026-06-29</span>
+                    </div>
+                    <div class="status-badge status-validation">
+                        ⏳ Validation...
+                    </div>
+                </div>
+
+                <div class="order-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Montant</span>
+                        <span class="meta-value">400 HTG</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Paiement</span>
+                        <span class="meta-value">Natcash</span>
+                    </div>
+                </div>
+
+                <!-- Bwat enfòmasyon an vèt la -->
+                <div class="info-box-green">
+                    <div class="info-title">
+                        <i class="fa-solid fa-mailbox"></i> Commande en cours de traitement
+                    </div>
+                    <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
+                    
+                    <!-- Lyen WhatsApp dirèk -->
+                    <a href="https://wa.me/509XXXXXX?text=Bonjou%20Caox%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20Netflix%20%23LS-6510" target="_blank" class="btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <button class="btn-details-toggle">
+                    <i class="fa-regular fa-eye"></i> Voir les détails
+                </button>
+
+                <!-- Seksyon detay kache (ap louvri lè w klike) -->
+                <div class="order-details-dropdown">
+                    <div class="details-content">
+                        <p><strong>Pwodwi:</strong> Netflix Profile Écran Pridan</p>
+                        <p><strong>Livrezon:</strong> Kont ou ap disponib touswit apre verifikasyon admin lan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. KAT DISNEY (VALIDÉE / TERMINEE) -->
+            <div class="order-card" data-status="valide">
+                <div class="order-header">
+                    <div class="service-info">
+                        <h2>Disney+ Premium</h2>
+                        <span class="order-id-date">DS-9021 | 2026-06-25</span>
+                    </div>
+                    <div class="status-badge status-valide">
+                        ✅ Validée
+                    </div>
+                </div>
+
+                <div class="order-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Montant</span>
+                        <span class="meta-value">400 HTG</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Paiement</span>
+                        <span class="meta-value">Moncash</span>
+                    </div>
+                </div>
+
+                <button class="btn-details-toggle">
+                    <i class="fa-regular fa-eye"></i> Voir les détails
+                </button>
+
+                <!-- Seksyon detay kache k ap gen Email ak modpas depi l valide -->
+                <div class="order-details-dropdown">
+                    <div class="details-content data-delivered">
+                        <h3>🔑 Enfòmasyon Kont Ou:</h3>
+                        <div class="account-field">
+                            <span><strong>Email:</strong> kliyan@gmail.com</span>
+                        </div>
+                        <div class="account-field">
+                            <span><strong>Modpas:</strong> CaoxPass2026</span>
+                        </div>
+                        <div class="account-field">
+                            <span><strong>Profil:</strong> Profil 3 (M-Store)</span>
+                        </div>
+                        <p class="ti-not-detay">Pa chanje modpas la pou kont lan pa gen pwoblèm.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. KAT REFUSÉE -->
+            <div class="order-card" data-status="refuse">
+                <div class="order-header">
+                    <div class="service-info">
+                        <h2>Netflix Partagé</h2>
+                        <span class="order-id-date">LS-4412 | 2026-06-20</span>
+                    </div>
+                    <div class="status-badge status-refuse">
+                        ❌ Refusée
+                    </div>
+                </div>
+
+                <div class="order-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Montant</span>
+                        <span class="meta-value">500 HTG</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Paiement</span>
+                        <span class="meta-value">Natcash</span>
+                    </div>
+                </div>
+
+                <button class="btn-details-toggle">
+                    <i class="fa-regular fa-eye"></i> Voir les détails
+                </button>
+
+                <div class="order-details-dropdown">
+                    <div class="details-content">
+                        <p style="color: #ff4d4d;"><strong>Rezon Refize:</strong> Nimewo tranzaksyon an pa kòrèk oswa lajan an pa rive.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT LOKAL POU FILTRAJ AK DROPDOWN -->
+    <script>
+        // Lojik pou ouvri/fèmen detay yo (Voir les détails)
+        document.querySelectorAll('.btn-details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle('open');
+                
+                if(dropdown.classList.contains('open')) {
+                    button.innerHTML = '<i class="fa-regular fa-eye-slash"></i> Masquer les détails';
+                } else {
+                    button.innerHTML = '<i class="fa-regular fa-eye"></i> Voir les détails';
+                }
+            });
+        });
+
+        // Lojik pou bouton filtraj yo (Toutes, Validées, etc.)
+        const tabs = document.querySelectorAll('.tab-btn');
+        const cards = document.querySelectorAll('.order-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Retire klas active sou ansyen bouton an epi mete l sou sa k klike a
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filterValue = tab.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    if (filterValue === 'toutes') {
+                        card.style.display = 'block';
+                    } else {
+                        if (card.getAttribute('data-status') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
