@@ -58,28 +58,23 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // NOU KANPE TOU DE KALITE REKÈT YO POU SI GEN YON KI MANKE
         let userWhatsapp = localStorage.getItem('user_whatsapp') || localStorage.getItem('whatsapp_kliyan') || "35730041";
-        
-        // Pouse nimewo a tounen String nèt pou evite konfizyon tip done
         userWhatsapp = String(userWhatsapp).trim();
 
         const ordersListContainer = document.querySelector('.orders-list');
         let aktiyèlFiltre = "toutes";
 
         try {
-            // Rekèt sekirize
             const q = query(collection(db, "commandes"), where("whatsapp", "==", userWhatsapp));
 
             onSnapshot(q, (querySnapshot) => {
                 aficheKomandYo(querySnapshot);
             }, (error) => {
                 console.error("Erreur detaye Firebase:", error);
-                ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur Firebase: ${error.message}. Enspekte konsòl la.</p>`;
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur Firebase. Enspekte konsòl la.</p>`;
             });
         } catch (err) {
             console.error("Erreur nan kòd la:", err);
-            ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur de script. Gade konsòl la.</p>`;
         }
 
         function aficheKomandYo(snapshot) {
@@ -99,7 +94,10 @@
                 card.className = 'order-card';
                 card.setAttribute('data-status', estati);
 
-                if (aktiyèlFiltre !== "toutes" && estati !== aktiyèlFiltre) {
+                // KOREKSYON FILTRAJ: Afiche si se "toutes" oubyen si estati a koresponn ak filtè a
+                if (aktiyèlFiltre === "toutes" || estati === aktiyèlFiltre) {
+                    card.style.display = 'block';
+                } else {
                     card.style.display = 'none';
                 }
 
@@ -127,9 +125,13 @@
                             <div class="account-field"><span><strong>Modpas:</strong> ${komand.password || ''}</span></div>
                             <div class="account-field"><span><strong>Profil:</strong> ${komand.profil || 'Profil Paj'}</span></div>
                         </div>`;
-                } else if (estati === "refuse") {
-                    badjEstati = `<div class="status-badge status-refuse">❌ Refusée</div>`;
-                    bwatDetay = `<p style="color: #ff4d4d;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon pa lwen oswa anile.'}</p>`;
+                } else if (estati === "refuse" || estati === "refusée") {
+                    // KOREKSYON: Sipòte fòma "refuse" san aksan ak tout klas CSS la
+                    badjEstati = `<div class="status-badge status-refuse" style="background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">❌ Refusée</div>`;
+                    bwatDetay = `
+                        <div class="data-rejected" style="padding: 10px; background: #2d1e1e; border-left: 4px solid #ef4444; border-radius: 4px; margin-top: 10px;">
+                            <p style="color: #ff9999; margin: 0;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon pa lwen oswa anile.'}</p>
+                        </div>`;
                 }
 
                 card.innerHTML = `
@@ -165,7 +167,7 @@
             });
         }
 
-        // Tabs filtraj
+        // Kat tab filtraj yo
         const tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
