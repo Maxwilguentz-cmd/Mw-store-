@@ -58,19 +58,20 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Ranmase nimewo kliyan an nan memwa a, si pa gen anyen li pran defo pou tès
+        let userWhatsapp = localStorage.getItem('user_whatsapp') || "35730041";
 
-// Si pa gen anyen sove, l ap pran "35730041" kòm defo pou tès.
-// Sa ap chache TOUT kòmand nèt ki nan koleksyon "commandes" la san filtraj pou tès la
-const q = query(collection(db, "commandes"));
+        // KOREKSYON: Filtre rekèt la pou l pran sèlman kòmand nimewo sa a
+        const q = query(collection(db, "commandes"), where("whatsapp", "==", userWhatsapp));
 
         let aktiyèlFiltre = "toutes";
-
         const ordersListContainer = document.querySelector('.orders-list');
-
-
 
         onSnapshot(q, (querySnapshot) => {
             aficheKomandYo(querySnapshot);
+        }, (error) => {
+            console.error("Erreur Firestore: ", error);
+            ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur de chargement. Veuillez réessayer.</p>`;
         });
 
         function aficheKomandYo(snapshot) {
@@ -91,9 +92,11 @@ const q = query(collection(db, "commandes"));
                 card.className = 'order-card';
                 card.setAttribute('data-status', estati);
 
-                // Aplike filtraj la vizyèlman touswit
+                // Aplike filtraj la vizyèlman touswit si moun nan te sou yon tab
                 if (aktiyèlFiltre !== "toutes" && estati !== aktiyèlFiltre) {
                     card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
                 }
 
                 let badjEstati = "";
@@ -106,7 +109,7 @@ const q = query(collection(db, "commandes"));
                         <div class="info-box-green">
                             <div class="info-title"><i class="fa-solid fa-mailbox"></i> Commande en cours de traitement</div>
                             <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
-                            <a href="https://wa.me/50935730041?text=Bonjou%20Caox%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
+                            <a href="https://wa.me/50935730041?text=Bonjou%20Mw%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
                                 <i class="fa-brands fa-whatsapp"></i> WhatsApp
                             </a>
                         </div>`;
@@ -146,7 +149,7 @@ const q = query(collection(db, "commandes"));
                     </div>
                 `;
 
-                // Ajoute lojik pou louvri detaye a sou bouton an
+                // Louvri detay kòmand lan
                 const toggleBtn = card.querySelector('.btn-details-toggle');
                 const dropdown = card.querySelector('.order-details-dropdown');
                 toggleBtn.addEventListener('click', () => {
