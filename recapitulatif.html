@@ -110,7 +110,7 @@
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
-            // Nou mete sekirite pou ID yo si ta gen oswa pa gen aksan
+            // Sekirite pou ID yo si ta gen oswa pa gen aksan
             const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
             if (elSevis) elSevis.innerHTML = nonSèvis;
 
@@ -149,20 +149,19 @@
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
 
-            let datJodi a = new Date().toISOString().split('T')[0];
+            // KOREKSYON: Non varyab la pa dwe gen espas
+            let datJodia = new Date().toISOString().split('T')[0];
 
-            // Nou voye l egzakteman nan "commandes" ak tout "status: 'encour'"
             db.collection("commandes").add({
                 whatsapp: whatsappKliyan,
                 service: nonSèvis,
                 montant: priSèvis,
                 paiement: metodPeman,
                 transaction_id: txnId,
-                date: datJodi a,
+                date: datJodia,
                 status: "encour"
             })
             .then(function() {
-                // Nou sove nimewo sa pou istorik.html ka konnen ki moun ki konekte
                 localStorage.setItem("user_whatsapp", whatsappKliyan);
                 window.location.href = "succes.html"; 
             })
