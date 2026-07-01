@@ -110,11 +110,21 @@
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
-            document.getElementById('recap-non-sèvis').innerHTML = nonSèvis;
-            document.getElementById('recap-pri-anwo').innerText = priSèvis;
-            document.getElementById('recap-sous-total').innerText = priSèvis;
-            document.getElementById('recap-total-final').innerText = priSèvis;
-            document.getElementById('recap-whatsapp').innerText = whatsappKliyan;
+            // Nou mete sekirite pou ID yo si ta gen oswa pa gen aksan
+            const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
+            if (elSevis) elSevis.innerHTML = nonSèvis;
+
+            const elPriAnwo = document.getElementById('recap-pri-anwo');
+            if (elPriAnwo) elPriAnwo.innerText = priSèvis;
+
+            const elSousTotal = document.getElementById('recap-sous-total');
+            if (elSousTotal) elSousTotal.innerText = priSèvis;
+
+            const elTotalFinal = document.getElementById('recap-total-final');
+            if (elTotalFinal) elTotalFinal.innerText = priSèvis;
+
+            const elWhatsapp = document.getElementById('recap-whatsapp');
+            if (elWhatsapp) elWhatsapp.innerText = whatsappKliyan;
         });
 
         // Kontwòl aktivasyon bouton an ak koche a
