@@ -60,14 +60,14 @@
 
 
 // Si pa gen anyen sove, l ap pran "35730041" kòm defo pou tès.
-const nimewoKliyan = localStorage.getItem("user_whatsapp") || "35730041"; 
+// Sa ap chache TOUT kòmand nèt ki nan koleksyon "commandes" la san filtraj pou tès la
+const q = query(collection(db, "commandes"));
 
         let aktiyèlFiltre = "toutes";
 
         const ordersListContainer = document.querySelector('.orders-list');
 
-        // Koute chanjman yo nan Firebase an tan reyèl
-        const q = query(collection(db, "commandes"), where("whatsapp", "==", nimewoKliyan));
+
 
         onSnapshot(q, (querySnapshot) => {
             aficheKomandYo(querySnapshot);
