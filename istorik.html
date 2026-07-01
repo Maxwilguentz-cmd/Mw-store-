@@ -39,3 +39,151 @@
         <div class="orders-list">
             <p style="text-align: center; color: #64748b;">Chajman kòmand yo...</p>
         </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb",
+            measurementId: "G-5H72KDEHD9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Ranmase nimewo kliyan an nan memwa a, si pa gen anyen li pran defo pou tès
+        let userWhatsapp = localStorage.getItem('user_whatsapp') || "35730041";
+
+        // KOREKSYON: Filtre rekèt la pou l pran sèlman kòmand nimewo sa a
+        const q = query(collection(db, "commandes"), where("whatsapp", "==", userWhatsapp));
+
+        let aktiyèlFiltre = "toutes";
+        const ordersListContainer = document.querySelector('.orders-list');
+
+        onSnapshot(q, (querySnapshot) => {
+            aficheKomandYo(querySnapshot);
+        }, (error) => {
+            console.error("Erreur Firestore: ", error);
+            ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur de chargement. Veuillez réessayer.</p>`;
+        });
+
+        function aficheKomandYo(snapshot) {
+            ordersListContainer.innerHTML = "";
+            
+            if (snapshot.empty) {
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #64748b;">Ou pa gen okenn kòmand nan moman sa a.</p>`;
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const komand = doc.data();
+                const idKomand = doc.id;
+                const estati = komand.status || "encour";
+
+                // Kreye eleman kat la
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.setAttribute('data-status', estati);
+
+                // Aplike filtraj la vizyèlman touswit si moun nan te sou yon tab
+                if (aktiyèlFiltre !== "toutes" && estati !== aktiyèlFiltre) {
+                    card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
+                }
+
+                let badjEstati = "";
+                let bwatInfoVert = "";
+                let bwatDetay = "";
+
+                if (estati === "encour") {
+                    badjEstati = `<div class="status-badge status-validation">⏳ Validation...</div>`;
+                    bwatInfoVert = `
+                        <div class="info-box-green">
+                            <div class="info-title"><i class="fa-solid fa-mailbox"></i> Commande en cours de traitement</div>
+                            <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
+                            <a href="https://wa.me/50935730041?text=Bonjou%20Mw%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>`;
+                    bwatDetay = `<p>Kòmand ou ap disponib touswit apre verifikasyon admin lan.</p>`;
+                } else if (estati === "valide") {
+                    badjEstati = `<div class="status-badge status-valide">✅ Validée</div>`;
+                    bwatDetay = `
+                        <div class="data-delivered">
+                            <h3>🔑 Enfòmasyon Kont Ou:</h3>
+                            <div class="account-field"><span><strong>Email:</strong> ${komand.email || ''}</span></div>
+                            <div class="account-field"><span><strong>Modpas:</strong> ${komand.password || ''}</span></div>
+                            <div class="account-field"><span><strong>Profil:</strong> ${komand.profil || 'Profil Paj'}</span></div>
+                        </div>`;
+                } else if (estati === "refuse") {
+                    badjEstati = `<div class="status-badge status-refuse">❌ Refusée</div>`;
+                    bwatDetay = `<p style="color: #ff4d4d;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon pa lwen oswa anile.'}</p>`;
+                }
+
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div class="service-info">
+                            <h2>${komand.service || 'Sèvis'}</h2>
+                            <span class="order-id-date">${idKomand} | ${komand.date || ''}</span>
+                        </div>
+                        ${badjEstati}
+                    </div>
+                    <div class="order-meta">
+                        <div class="meta-item"><span class="meta-label">Montant</span><span class="meta-value">${komand.montant || '0'} HTG</span></div>
+                        <div class="meta-item"><span class="meta-label">Paiement</span><span class="meta-value">${komand.paiement || 'Panyen'}</span></div>
+                    </div>
+                    ${bwatInfoVert}
+                    <button class="btn-details-toggle">
+                        <i class="fa-regular fa-eye"></i> Voir les détails
+                    </button>
+                    <div class="order-details-dropdown">
+                        <div class="details-content">${bwatDetay}</div>
+                    </div>
+                `;
+
+                // Louvri detay kòmand lan
+                const toggleBtn = card.querySelector('.btn-details-toggle');
+                const dropdown = card.querySelector('.order-details-dropdown');
+                toggleBtn.addEventListener('click', () => {
+                    dropdown.classList.toggle('open');
+                    toggleBtn.innerHTML = dropdown.classList.contains('open') ? 
+                        '<i class="fa-regular fa-eye-slash"></i> Masquer les détails' : '<i class="fa-regular fa-eye"></i> Voir les détails';
+                });
+
+                ordersListContainer.appendChild(card);
+            });
+        }
+
+        // Lojik pou bouton filtraj yo (Tabs)
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                aktiyèlFiltre = tab.getAttribute('data-filter');
+                const cards = document.querySelectorAll('.order-card');
+
+                cards.forEach(card => {
+                    const status = card.getAttribute('data-status');
+                    if (aktiyèlFiltre === 'toutes' || status === aktiyèlFiltre) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        document.getElementById('refresh-btn').addEventListener('click', () => location.reload());
+    </script>
+</body>
+</html>
