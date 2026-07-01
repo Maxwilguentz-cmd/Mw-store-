@@ -42,8 +42,8 @@
             <h2 style="font-size: 1.4rem; font-weight: normal; margin-bottom: 25px;">Récapitulatif de la commande</h2>
             
             <div class="liy-recap-pwodwi">
-                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Netflix Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
-                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">500 G</span>
+                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Prime Video Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
+                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">300 G</span>
             </div>
 
             <div class="bwat-infos-streaming">
@@ -56,7 +56,7 @@
 
             <div class="liy-recap-pri" style="margin-top: 30px; border-bottom: 1px solid #111; padding-bottom: 15px;">
                 <span style="color: #555;">Sous-total</span>
-                <span id="recap-sous-total" style="color: #555;">500 G</span>
+                <span id="recap-sous-total" style="color: #555;">300 G</span>
             </div>
 
             <div class="liy-recap-pri" style="margin-top: 15px; margin-bottom: 20px;">
@@ -106,8 +106,8 @@
 
         // Lè paj la fin chaje, ranmase done nan memwa pou afiche yo sou ekran an
         document.addEventListener("DOMContentLoaded", function() {
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Prime Video Partagé x1";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "300 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
             document.getElementById('recap-non-sèvis').innerHTML = nonSèvis;
@@ -136,8 +136,8 @@
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
-            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Prime Video Partagé x1";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "300 G";
 
             // Voye tout blòk done a ansanm nan koleksyon "commandes_valibles"
             db.collection("commandes_valides").add({
