@@ -89,7 +89,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Konfigirasyon Firebase pa w la nèt
+        // Konfigirasyon Firebase pa w la
         const firebaseConfig = {
             apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
             authDomain: "mwstore-526d1.firebaseapp.com",
@@ -131,7 +131,7 @@
             }
         }
 
-        // AKYON LÈ KLIYAN AN KLIKE SOU "VALIDER MA COMMANDE"
+        // AKSYON KOTE NOU FIXE KOLEKSYON AN AK STATUS AN
         document.getElementById('btn-finaliser').addEventListener('click', function() {
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
@@ -139,18 +139,22 @@
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
 
-            // Voye tout blòk done a ansanm nan koleksyon "commandes_valibles"
-            db.collection("commandes_valides").add({
+            let datJodi a = new Date().toISOString().split('T')[0];
+
+            // Nou voye l egzakteman nan "commandes" ak tout "status: 'encour'"
+            db.collection("commandes").add({
                 whatsapp: whatsappKliyan,
                 service: nonSèvis,
                 montant: priSèvis,
-                methode_peman: metodPeman,
+                paiement: metodPeman,
                 transaction_id: txnId,
-                date: new Date()
+                date: datJodi a,
+                status: "encour"
             })
             .then(function() {
-                localStorage.clear(); // Netwaye memwa navigatè a apre operasyon an fin reyisi
-                window.location.href = "succes.html"; // Redirije dirèkteman sou bèl paj siksè a
+                // Nou sove nimewo sa pou istorik.html ka konnen ki moun ki konekte
+                localStorage.setItem("user_whatsapp", whatsappKliyan);
+                window.location.href = "succes.html"; 
             })
             .catch(function(error) {
                 alert("Erreur Firebase: " + error.message);
