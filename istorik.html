@@ -58,27 +58,35 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Ranmase nimewo kliyan an nan memwa a, si pa gen anyen li pran defo pou tès
-        let userWhatsapp = localStorage.getItem('user_whatsapp') || "35730041";
+        // NOU KANPE TOU DE KALITE REKÈT YO POU SI GEN YON KI MANKE
+        let userWhatsapp = localStorage.getItem('user_whatsapp') || localStorage.getItem('whatsapp_kliyan') || "35730041";
+        
+        // Pouse nimewo a tounen String nèt pou evite konfizyon tip done
+        userWhatsapp = String(userWhatsapp).trim();
 
-        // KOREKSYON: Filtre rekèt la pou l pran sèlman kòmand nimewo sa a
-        const q = query(collection(db, "commandes"), where("whatsapp", "==", userWhatsapp));
-
-        let aktiyèlFiltre = "toutes";
         const ordersListContainer = document.querySelector('.orders-list');
+        let aktiyèlFiltre = "toutes";
 
-        onSnapshot(q, (querySnapshot) => {
-            aficheKomandYo(querySnapshot);
-        }, (error) => {
-            console.error("Erreur Firestore: ", error);
-            ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur de chargement. Veuillez réessayer.</p>`;
-        });
+        try {
+            // Rekèt sekirize
+            const q = query(collection(db, "commandes"), where("whatsapp", "==", userWhatsapp));
+
+            onSnapshot(q, (querySnapshot) => {
+                aficheKomandYo(querySnapshot);
+            }, (error) => {
+                console.error("Erreur detaye Firebase:", error);
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur Firebase: ${error.message}. Enspekte konsòl la.</p>`;
+            });
+        } catch (err) {
+            console.error("Erreur nan kòd la:", err);
+            ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d;">Erreur de script. Gade konsòl la.</p>`;
+        }
 
         function aficheKomandYo(snapshot) {
             ordersListContainer.innerHTML = "";
             
             if (snapshot.empty) {
-                ordersListContainer.innerHTML = `<p style="text-align: center; color: #64748b;">Ou pa gen okenn kòmand nan moman sa a.</p>`;
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #64748b;">Ou pa gen okenn kòmand pou nimewo (${userWhatsapp}) sa a.</p>`;
                 return;
             }
 
@@ -87,16 +95,12 @@
                 const idKomand = doc.id;
                 const estati = komand.status || "encour";
 
-                // Kreye eleman kat la
                 const card = document.createElement('div');
                 card.className = 'order-card';
                 card.setAttribute('data-status', estati);
 
-                // Aplike filtraj la vizyèlman touswit si moun nan te sou yon tab
                 if (aktiyèlFiltre !== "toutes" && estati !== aktiyèlFiltre) {
                     card.style.display = 'none';
-                } else {
-                    card.style.display = 'block';
                 }
 
                 let badjEstati = "";
@@ -149,7 +153,6 @@
                     </div>
                 `;
 
-                // Louvri detay kòmand lan
                 const toggleBtn = card.querySelector('.btn-details-toggle');
                 const dropdown = card.querySelector('.order-details-dropdown');
                 toggleBtn.addEventListener('click', () => {
@@ -162,7 +165,7 @@
             });
         }
 
-        // Lojik pou bouton filtraj yo (Tabs)
+        // Tabs filtraj
         const tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
