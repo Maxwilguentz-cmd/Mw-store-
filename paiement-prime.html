@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement de la commande</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Ba Navigasyon anlè a -->
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kontni Prensipal la -->
+    <div class="container-checkout">
+        <h1 class="titre-checkout">Finaliser ma commande</h1>
+
+        <!-- Liy Etap yo -->
+        <div class="etapes-barre">
+            <div class="etape">
+                <span class="num-etape">1</span>
+                <span class="texte-etape">Informations</span>
+            </div>
+            <div class="etape active">
+                <span class="num-etape">2</span>
+                <span class="texte-etape">Paiement</span>
+            </div>
+            <div class="etape">
+                <span class="num-etape">3</span>
+                <span class="texte-etape">Récapitulatif</span>
+            </div>
+        </div>
+
+        <!-- Kat Peman an -->
+        <div class="carte-formulaire">
+            
+            <!-- BOUTON MONCASH -->
+            <div class="boite-opsyon-peman" id="btn-moncash" onclick="chwaziMetod('moncash')">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>MonCash ⚡</span>
+            </div>
+
+            <!-- ENSTRIKSYON MONCASH -->
+            <div class="bwat-instructions-peman d-none" id="bwat-moncash">
+                <h3>Instructions pour MonCash:</h3>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                
+                <div class="nimewo-kopie">
+                    <span>+509 38019657</span>
+                    <i class="fa-regular fa-copy" onclick="kopieNimewo('+50938019657')" style="cursor: pointer;"></i>
+                </div>
+                <p class="non-moun">Nom: Maxime Wilguentz</p>
+
+                <div class="boite-txn-input">
+                    <label for="txn_id_moncash">Transaction ID MonCash (Txn ID)</label>
+                    <input type="text" id="txn_id_moncash" placeholder="Ex: 003087615746" maxlength="12">
+                    <span class="ti-detay-anba">12 chiffres, commence par 003. ⚡</span>
+                </div>
+            </div>
+
+            <!-- BOUTON NATCASH -->
+            <div class="boite-opsyon-peman" id="btn-natcash" onclick="chwaziMetod('natcash')">
+                <i class="fa-solid fa-wallet"></i>
+                <span>NatCash ⚡</span>
+            </div>
+
+            <!-- ENSTRIKSYON NATCASH -->
+            <div class="bwat-instructions-peman d-none" id="bwat-natcash">
+                <h3>Instructions pour NatCash:</h3>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                
+                <div class="nimewo-kopie">
+                    <span>+509 40807923</span>
+                    <i class="fa-regular fa-copy" onclick="kopieNimewo('+50940807923')" style="cursor: pointer;"></i>
+                </div>
+                <p class="non-moun">Nom: Maxime Wilguentz</p>
+
+                <div class="boite-txn-input">
+                    <label for="txn_id_natcash">Transaction ID NatCash (Txn ID)</label>
+                    <input type="text" id="txn_id_natcash" placeholder="Ex: Numéro de transaction">
+                </div>
+            </div>
+
+            <!-- Ti bouton kabwa k ap flote -->
+            <div class="kabwa-flottant">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge-kabwa">1</span>
+            </div>
+
+            <!-- Bouton navigasyon yo anba -->
+            <div class="goup-boutons-anba">
+                <button type="button" class="btn-retour" onclick="window.location.href='checkout-disney.html'">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </button>
+                <button type="button" class="btn-continuer-peman" id="btn-swiv-recap">
+                    Continuer <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    let metodChwazi = "";
+
+    function chwaziMetod(metod) {
+        metodChwazi = metod;
+        
+        const bwatMoncash = document.getElementById('bwat-moncash');
+        const bwatNatcash = document.getElementById('bwat-natcash');
+        const btnMoncash = document.getElementById('btn-moncash');
+        const btnNatcash = document.getElementById('btn-natcash');
+
+        bwatMoncash.classList.add('d-none');
+        bwatNatcash.classList.add('d-none');
+        btnMoncash.classList.remove('aktive');
+        btnNatcash.classList.remove('aktive');
+
+        if(metod === 'moncash') {
+            bwatMoncash.classList.remove('d-none');
+            btnMoncash.classList.add('aktive');
+        } else if(metod === 'natcash') {
+            bwatNatcash.classList.remove('d-none');
+            btnNatcash.classList.add('aktive');
+        }
+    }
+
+    function kopieNimewo(nimewo) {
+        navigator.clipboard.writeText(nimewo);
+        alert("Nimewo a kopye: " + nimewo);
+    }
+
+    document.getElementById('btn-swiv-recap').addEventListener('click', function() {
+        if (metodChwazi === "") {
+            alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!");
+            return;
+        }
+
+        let txnId = "";
+        if (metodChwazi === "moncash") {
+            txnId = document.getElementById('txn_id_moncash').value.trim();
+            if(txnId.length < 12 || !txnId.startsWith("003")) {
+                alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
+                return;
+            }
+        } else {
+            txnId = document.getElementById('txn_id_natcash').value.trim();
+        }
+
+        if (txnId === "") {
+            alert("Silvouplè antre Transaksyon ID la pou nou ka verifye peman an.");
+            return;
+        }
+
+        // MEN LIY KI TE MANKE YO: Sove tou de nan memwa a pibon fòma
+        localStorage.setItem('metod_peman', metodChwazi);
+        localStorage.setItem('txn_id_kliyan', txnId);
+        
+        window.location.href = "recapitulatif-disney.html";
+    });
+</script>
+</body>
+</html>
