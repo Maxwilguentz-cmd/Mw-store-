@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finaliser ma commande</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-checkout">
+        <h1 class="titre-checkout">Finaliser ma commande</h1>
+
+        <!-- Etap yo (Steps Indicator) -->
+        <div class="etap-bar">
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Informations</span>
+            </div>
+            <div class="etap">
+                <span class="etap-chif">2</span>
+                <span class="etap-tiks">Paiement</span>
+            </div>
+            <div class="etap">
+                <span class="etap-chif">3</span>
+                <span class="etap-tiks">Récapitulatif</span>
+            </div>
+        </div>            
+
+
+        <div class="carte-formulaire">
+            <h2>Informations de livraison</h2>
+            
+            <div class="boite-input-group">
+                <span class="badge-input">INFOS — PROFIL PARTAGÉ</span>
+                <label for="whatsapp">Numéro WhatsApp</label>
+                <input type="number" id="whatsapp" placeholder="Ex: 38019657 (sans +509)" required>
+            </div>
+
+            <button type="button" class="btn-continuer" id="btn-continuer">
+                Continuer <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="kabwa-flottant">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge-kabwa">1</span>
+    </div>
+
+    <script>
+      // ISIT LA NOU RETIRE FIREBASE NÈT.
+      // Kòd la ap jis sere nimewo a nan memwa navigatè a epi chanje paj la.
+      document.getElementById('btn-continuer').addEventListener('click', function() {
+          let nimewo = document.getElementById('whatsapp').value.trim();
+          
+          if (nimewo === "") {
+              alert("Silvouplè antre nimewo WhatsApp ou a");
+              return;
+          }
+
+          // Sere nimewo a sèlman nan localStorage (memwa) pou paj 3 a ka pran l pita
+          localStorage.setItem('whatsapp_kliyan', nimewo);
+          
+          // Ale dirèk nan paj peman an san voye anyen nan data a
+          window.location.href = "paiement-disney.html";
+      });
+    </script>
+</body>
+</html>
