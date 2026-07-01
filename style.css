@@ -27,7 +27,7 @@ body {
 /* === HERO SECTION (Banyè Anlè a) === */
 .hero-section {
     position: relative; /* Pèmèt nou pozisyone lòt eleman andedan l an 'absolute' parapò ak li */
-    height: 200px; /* Wotè fiks banyè anlè a */
+    height: 150px; /* Wotè fiks banyè anlè a */
     display: flex; /* Aktive flexbox pou jere pozisyon eleman yo */
     flex-direction: column; /* Ranmase eleman yo vètikalman (yonn anba lòt) */
     justify-content: space-between; /* Pouse premye eleman an anlè nèt ak dezyèm lan anba nèt */
