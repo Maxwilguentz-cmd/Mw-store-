@@ -59,8 +59,9 @@
         const db = getFirestore(app);
 
 
-// Liy sa ap pran tout kòmand nèt san gade nimewo telefòn
-        const q = query(collection(db, "commandes")); 
+// Si pa gen anyen sove, l ap pran "35730041" kòm defo pou tès.
+const nimewoKliyan = localStorage.getItem("user_whatsapp") || "35730041"; 
+
         let aktiyèlFiltre = "toutes";
 
         const ordersListContainer = document.querySelector('.orders-list');
