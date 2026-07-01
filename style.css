@@ -32,7 +32,8 @@ body {
     flex-direction: column; /* Ranmase eleman yo vètikalman (yonn anba lòt) */
     justify-content: space-between; /* Pouse premye eleman an anlè nèt ak dezyèm lan anba nèt */
     padding: 20px 0 40px 0; /* Espas andedan (anlè ak anba) */
-    border-bottom: 1px solid #222; /* Yon ti liy gri fonse anba banyè a */
+    border-bottom: 1px solid #222;} /* Yon ti liy gri fonse anba banyè a */
+   
 
 
 /* ==========================================================================
