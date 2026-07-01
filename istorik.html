@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Istorik Kòmand - Caox Store</title>
-    <!-- Font Awesome pou bèl ikòn yo (anlè ak nan WhatsApp) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style12.css">
+    <link rel="stylesheet" href="istorik.css">
 </head>
 <body>
 
-    <!-- HEADER PAJ LA -->
     <header class="header-historik">
         <div class="logo">
-            <span class="logo-caox">MW</span><span class="logo-store"> Store</span>
+            <span class="logo-caox">Caox</span><span class="logo-store"> Store</span>
         </div>
         <div class="header-right">
             <button class="btn-notif"><i class="fa-regular fa-bell"></i></button>
@@ -25,10 +23,8 @@
     </header>
 
     <main class="container-historik">
-        <!-- SOU-TIT -->
         <p class="instruction-text">Suivez l'état de vos achats et retrouvez vos codes livrés.</p>
 
-        <!-- ONGLÈ FILTRAJ YO (Dapre IMG_9743[2].jpg) -->
         <div class="tabs-container">
             <button class="tab-btn active" data-filter="toutes">Toutes</button>
             <button class="tab-btn" data-filter="valide">Validées</button>
@@ -36,186 +32,153 @@
             <button class="tab-btn" data-filter="refuse">Refusées</button>
         </div>
 
-        <!-- BOUTON REFRESH LA -->
         <div class="refresh-container">
-            <button class="btn-refresh"><i class="fa-solid fa-arrows-rotate"></i></button>
+            <button class="btn-refresh" id="refresh-btn"><i class="fa-solid fa-arrows-rotate"></i></button>
         </div>
 
-        <!-- LIS KÒMAND YO -->
         <div class="orders-list">
-
-            <!-- 1. KAT NETFLIX (EN COURS / VALIDATION) -->
-            <div class="order-card" data-status="encour">
-                <div class="order-header">
-                    <div class="service-info">
-                        <h2>Netflix Partagé</h2>
-                        <span class="order-id-date">LS-6510 | 2026-06-29</span>
-                    </div>
-                    <div class="status-badge status-validation">
-                        ⏳ Validation...
-                    </div>
-                </div>
-
-                <div class="order-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Montant</span>
-                        <span class="meta-value">400 HTG</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Paiement</span>
-                        <span class="meta-value">Natcash</span>
-                    </div>
-                </div>
-
-                <!-- Bwat enfòmasyon an vèt la -->
-                <div class="info-box-green">
-                    <div class="info-title">
-                        <i class="fa-solid fa-mailbox"></i> Commande en cours de traitement
-                    </div>
-                    <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
-                    
-                    <!-- Lyen WhatsApp dirèk -->
-                    <a href="https://wa.me/509XXXXXX?text=Bonjou%20Caox%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20Netflix%20%23LS-6510" target="_blank" class="btn-whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-
-                <button class="btn-details-toggle">
-                    <i class="fa-regular fa-eye"></i> Voir les détails
-                </button>
-
-                <!-- Seksyon detay kache (ap louvri lè w klike) -->
-                <div class="order-details-dropdown">
-                    <div class="details-content">
-                        <p><strong>Pwodwi:</strong> Netflix Profile Écran Pridan</p>
-                        <p><strong>Livrezon:</strong> Kont ou ap disponib touswit apre verifikasyon admin lan.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. KAT DISNEY (VALIDÉE / TERMINEE) -->
-            <div class="order-card" data-status="valide">
-                <div class="order-header">
-                    <div class="service-info">
-                        <h2>Disney+ Premium</h2>
-                        <span class="order-id-date">DS-9021 | 2026-06-25</span>
-                    </div>
-                    <div class="status-badge status-valide">
-                        ✅ Validée
-                    </div>
-                </div>
-
-                <div class="order-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Montant</span>
-                        <span class="meta-value">400 HTG</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Paiement</span>
-                        <span class="meta-value">Moncash</span>
-                    </div>
-                </div>
-
-                <button class="btn-details-toggle">
-                    <i class="fa-regular fa-eye"></i> Voir les détails
-                </button>
-
-                <!-- Seksyon detay kache k ap gen Email ak modpas depi l valide -->
-                <div class="order-details-dropdown">
-                    <div class="details-content data-delivered">
-                        <h3>🔑 Enfòmasyon Kont Ou:</h3>
-                        <div class="account-field">
-                            <span><strong>Email:</strong> kliyan@gmail.com</span>
-                        </div>
-                        <div class="account-field">
-                            <span><strong>Modpas:</strong> CaoxPass2026</span>
-                        </div>
-                        <div class="account-field">
-                            <span><strong>Profil:</strong> Profil 3 (M-Store)</span>
-                        </div>
-                        <p class="ti-not-detay">Pa chanje modpas la pou kont lan pa gen pwoblèm.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. KAT REFUSÉE -->
-            <div class="order-card" data-status="refuse">
-                <div class="order-header">
-                    <div class="service-info">
-                        <h2>Netflix Partagé</h2>
-                        <span class="order-id-date">LS-4412 | 2026-06-20</span>
-                    </div>
-                    <div class="status-badge status-refuse">
-                        ❌ Refusée
-                    </div>
-                </div>
-
-                <div class="order-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Montant</span>
-                        <span class="meta-value">500 HTG</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Paiement</span>
-                        <span class="meta-value">Natcash</span>
-                    </div>
-                </div>
-
-                <button class="btn-details-toggle">
-                    <i class="fa-regular fa-eye"></i> Voir les détails
-                </button>
-
-                <div class="order-details-dropdown">
-                    <div class="details-content">
-                        <p style="color: #ff4d4d;"><strong>Rezon Refize:</strong> Nimewo tranzaksyon an pa kòrèk oswa lajan an pa rive.</p>
-                    </div>
-                </div>
-            </div>
-
+            <p style="text-align: center; color: #64748b;">Chajman kòmand yo...</p>
         </div>
     </main>
 
-    <!-- JAVASCRIPT LOKAL POU FILTRAJ AK DROPDOWN -->
-    <script>
-        // Lojik pou ouvri/fèmen detay yo (Voir les détails)
-        document.querySelectorAll('.btn-details-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdown = button.nextElementSibling;
-                dropdown.classList.toggle('open');
-                
-                if(dropdown.classList.contains('open')) {
-                    button.innerHTML = '<i class="fa-regular fa-eye-slash"></i> Masquer les détails';
-                } else {
-                    button.innerHTML = '<i class="fa-regular fa-eye"></i> Voir les détails';
-                }
-            });
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // ⚠️ RANPLASE AK VRÈ ENFÒMASYON FIREBASE PA W LA
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Nimewo telefòn kliyan an pou n ka filtre kòmand li yo sèlman
+        const nimewoKliyan = "35730041"; 
+        let aktiyèlFiltre = "toutes";
+
+        const ordersListContainer = document.querySelector('.orders-list');
+
+        // Koute chanjman yo nan Firebase an tan reyèl
+        const q = query(collection(db, "commandes"), where("whatsapp", "==", nimewoKliyan));
+
+        onSnapshot(q, (querySnapshot) => {
+            aficheKomandYo(querySnapshot);
         });
 
-        // Lojik pou bouton filtraj yo (Toutes, Validées, etc.)
-        const tabs = document.querySelectorAll('.tab-btn');
-        const cards = document.querySelectorAll('.order-card');
+        function aficheKomandYo(snapshot) {
+            ordersListContainer.innerHTML = "";
+            
+            if (snapshot.empty) {
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #64748b;">Ou pa gen okenn kòmand nan moman sa a.</p>`;
+                return;
+            }
 
+            snapshot.forEach((doc) => {
+                const komand = doc.data();
+                const idKomand = doc.id;
+                const estati = komand.status || "encour";
+
+                // Kreye eleman kat la
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.setAttribute('data-status', estati);
+
+                // Aplike filtraj la vizyèlman touswit
+                if (aktiyèlFiltre !== "toutes" && estati !== aktiyèlFiltre) {
+                    card.style.display = 'none';
+                }
+
+                let badjEstati = "";
+                let bwatInfoVert = "";
+                let bwatDetay = "";
+
+                if (estati === "encour") {
+                    badjEstati = `<div class="status-badge status-validation">⏳ Validation...</div>`;
+                    bwatInfoVert = `
+                        <div class="info-box-green">
+                            <div class="info-title"><i class="fa-solid fa-mailbox"></i> Commande en cours de traitement</div>
+                            <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
+                            <a href="https://wa.me/50935730041?text=Bonjou%20Caox%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>`;
+                    bwatDetay = `<p>Kòmand ou ap disponib touswit apre verifikasyon admin lan.</p>`;
+                } else if (estati === "valide") {
+                    badjEstati = `<div class="status-badge status-valide">✅ Validée</div>`;
+                    bwatDetay = `
+                        <div class="data-delivered">
+                            <h3>🔑 Enfòmasyon Kont Ou:</h3>
+                            <div class="account-field"><span><strong>Email:</strong> ${komand.email || ''}</span></div>
+                            <div class="account-field"><span><strong>Modpas:</strong> ${komand.password || ''}</span></div>
+                            <div class="account-field"><span><strong>Profil:</strong> ${komand.profil || 'Profil Paj'}</span></div>
+                        </div>`;
+                } else if (estati === "refuse") {
+                    badjEstati = `<div class="status-badge status-refuse">❌ Refusée</div>`;
+                    bwatDetay = `<p style="color: #ff4d4d;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon pa lwen oswa anile.'}</p>`;
+                }
+
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div class="service-info">
+                            <h2>${komand.service || 'Sèvis'}</h2>
+                            <span class="order-id-date">${idKomand} | ${komand.date || ''}</span>
+                        </div>
+                        ${badjEstati}
+                    </div>
+                    <div class="order-meta">
+                        <div class="meta-item"><span class="meta-label">Montant</span><span class="meta-value">${komand.montant || '0'} HTG</span></div>
+                        <div class="meta-item"><span class="meta-label">Paiement</span><span class="meta-value">${komand.paiement || 'Panyen'}</span></div>
+                    </div>
+                    ${bwatInfoVert}
+                    <button class="btn-details-toggle">
+                        <i class="fa-regular fa-eye"></i> Voir les détails
+                    </button>
+                    <div class="order-details-dropdown">
+                        <div class="details-content">${bwatDetay}</div>
+                    </div>
+                `;
+
+                // Ajoute lojik pou louvri detaye a sou bouton an
+                const toggleBtn = card.querySelector('.btn-details-toggle');
+                const dropdown = card.querySelector('.order-details-dropdown');
+                toggleBtn.addEventListener('click', () => {
+                    dropdown.classList.toggle('open');
+                    toggleBtn.innerHTML = dropdown.classList.contains('open') ? 
+                        '<i class="fa-regular fa-eye-slash"></i> Masquer les détails' : '<i class="fa-regular fa-eye"></i> Voir les détails';
+                });
+
+                ordersListContainer.appendChild(card);
+            });
+        }
+
+        // Lojik pou bouton filtraj yo (Tabs)
+        const tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Retire klas active sou ansyen bouton an epi mete l sou sa k klike a
                 tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
 
-                const filterValue = tab.getAttribute('data-filter');
+                aktiyèlFiltre = tab.getAttribute('data-filter');
+                const cards = document.querySelectorAll('.order-card');
 
                 cards.forEach(card => {
-                    if (filterValue === 'toutes') {
+                    const status = card.getAttribute('data-status');
+                    if (aktiyèlFiltre === 'toutes' || status === aktiyèlFiltre) {
                         card.style.display = 'block';
                     } else {
-                        if (card.getAttribute('data-status') === filterValue) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
+                        card.style.display = 'none';
                     }
                 });
             });
         });
+
+        document.getElementById('refresh-btn').addEventListener('click', () => location.reload());
     </script>
 </body>
 </html>
