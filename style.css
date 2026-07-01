@@ -37,6 +37,15 @@ body {
 }
 
 
+.btn-back {
+    background: rgba(0, 0, 0, 0.6); /* Background nwa transparan */
+    border: 1px solid #444; /* Ti bordi gri */
+    color: white; /* Tèks bouton an blan */
+    padding: 8px 16px; /* Espas andedan bouton an */
+    border-radius: 20px; /* Fè kwen bouton an won */
+    font-size: 1rem; /* Gwosè tèks la */
+    cursor: pointer; /* Fè sourit la tounen yon ti men lè w pase sou li */
+}
 
 /* ==========================================================================
    2. SEKSYON TIT AK SOU-TIT YO
