@@ -72,7 +72,11 @@
           }
 
           // Sere nimewo a sèlman nan localStorage (memwa) pou paj 3 a ka pran l pita
-          localStorage.setItem('user_whatsapp', nimewo);
+             .then(function() {
+                // Nou sove nimewo sa pou istorik.html ka konnen ki moun ki konekte
+                localStorage.setItem("user_whatsapp", whatsappKliyan);
+                window.location.href = "succes.html"; 
+            }) 
           
           // Ale dirèk nan paj peman an san voye anyen nan data a
           window.location.href = "paiement.html";
