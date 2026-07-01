@@ -28,62 +28,12 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-label">En cours</span>
-                <span class="stat-number num-waiting">1</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Validées</span>
-                <span class="stat-number num-done">1</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Refusées</span>
-                <span class="stat-number num-failed">1</span>
+                <span class="stat-number num-waiting" id="count-encour">0</span>
             </div>
         </div>
 
         <div class="admin-orders-list">
-            
-            <div class="admin-order-card urgent" id="order-LS-6510">
-                <div class="card-top">
-                    <span class="service-tag tag-netflix">Netflix Partagé</span>
-                    <span class="admin-status status-pending">⏳ En attente</span>
-                </div>
-
-                <div class="client-details">
-                    <p><strong>Code:</strong> LS-6510</p>
-                    <p><strong>Date:</strong> 2026-06-29</p>
-                    <p><strong>Client:</strong> Jean Pierre</p>
-                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/50935730041" target="_blank" class="client-phone"><i class="fa-brands fa-whatsapp"></i> 35730041</a></p>
-                    <p><strong>PIN mande:</strong> 1234</p>
-                    <p><strong>Paiement:</strong> Natcash (500 HTG)</p>
-                </div>
-
-                <div class="admin-actions">
-                    <button class="btn-action btn-approve" onclick="openApproveModal('LS-6510', 'Netflix Partagé')">
-                        <i class="fa-solid fa-check"></i> Valider
-                    </button>
-                    <button class="btn-action btn-reject" onclick="openRejectModal('LS-6510')">
-                        <i class="fa-solid fa-xmark"></i> Refuser
-                    </button>
-                </div>
-            </div>
-
-            <div class="admin-order-card opacity-done">
-                <div class="card-top">
-                    <span class="service-tag tag-disney">Disney+ Premium</span>
-                    <span class="admin-status status-approved">✅ Validée</span>
-                </div>
-
-                <div class="client-details">
-                    <p><strong>Code:</strong> DS-9021</p>
-                    <p><strong>Client:</strong> Marie Laurence</p>
-                    <p><strong>Paiement:</strong> Moncash (600 HTG)</p>
-                    <div class="delivered-info-box">
-                        <p style="margin: 0; color: #cca43b;"><strong>Données envoyées:</strong></p>
-                        <span>Email: kliyan@gmail.com | Pass: CaoxPass2026</span>
-                    </div>
-                </div>
-            </div>
-
+            <p style="text-align: center; color: #64748b;">Chajman kòmand yo...</p>
         </div>
     </main>
 
@@ -92,26 +42,22 @@
             <h2><i class="fa-solid fa-key" style="color: #cca43b;"></i> Livrer les accès</h2>
             <p id="modal-service-name" style="color: #888; margin-top: -5px;"></p>
             
-            <form id="approveForm" onsubmit="submitApproval(event)">
+            <form id="approveForm">
                 <input type="hidden" id="approve-order-id">
-                
                 <div class="form-group">
                     <label>Email du compte</label>
                     <input type="email" id="acc-email" placeholder="Ex: netflix@caox.com" required>
                 </div>
-
                 <div class="form-group">
                     <label>Mot de passe</label>
                     <input type="text" id="acc-password" placeholder="Ex: TopPass123" required>
                 </div>
-
                 <div class="form-group">
                     <label>Profil attribué</label>
                     <input type="text" id="acc-profile" placeholder="Ex: Profil 3 (Jean)" required>
                 </div>
-
                 <div class="modal-buttons">
-                    <button type="button" class="btn-modal-cancel" onclick="closeModal('approveModal')">Annuler</button>
+                    <button type="button" class="btn-modal-cancel" id="btn-cancel-approve">Annuler</button>
                     <button type="submit" class="btn-modal-confirm">Confirmer & Livrer</button>
                 </div>
             </form>
@@ -121,53 +67,141 @@
     <div class="modal-overlay" id="rejectModal">
         <div class="modal-box">
             <h2><i class="fa-solid fa-triangle-exclamation" style="color: #ff4d4d;"></i> Refuser la commande</h2>
-            <form id="rejectForm" onsubmit="submitRejection(event)">
+            <form id="rejectForm">
                 <input type="hidden" id="reject-order-id">
-                
                 <div class="form-group">
                     <label>Raison du refus</label>
-                    <textarea id="reject-reason" placeholder="Ex: Code de transaction incorrect ou introuvable." rows="3" required></textarea>
+                    <textarea id="reject-reason" placeholder="Ex: Code de transaction incorrect." rows="3" required></textarea>
                 </div>
-
                 <div class="modal-buttons">
-                    <button type="button" class="btn-modal-cancel" onclick="closeModal('rejectModal')">Annuler</button>
+                    <button type="button" class="btn-modal-cancel" id="btn-cancel-reject">Annuler</button>
                     <button type="submit" class="btn-modal-confirm btn-red">Confirmer le refus</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        function openApproveModal(orderId, serviceName) {
-            document.getElementById('approve-order-id').value = orderId;
-            document.getElementById('modal-service-name').innerText = "Commande: " + orderId + " (" + serviceName + ")";
-            document.getElementById('approveModal').classList.add('show');
-        }
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        function openRejectModal(orderId) {
-            document.getElementById('reject-order-id').value = orderId;
-            document.getElementById('rejectModal').classList.add('show');
-        }
+        // ⚠️ RANPLASE AK VRÈ ENFÒMASYON FIREBASE PA W LA
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        function submitApproval(e) {
+        const adminListContainer = document.querySelector('.admin-orders-list');
+        const countWaiting = document.getElementById('count-encour');
+
+        // Koute sèlman kòmand ki "encour" yo
+        const qAdmin = query(collection(db, "commandes"), where("status", "==", "encour"));
+
+        onSnapshot(qAdmin, (querySnapshot) => {
+            adminListContainer.innerHTML = "";
+            countWaiting.innerText = querySnapshot.size;
+
+            if (querySnapshot.empty) {
+                adminListContainer.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Pa gen okenn kòmand an atant kounye a. 🎉</p>`;
+                return;
+            }
+
+            querySnapshot.forEach((documentSnap) => {
+                const komand = documentSnap.data();
+                const idKomand = documentSnap.id;
+
+                const card = document.createElement('div');
+                card.className = 'admin-order-card urgent';
+                card.innerHTML = `
+                    <div class="card-top">
+                        <span class="service-tag tag-netflix">${komand.service || 'Sèvis'}</span>
+                        <span class="admin-status status-pending">⏳ En attente</span>
+                    </div>
+                    <div class="client-details">
+                        <p><strong>Code:</strong> ${idKomand}</p>
+                        <p><strong>Client:</strong> ${komand.client || 'Enkonni'}</p>
+                        <p><strong>WhatsApp:</strong> <a href="https://wa.me/509${komand.whatsapp}" target="_blank" class="client-phone"><i class="fa-brands fa-whatsapp"></i> ${komand.whatsapp || ''}</a></p>
+                        <p><strong>Paiement:</strong> ${komand.paiement || ''} (${komand.montant || 0} HTG)</p>
+                    </div>
+                    <div class="admin-actions">
+                        <button class="btn-action btn-approve" data-id="${idKomand}" data-service="${komand.service || 'Sèvis'}">
+                            <i class="fa-solid fa-check"></i> Valider
+                        </button>
+                        <button class="btn-action btn-reject" data-id="${idKomand}">
+                            <i class="fa-solid fa-xmark"></i> Refuser
+                        </button>
+                    </div>
+                `;
+
+                // Evènman klike sou bouton Valider
+                card.querySelector('.btn-approve').addEventListener('click', (e) => {
+                    const btn = e.currentTarget;
+                    document.getElementById('approve-order-id').value = btn.getAttribute('data-id');
+                    document.getElementById('modal-service-name').innerText = "Commande: " + btn.getAttribute('data-id') + " (" + btn.getAttribute('data-service') + ")";
+                    document.getElementById('approveModal').classList.add('show');
+                });
+
+                // Evènman klike sou bouton Refuser
+                card.querySelector('.btn-reject').addEventListener('click', (e) => {
+                    const btn = e.currentTarget;
+                    document.getElementById('reject-order-id').value = btn.getAttribute('data-id');
+                    document.getElementById('rejectModal').classList.add('show');
+                });
+
+                adminListContainer.appendChild(card);
+            });
+        });
+
+        // Fèmen Modal yo
+        document.getElementById('btn-cancel-approve').addEventListener('click', () => document.getElementById('approveModal').classList.remove('show'));
+        document.getElementById('btn-cancel-reject').addEventListener('click', () => document.getElementById('rejectModal').classList.remove('show'));
+
+        // Soumèt Apwobasyon
+        document.getElementById('approveForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('approve-order-id').value;
-            alert("Kòmand " + id + " valide avèk siksè! Done yo pare pou kliyan an.");
-            closeModal('approveModal');
-            document.getElementById('order-' + id).style.opacity = "0.4"; // Simile li fini
-        }
+            const email = document.getElementById('acc-email').value;
+            const password = document.getElementById('acc-password').value;
+            const profil = document.getElementById('acc-profile').value;
 
-        function submitRejection(e) {
+            try {
+                await updateDoc(doc(db, "commandes", id), {
+                    status: "valide",
+                    email: email,
+                    password: password,
+                    profil: profil
+                });
+                document.getElementById('approveModal').classList.remove('show');
+                document.getElementById('approveForm').reset();
+            } catch (err) {
+                alert("Erreur nan validation: " + err.message);
+            }
+        });
+
+        // Soumèt Refi
+        document.getElementById('rejectForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('reject-order-id').value;
-            alert("Kòmand " + id + " refize.");
-            closeModal('rejectModal');
-            document.getElementById('order-' + id).style.opacity = "0.4";
-        }
+            const raison = document.getElementById('reject-reason').value;
+
+            try {
+                await updateDoc(doc(db, "commandes", id), {
+                    status: "refuse",
+                    raison: raison
+                });
+                document.getElementById('rejectModal').classList.remove('show');
+                document.getElementById('rejectForm').reset();
+            } catch (err) {
+                alert("Erreur nan refize: " + err.message);
+            }
+        });
     </script>
 </body>
 </html>
