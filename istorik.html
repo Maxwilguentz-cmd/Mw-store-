@@ -58,8 +58,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Nimewo telefòn kliyan an pou n ka filtre kòmand li yo sèlman
-        const nimewoKliyan = "35730041"; 
+
+// Liy sa ap pran tout kòmand nèt san gade nimewo telefòn
+        const q = query(collection(db, "commandes")); 
         let aktiyèlFiltre = "toutes";
 
         const ordersListContainer = document.querySelector('.orders-list');
