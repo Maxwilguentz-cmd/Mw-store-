@@ -23,19 +23,18 @@
     <div class="container-checkout">
         <h1 class="titre-checkout">Finaliser ma commande</h1>
 
-        <!-- Etap yo (Steps Indicator) -->
         <div class="etap-bar">
             <div class="etap aktif">
                 <span class="etap-chif">&#10003;</span>
                 <span class="etap-tiks">Informations</span>
             </div>
             <div class="etap">
-                <span class="etap-chif">2</span>
-                <span class="etap-tiks">Paiement</span>
+                <span class="num-etape">2</span>
+                <span class="texte-etape">Paiement</span>
             </div>
             <div class="etap">
-                <span class="etap-chif">3</span>
-                <span class="etap-tiks">Récapitulatif</span>
+                <span class="num-etape">3</span>
+                <span class="texte-etape">Récapitulatif</span>
             </div>
         </div>            
 
@@ -61,8 +60,7 @@
     </div>
 
     <script>
-      // ISIT LA NOU RETIRE FIREBASE NÈT.
-      // Kòd la ap jis sere nimewo a nan memwa navigatè a epi chanje paj la.
+      // Kòd la ap jis sere nimewo a nan memwa navigatè a epi chanje paj la kòrèkteman.
       document.getElementById('btn-continuer').addEventListener('click', function() {
           let nimewo = document.getElementById('whatsapp').value.trim();
           
@@ -71,12 +69,13 @@
               return;
           }
 
-          // Sere nimewo a sèlman nan localStorage (memwa) pou paj 3 a ka pran l pita
-             .then(function() {
-                // Nou sove nimewo sa pou istorik.html ka konnen ki moun ki konekte
-                localStorage.setItem("user_whatsapp", whatsappKliyan);
-                window.location.href = "paiement.html";)}
-      }
+          // Sove nimewo a sou tou de kle yo pou sekirite tout paj yo
+          localStorage.setItem("whatsapp_kliyan", nimewo);
+          localStorage.setItem("user_whatsapp", nimewo);
+          
+          // Chanje paj pou ale nan peman
+          window.location.href = "paiement.html";
+      });
     </script>
 </body>
 </html>
