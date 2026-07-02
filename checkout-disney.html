@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,6 @@
     <div class="container-checkout">
         <h1 class="titre-checkout">Finaliser ma commande</h1>
 
-        <!-- Etap yo (Steps Indicator) -->
         <div class="etap-bar">
             <div class="etap aktif">
                 <span class="etap-chif">&#10003;</span>
@@ -34,8 +33,8 @@
                 <span class="etap-tiks">Paiement</span>
             </div>
             <div class="etap">
-                <span class="etap-chif">3</span>
-                <span class="etap-tiks">Récapitulatif</span>
+                <span class="num-etape">3</span>
+                <span class="texte-etape">Récapitulatif</span>
             </div>
         </div>            
 
@@ -49,9 +48,17 @@
                 <input type="number" id="whatsapp" placeholder="Ex: 38019657 (sans +509)" required>
             </div>
 
-            <button type="button" class="btn-continuer" id="btn-continuer">
-                Continuer <i class="fa-solid fa-arrow-right"></i>
-            </button>
+     
+     <div class="goup-boutons-anba" style="margin-top: 30px; display: flex; justify-content: space-between; gap: 15px;">
+                    <button type="button" class="btn-retour" onclick="window.location.href='disney.html'" style="padding: 12px 20px; border: 1px; color: white; border-radius: 15px; cursor: pointer; font-weight: bold;">
+                        <i class="fa-solid fa-arrow-left"></i> Boutiques
+                    </button>
+
+
+                <button type="button" class="btn-continuer" id="btn-continuer" style="flex: 1; justify-content: center;">
+                    Continuer <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -79,4 +86,7 @@
       });
     </script>
 </body>
-</html>
+</html>   
+     
+     
+     
