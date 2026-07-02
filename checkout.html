@@ -47,6 +47,10 @@
                 <label for="whatsapp">Numéro WhatsApp</label>
                 <input type="number" id="whatsapp" placeholder="Ex: 35730041 (sans +509)" required>
             </div>
+     <div class="goup-boutons-anba" style="margin-top: 30px; display: flex; justify-content: space-between; gap: 15px;">
+                    <button type="button" class="btn-retour" onclick="window.location.href='disney.html'" style="padding: 12px 20px; border: 1px; color: white; border-radius: 15px; cursor: pointer; font-weight: bold;">
+                        <i class="fa-solid fa-arrow-left"></i> Boutiques
+                    </button>            
 
             <button type="button" class="btn-continuer" id="btn-continuer">
                 Continuer <i class="fa-solid fa-arrow-right"></i>
@@ -70,7 +74,6 @@
           }
 
           // Sove nimewo a sou tou de kle yo pou sekirite tout paj yo
-          localStorage.setItem("whatsapp_kliyan", nimewo);
           localStorage.setItem("user_whatsapp", nimewo);
           
           // Chanje paj pou ale nan peman
