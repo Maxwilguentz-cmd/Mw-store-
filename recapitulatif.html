@@ -89,6 +89,15 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
+        // SOU TRAVAY: Blokaj Sekirite anvan anyen chaje sou paj la
+        let mounNanKonekte = localStorage.getItem("user_connecte");
+        let imelMounNan = localStorage.getItem("user_email");
+        
+        if (mounNanKonekte !== "true" || !imelMounNan) {
+            localStorage.clear();
+            window.location.href = "connexion.html";
+        }
+
         // Konfigirasyon Firebase pa w la
         const firebaseConfig = {
             apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
@@ -110,7 +119,6 @@
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
 
-            // Sekirite pou ID yo si ta gen oswa pa gen aksan
             const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
             if (elSevis) elSevis.innerHTML = nonSèvis;
 
@@ -150,11 +158,10 @@
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
             let datJodia = new Date().toISOString().split('T')[0];
 
-            // Nou ranmase imel moun ki konekte a nan memwa a
             let imelKliyan = localStorage.getItem("user_email") || "Non connecté";
 
             db.collection("commandes").add({
-                user_email: imelKliyan, // KOREKSYON: Kòmand lan lye ak imel kliyan an kounye a
+                user_email: imelKliyan,
                 whatsapp: whatsappKliyan,
                 service: nonSèvis,
                 montant: priSèvis,
