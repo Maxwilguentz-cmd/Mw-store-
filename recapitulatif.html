@@ -141,18 +141,20 @@
             }
         }
 
-        // AKSYON KOTE NOU FIXE KOLEKSYON AN AK STATUS AN
+        // AKSYON KOTE NOU ENTEGRE IMEL ITILIZATÈ A ANSANM AK KÒMAND LAN
         document.getElementById('btn-finaliser').addEventListener('click', function() {
             let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
-
-            // KOREKSYON: Non varyab la pa dwe gen espas
             let datJodia = new Date().toISOString().split('T')[0];
 
+            // Nou ranmase imel moun ki konekte a nan memwa a
+            let imelKliyan = localStorage.getItem("user_email") || "Non connecté";
+
             db.collection("commandes").add({
+                user_email: imelKliyan, // KOREKSYON: Kòmand lan lye ak imel kliyan an kounye a
                 whatsapp: whatsappKliyan,
                 service: nonSèvis,
                 montant: priSèvis,
