@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - MwStore</title>
+    <!-- Nou garde style12.css ou a pou rès bwat istorik yo ka pran bèl fòma yo -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style12.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #060606;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Top Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #0a0a0a;
+            border-bottom: 1px solid #12110e;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span { color: #cca43b; }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #8a99ad;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: #cca43b; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-pill {
+            background: #12110e;
+            border: 1px solid #2b2518;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-pill i { color: #cca43b; }
+
+        /* Main Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        /* Sidebar Gòch */
+        .sidebar {
+            flex: 1;
+            background: #0c0b09;
+            border: 1px solid #1a1712;
+            border-radius: 16px;
+            padding: 25px 20px;
+            height: fit-content;
+        }
+
+        .sidebar-title h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-title p {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            color: #8a99ad;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: #1a1712;
+            color: #ffffff;
+        }
+
+        .menu-item.active {
+            border-left: 3px solid #cca43b;
+        }
+
+        /* Kontni Dwa */
+        .main-content {
+            flex: 3;
+        }
+
+        .content-section {
+            display: none; /* Kache pa defo */
+        }
+
+        .content-section.active {
+            display: block; /* Afiche sèlman sa ki aktif la */
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            background: #cca43b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .profile-title h2 { font-size: 1.6rem; }
+        .profile-title p { color: #64748b; font-size: 0.95rem; }
+
+        /* Kat Fòm ak Kat Istorik */
+        .card-box {
+            background: #0c0b09;
+            border: 1px solid #1a1712;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .card-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box label {
+            display: block;
+            color: #8a99ad;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="logo">Mw<span>Store</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Boutique</a></li>
+            <li><a href="#">Points</a></li>
+            <li><a href="#">Tutos</a></li>
+            <li><a href="#">Actus</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+        <div class="nav-right">
+            <i class="fa-regular fa-bell" style="font-size: 1.2rem; cursor: pointer;"></i>
+            <div class="user-pill">
+                <i class="fa-solid fa-user"></i>
+                <span id="top-username">Chargement...</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar bò gòch -->
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                <h3>Mon Compte</h3>
+                <p>Gère ton profil et commandes.</p>
+            </div>
+            <div class="menu-list">
+                <div class="menu-item active" onclick="switchTab('profil', this)">
+                    <i class="fa-regular fa-user"></i> Mon Profil
+                </div>
+                <div class="menu-item" onclick="switchTab('commandes', this)">
+                    <i class="fa-solid fa-box"></i> Mes Commandes
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion
+                </div>
+            </div>
+        </aside>
+
+        <!-- Kontni bò dwat -->
+        <main class="main-content">
+
+            <!-- TAB 1: SECTION PROFIL -->
+            <section id="section-profil" class="content-section active">
+                <div class="profile-header">
+                    <div class="avatar-circle" id="avatar-initial">M</div>
+                    <div class="profile-title">
+                        <h2 id="mid-username">Chargement...</h2>
+                        <p id="mid-email">...</p>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <h3>Informations personnelles</h3>
+                    <div class="input-box">
+                        <label>Nom d'affichage</label>
+                        <input type="text" id="profile-nom" readonly>
+                    </div>
+                    <div class="input-box">
+                        <label>Email</label>
+                        <input type="email" id="profile-email" readonly>
+                    </div>
+                    <div class="input-box">
+                        <label>WhatsApp</label>
+                        <input type="text" id="profile-whatsapp" readonly>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: EGZAKTEMAN PWÒP JAN ISTORIK.HTML TE YE A -->
+            <section id="section-commandes" class="content-section">
+                <main class="container-historik" style="padding: 0; margin: 0; max-width: 100%;">
+                    <p class="instruction-text" style="margin-bottom: 20px;">Suivez l'état de vos achats et retrouvez vos codes livrés.</p>
+
+                    <div class="tabs-container">
+                        <button class="tab-btn active" data-filter="toutes">Toutes</button>
+                        <button class="tab-btn" data-filter="valide">Validées</button>
+                        <button class="tab-btn" data-filter="encour">En cours</button>
+                        <button class="tab-btn" data-filter="refuse">Refusées</button>
+                    </div>
+
+                    <div class="refresh-container">
+                        <button class="btn-refresh" id="refresh-btn" onclick="chargerCommandes()"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+
+                    <div class="orders-list" id="liste-commandes-firebase">
+                        <p style="text-align: center; color: #64748b; padding: 20px;">Chajman kòmand yo...</p>
+                    </div>
+                </main>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Firebase SDK (Version Modilè - tankou nan kòd ou a) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Blokaj sekirite si moun nan poko konekte
+        let mounNanKonekte = localStorage.getItem("user_connecte");
+        let imelMounNan = localStorage.getItem("user_email");
+        
+        if (mounNanKonekte !== "true" || !imelMounNan) {
+            localStorage.clear();
+            window.location.href = "connexion.html";
+        }
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb",
+            measurementId: "G-5H72KDEHD9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let aktiyèlFiltre = "toutes";
+        const ordersListContainer = document.getElementById('liste-commandes-firebase');
+
+        // Lè paj la chaje, al rale enfòmasyon Profil ak Kòmand
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                const qUser = query(collection(db, "utilisateurs"), where("email", "==", imelMounNan));
+                const userSnapshot = await getDocs(qUser);
+                
+                if (!userSnapshot.empty) {
+                    let userData = userSnapshot.docs[0].data();
+                    let nonMounNan = userData.nom || "Utilisateur";
+
+                    document.getElementById('top-username').innerText = nonMounNan;
+                    document.getElementById('mid-username').innerText = nonMounNan;
+                    document.getElementById('mid-email').innerText = imelMounNan;
+                    document.getElementById('avatar-initial').innerText = nonMounNan.charAt(0).toUpperCase();
+
+                    document.getElementById('profile-nom').value = nonMounNan;
+                    document.getElementById('profile-email').value = imelMounNan;
+                    document.getElementById('profile-whatsapp').value = userData.whatsapp || "Non spécifié";
+                }
+                
+                // Kòmanse koute kòmand yo an tan reyèl ak onSnapshot (tankou nan kòd istorik ou a)
+                ekouteCommandes();
+
+            } catch (error) {
+                console.error("Erreur profil: ", error);
+            }
+        });
+
+        // Koute kòmand itilizatè a depi nan Firebase
+        function ekouteCommandes() {
+            const qOrders = query(collection(db, "commandes"), where("user_email", "==", imelMounNan));
+
+            onSnapshot(qOrders, (querySnapshot) => {
+                aficheKomandYo(querySnapshot);
+            }, (error) => {
+                console.error("Erreur detaye Firebase:", error);
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #ff4d4d; padding: 20px;">Erreur Firebase.</p>`;
+            });
+        }
+
+        // Fonksyon ki bati kat yo egzakteman jan istorik.html te fel la
+        function aficheKomandYo(snapshot) {
+            ordersListContainer.innerHTML = "";
+            
+            if (snapshot.empty) {
+                ordersListContainer.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Ou pa gen okenn kòmand pou kont sa a (${imelMounNan}).</p>`;
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const komand = doc.data();
+                const idKomand = doc.id;
+                const estati = komand.status || "encour";
+
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.setAttribute('data-status', estati);
+
+                // Kontwòl filtraj la
+                if (aktiyèlFiltre === "toutes" || estati === aktiyèlFiltre) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+
+                let badjEstati = "";
+                let bwatInfoVert = "";
+                let bwatDetay = "";
+
+                if (estati === "encour") {
+                    badjEstati = `<div class="status-badge status-validation">⏳ Validation...</div>`;
+                    bwatInfoVert = `
+                        <div class="info-box-green">
+                            <div class="info-title"><i class="fa-solid fa-mailbox"></i> Commande en cours de traitement</div>
+                            <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
+                            <a href="https://wa.me/50938019657?text=Bonjou%20Mw%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>`;
+                    bwatDetay = `<p style="color: #8a99ad;">Kòmand ou ap disponib touswit apre verifikasyon admin lan.</p>`;
+                } else if (estati === "valide") {
+                    badjEstati = `<div class="status-badge status-valide">✅ Validée</div>`;
+                    bwatDetay = `
+                        <div class="data-delivered">
+                            <h3>🔑 Enfòmasyon Kont Ou:</h3>
+                            <div class="account-field"><span><strong>Email:</strong> ${komand.email || ''}</span></div>
+                            <div class="account-field"><span><strong>Modpas:</strong> ${komand.password || ''}</span></div>
+                            <div class="account-field"><span><strong>Profil:</strong> ${komand.profil || 'Profil Paj'}</span></div>
+                        </div>`;
+                } else if (estati === "refuse" || estati === "refusée") {
+                    badjEstati = `<div class="status-badge status-refuse" style="background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">❌ Refusée</div>`;
+                    bwatDetay = `
+                        <div class="data-rejected" style="padding: 10px; background: #2d1e1e; border-left: 4px solid #ef4444; border-radius: 4px; margin-top: 10px;">
+                            <p style="color: #ff9999; margin: 0;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon pa lwen oswa anile.'}</p>
+                        </div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div class="service-info">
+                            <h2>${komand.service || 'Sèvis'}</h2>
+                            <span class="order-id-date">${idKomand} | ${komand.date || ''}</span>
+                        </div>
+                        ${badjEstati}
+                    </div>
+                    <div class="order-meta">
+                        <div class="meta-item"><span class="meta-label">Montant</span><span class="meta-value">${komand.montant || '0'}</span></div>
+                        <div class="meta-item"><span class="meta-label">Paiement</span><span class="meta-value">${komand.paiement || 'Panyen'}</span></div>
+                    </div>
+                    ${bwatInfoVert}
+                    <button class="btn-details-toggle">
+                        <i class="fa-regular fa-eye"></i> Voir les détails
+                    </button>
+                    <div class="order-details-dropdown">
+                        <div class="details-content">${bwatDetay}</div>
+                    </div>
+                `;
+
+                // Evènman sou bouton "Voir les détails" lan
+                const toggleBtn = card.querySelector('.btn-details-toggle');
+                const dropdown = card.querySelector('.order-details-dropdown');
+                toggleBtn.addEventListener('click', () => {
+                    dropdown.classList.toggle('open');
+                    toggleBtn.innerHTML = dropdown.classList.contains('open') ? 
+                        '<i class="fa-regular fa-eye-slash"></i> Masquer les détails' : '<i class="fa-regular fa-eye"></i> Voir les détails';
+                });
+
+                ordersListContainer.appendChild(card);
+            });
+        }
+
+        // Lojik Filtraj bouton tab yo (Toutes, Validées, En cours, Refusées)
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                aktiyèlFiltre = tab.getAttribute('data-filter');
+                const cards = document.querySelectorAll('.order-card');
+
+                cards.forEach(card => {
+                    const status = card.getAttribute('data-status');
+                    if (aktiyèlFiltre === 'toutes' || status === aktiyèlFiltre) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Ekspoze fonksyon chanje Tab pou HTML la ka wè l
+        window.switchTab = function(tabName, element) {
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+
+            element.classList.add('active');
+            document.getElementById(`section-${tabName}`).classList.add('active');
+        };
+
+        // Ekspoze fonksyon Dekoneksyon
+        window.logout = function() {
+            localStorage.clear();
+            window.location.href = "connexion.html";
+        };
+    </script>
+</body>
+</html>
