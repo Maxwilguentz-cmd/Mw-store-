@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - MwStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header Style MwStore */
+        .header-checkout {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+
+        .logo-checkout {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo-checkout span {
+            color: #cca43b;
+        }
+
+        .menu-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-icons i {
+            font-size: 20px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .barres-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .barres-menu span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        /* Banner enfòmasyon */
+        .info-banner {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(18, 17, 14, 0.8);
+            border: 1px solid #2b2518;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        /* Kontenè Fòm lan */
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+
+        .main-logo-center {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #cca43b;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+            margin-bottom: 25px;
+            background: #12110e;
+        }
+
+        .main-logo-center .inner-text {
+            transform: rotate(-45deg);
+            color: #cca43b;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: #8a99ad;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        /* Input Groups */
+        .input-group {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-group i.input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a99ad;
+            font-size: 1.1rem;
+        }
+
+        .input-group i.toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a99ad;
+            cursor: pointer;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 16px 16px 45px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #cca43b;
+            background: #1a1710;
+            box-shadow: 0 0 8px rgba(204, 164, 59, 0.2);
+        }
+
+        /* Èd */
+        .form-helpers {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8a99ad;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            accent-color: #cca43b;
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-password {
+            color: #8a99ad;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #cca43b;
+        }
+
+        /* Bouton Submit Prensipal */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* Lyen pou kreye kont */
+        .no-account {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #8a99ad;
+            margin-bottom: 25px;
+        }
+
+        .no-account a {
+            color: #cca43b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Separateur "ou" */
+        .separator {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+            color: #3b4b5e;
+            font-size: 0.85rem;
+        }
+
+        .separator::before, .separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #2b2518;
+        }
+
+        .separator span {
+            padding: 0 15px;
+        }
+
+        /* Bouton Google */
+        .btn-google {
+            width: 100%;
+            padding: 16px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            color: #ffffff;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-google:hover {
+            background: #1a1710;
+            border-color: #cca43b;
+        }
+
+        .btn-google img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-banner">
+        Connecte-toi pour commander.
+    </div>
+
+    <main class="login-container">
+        <div class="main-logo-center">
+            <span class="inner-text">Mw</span>
+        </div>
+
+        <h1>Bon retour</h1>
+        <p class="subtitle">Se connecter à MW STORE</p>
+
+        <form id="form-connexion">
+            <div class="input-group">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" id="email" placeholder="Adresse email" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="password" placeholder="Mot de passe" required>
+                <i class="fa-regular fa-eye toggle-password" onclick="togglePass()"></i>
+            </div>
+
+            <div class="form-helpers">
+                <label class="remember-me">
+                    <input type="checkbox"> Se souvenir de moi
+                </label>
+                <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Connexion <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <div class="no-account">
+                Poko gen yon kont? <a href="inscription.html">S'inscrire</a>
+            </div>
+
+            <div class="separator">
+                <span>ou</span>
+            </div>
+
+            <button type="button" class="btn-google" id="btn-google-login">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google__G__Logo.svg" alt="Google">
+                Connexion avec Google
+            </button>
+        </form>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Konfigirasyon Firebase pa w la
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb"
+        };
+
+        // Inisyalize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Fonksyon montre/kache modpas
+        function togglePass() {
+            const inputPass = document.getElementById('password');
+            const icon = document.querySelector('.toggle-password');
+            if (inputPass.type === "password") {
+                inputPass.type = "text";
+                icon.classList.replace('fa-regular', 'fa-solid');
+            } else {
+                inputPass.type = "password";
+                icon.classList.replace('fa-solid', 'fa-regular');
+            }
+        }
+
+        // Lojik pou verifye koneksyon an nan baz de done a
+        document.getElementById('form-connexion').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const btnSubmit = document.querySelector('.btn-submit');
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Vérification...";
+
+            try {
+                // Li al chèche kont lan nan Firebase Auth
+                await auth.signInWithEmailAndPassword(email, password);
+                
+                // Si kont lan bon, nou sove mak la nan localStorage
+                localStorage.setItem("user_connecte", "true");
+                localStorage.setItem("user_email", email);
+
+                // Nou voye l sou paj kòmand lan dirèkteman
+                window.location.href = "profil.html";
+
+            } catch (error) {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `Connexion <i class="fa-solid fa-arrow-right"></i>`;
+                // Ba li yon mesaj klè si modpas la oswa imel la pa bon
+                alert("Erreur de connexion: Email ou mot de passe incorrect.");
+            }
+        });
+
+        // Lojik Koneksyon ak Google pou paj koneksyon an tou
+        document.getElementById('btn-google-login').addEventListener('click', async function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // Tcheke si moun nan te deja nan Firestore
+                const userDoc = await db.collection("utilisateurs").doc(user.uid).get();
+                if (!userDoc.exists) {
+                    await db.collection("utilisateurs").doc(user.uid).set({
+                        uid: user.uid,
+                        email: user.email,
+                        nom: user.displayName || "Utilisateur Google",
+                        whatsapp: "Non renseigné",
+                        code_parrain: "Aucun",
+                        date_inscription: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
+                localStorage.setItem("user_connecte", "true");
+                localStorage.setItem("user_email", user.email);
+                window.location.href = "checkout.html";
+
+            } catch (error) {
+                alert("Erreur Google: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
