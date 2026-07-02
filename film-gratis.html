@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS espesyal pou paj fim nan ka parèt byen sou telefòn */
         body {
             background-color: #0c0b09;
             color: #ffffff;
@@ -59,7 +58,6 @@
             color: #cca43b;
         }
 
-        /* Bouton Retounen style Netflix */
         .navigation-section {
             padding: 20px;
             display: flex;
@@ -87,7 +85,6 @@
             color: #000;
         }
 
-        /* Bouton "Ajouter un film" */
         .btn-ajouter-film {
             background: #cca43b;
             color: #000;
@@ -102,7 +99,6 @@
             font-size: 0.9rem;
         }
 
-        /* Grid pou afiche fim yo (Responsive pou telefòn) */
         .films-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -123,7 +119,7 @@
         .film-video-container {
             position: relative;
             width: 100%;
-            padding-top: 140%; /* Kenbe fòma afich tradisyonèl la */
+            padding-top: 140%;
             background: #000;
         }
 
@@ -159,6 +155,15 @@
             overflow: hidden;
         }
 
+        .download-progress {
+            display: none;
+            font-size: 0.8rem;
+            color: #cca43b;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
         .film-actions {
             display: flex;
             gap: 5px;
@@ -186,7 +191,6 @@
             border: 1px solid #333;
         }
 
-        /* Modal pou fòm ajoute fim lan */
         .modal {
             display: none;
             position: fixed;
@@ -237,6 +241,15 @@
             box-sizing: border-box;
         }
 
+        .upload-progress {
+            display: none;
+            font-size: 0.85rem;
+            color: #cca43b;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
         .modal-buttons {
             display: flex;
             justify-content: flex-end;
@@ -265,17 +278,14 @@
 </head>
 <body>
 
-    <!-- Menm Header a ak res sit la -->
     <div class="header-checkout">
         <div class="logo-checkout"><span>Store</span></div>
         <div class="menu-icons">
             <i class="fa-regular fa-bell" style="cursor: pointer;"></i>
-            
             <div class="barres-menu" id="btn-menu-burger" style="cursor: pointer;">
                 <span></span>
                 <span></span>
             </div>
-
             <div class="dropdown-connexion" id="box-connexion">
                 <a href="#" id="link-connexion">
                     <i class="fa-solid fa-right-to-bracket" style="color: #cca43b;"></i> Connexion
@@ -284,12 +294,10 @@
         </div>
     </div>
 
-    <!-- Seksyon Navigasyon -->
     <div class="navigation-section">
         <a href="index.html" class="btn-back">
             <i class="fa-solid fa-arrow-left"></i> Accueil
         </a>
-        
         <button class="btn-ajouter-film" id="open-modal-btn">
             <i class="fa-solid fa-plus"></i> Ajouter
         </button>
@@ -300,12 +308,8 @@
         <p>Regardez et téléchargez vos films préférés gratuitement.</p>
     </div>
 
-    <!-- Grid kote tout fim yo ap afiche -->
-    <div class="films-grid" id="container-films">
-        <!-- Kat sa ap rete vid pou nouvo fim yo ka antre otomatikman ak videyo pa yo -->
-    </div>
+    <div class="films-grid" id="container-films"></div>
 
-    <!-- Modal pou fòm pou ajoute fim nan (Popup) -->
     <div class="modal" id="modal-film">
         <div class="modal-content">
             <h3>Proposer un Film</h3>
@@ -316,16 +320,16 @@
                 </div>
                 <div class="form-group">
                     <label>Sélectionner le fichier vidéo *</label>
-                    <!-- Nou chanje sa pou n mande yon fichye videyo dirèkteman -->
                     <input type="file" id="film-video-input" accept="video/*" required>
                 </div>
                 <div class="form-group">
                     <label>Description (Optionnel)</label>
                     <textarea id="film-desc-input" rows="3" placeholder="Petit résumé..."></textarea>
                 </div>
+                <div class="upload-progress" id="upload-status">Envoi en cours : 0%</div>
                 <div class="modal-buttons">
                     <button type="button" class="btn-close" id="close-modal-btn">Annuler</button>
-                    <button type="submit" class="btn-submit">Envoyer</button>
+                    <button type="submit" class="btn-submit" id="submit-film-btn">Envoyer</button>
                 </div>
             </form>
         </div>
@@ -334,18 +338,36 @@
     <script src="script.js"></script>
 
     <script>
-        // --- 1. KONTWÒL PAJ CONNEXION AK REDIREKSYON ---
+        // --- 1. JESYON BAZ DONE "INDEXEDDB" POU SOVE VIDEWO YO POU TOUTBON ---
+        let db;
+        const request = indexedDB.open("MWStoreMoviesDB", 1);
+
+        request.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("movies")) {
+                db.createObjectStore("movies", { keyPath: "id", autoIncrement: true });
+            }
+        };
+
+        request.onsuccess = function(e) {
+            db = e.target.result;
+            loadMoviesFromDB(); // Chaje fim yo otomatikman lè paj la louvri
+        };
+
+        request.onerror = function(e) {
+            console.error("Erreur IndexedDB :", e.target.error);
+        };
+
+        // --- 2. KONTWÒL NAVIGASYON ---
         document.getElementById('link-connexion').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.setItem("vini_de", "film-gratis.html");
             window.location.href = "connexion1.html";
         });
 
-        // --- 2. LOGIK DE BAR DEPO PI WO A ---
         document.getElementById('btn-menu-burger').addEventListener('click', function(e) {
             e.stopPropagation();
             let mounNanKonekte = localStorage.getItem("user_connecte");
-
             if (mounNanKonekte === "true") {
                 window.location.href = "profil.html";
             } else {
@@ -357,25 +379,12 @@
             document.getElementById('box-connexion').classList.remove('show');
         });
 
-        // --- 3. LOGIK MODAL (POPUP AJOUTER FILM) ---
         const modal = document.getElementById('modal-film');
         document.getElementById('open-modal-btn').addEventListener('click', () => modal.style.display = 'flex');
         document.getElementById('close-modal-btn').addEventListener('click', () => modal.style.display = 'none');
 
-        // --- 4. LOGIK POU AJOUTE VIDESYO A AK TOUT DETAY LI ---
-        document.getElementById('form-film').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('film-name-input').value;
-            const videoFile = document.getElementById('film-video-input').files[0];
-            const desc = document.getElementById('film-desc-input').value || "Aucune description disponible.";
-
-            if (!videoFile) return;
-
-            // Kòd sa a transfòme fichye videyo lokal la an yon lyen (URL) k ap ka jwe nan navigatè a
-            const videoUrl = URL.createObjectURL(videoFile);
-
-            // Kreye kat la ak yon eleman <video> ki gen kontwòl olye de yon senp foto
+        // --- 3. AFICHE KAT FIM YO SOU EKRAN AN ---
+        function kreyekatFilmHtml(name, videoUrl, desc) {
             const nouvoFilm = document.createElement('div');
             nouvoFilm.className = 'film-card';
             nouvoFilm.innerHTML = `
@@ -385,20 +394,117 @@
                 <div class="film-info">
                     <h3 class="film-title">${name}</h3>
                     <p class="film-desc">${desc}</p>
+                    <div class="download-progress">Téléchargement : 0%</div>
                     <div class="film-actions">
                         <a href="${videoUrl}" target="_blank" class="btn-action btn-watch">Regarder</a>
-                        <a href="${videoUrl}" download="${name}.mp4" class="btn-action btn-download">Télécharger</a>
+                        <button class="btn-action btn-download" onclick="simuleDownload(this, '${videoUrl}', '${name}')">Télécharger</button>
                     </div>
                 </div>
             `;
-
-            // Ajoute fim nan nan grid la
             document.getElementById('container-films').appendChild(nouvoFilm);
+        }
 
-            // Netwaye fòm nan epi kache modal la
-            document.getElementById('form-film').reset();
-            modal.style.display = 'none';
+        // --- 4. LI DONE FIM YO NAN BAZ DONE A LÈ PAJ LA LOUVRI ---
+        function loadMoviesFromDB() {
+            const transaction = db.transaction(["movies"], "readonly");
+            const store = transaction.objectStore("movies");
+            const cursorRequest = store.openCursor();
+
+            document.getElementById('container-films').innerHTML = ''; // Netwaye grid la anvan
+
+            cursorRequest.onsuccess = function(e) {
+                const cursor = e.target.result;
+                if (cursor) {
+                    // Kreye yon URL tanporè pou gade fichye videyo binè (Blob) ki sove a
+                    const videoUrl = URL.createObjectURL(cursor.value.videoBlob);
+                    kreyekatFilmHtml(cursor.value.name, videoUrl, cursor.value.desc);
+                    cursor.continue();
+                }
+            };
+        }
+
+        // --- 5. SOVE FIM NAN ETAKAVÈK FICHER VIDEYO A LÈ YO KLIKE ENVOYER ---
+        document.getElementById('form-film').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('film-name-input').value;
+            const videoFile = document.getElementById('film-video-input').files[0];
+            const desc = document.getElementById('film-desc-input').value || "Aucune description disponible.";
+
+            if (!videoFile) return;
+
+            const uploadStatus = document.getElementById('upload-status');
+            const submitBtn = document.getElementById('submit-film-btn');
+            
+            uploadStatus.style.display = 'block';
+            submitBtn.disabled = true;
+
+            let uploadPercent = 0;
+            const uploadInterval = setInterval(() => {
+                uploadPercent += 10;
+                uploadStatus.innerText = `Envoi en cours : ${uploadPercent}%`;
+
+                if (uploadPercent >= 100) {
+                    clearInterval(uploadInterval);
+                    
+                    // Sove fichye videyo a nèt (kòm gwo Blob binè) nan IndexedDB
+                    const transaction = db.transaction(["movies"], "readwrite");
+                    const store = transaction.objectStore("movies");
+                    
+                    const movieData = {
+                        name: name,
+                        videoBlob: videoFile, // Fichye a ale nan baz done a la!
+                        desc: desc
+                    };
+
+                    store.add(movieData);
+
+                    transaction.oncomplete = function() {
+                        loadMoviesFromDB(); // Rafrechi grid la pou montre nouvo fim nan ki sove nèt la
+                        
+                        uploadStatus.style.display = 'none';
+                        uploadStatus.innerText = `Envoi en cours : 0%`;
+                        submitBtn.disabled = false;
+                        document.getElementById('form-film').reset();
+                        modal.style.display = 'none';
+                    };
+                }
+            }, 200);
         });
+
+        // --- 6. JERE TELECHAJMAN ---
+        function simuleDownload(btn, videoUrl, filename) {
+            const cardInfo = btn.closest('.film-info');
+            const progressDiv = cardInfo.querySelector('.download-progress');
+            
+            btn.disabled = true;
+            progressDiv.style.display = 'block';
+            
+            let downloadPercent = 0;
+            const downloadInterval = setInterval(() => {
+                downloadPercent += 5;
+                progressDiv.innerText = `Téléchargement : ${downloadPercent}%`;
+                
+                if (downloadPercent >= 100) {
+                    clearInterval(downloadInterval);
+                    progressDiv.innerText = `Téléchargement terminé !`;
+                    
+                    // Deklanche fòs telechajman fichye videyo a sou aparèy kliyan an
+                    const a = document.createElement('a');
+                    a.href = videoUrl;
+                    a.download = `${filename}.mp4`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    
+                    setTimeout(() => {
+                        progressDiv.style.display = 'none';
+                        progressDiv.innerText = `Téléchargement : 0%`;
+                        btn.disabled = false;
+                    }, 2000);
+                }
+            }, 150);
+        }
     </script>
 </body>
 </html>
