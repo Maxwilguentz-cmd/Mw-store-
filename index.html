@@ -1,29 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MWStore-accuil</title>
+    <title>MWStore-accueil</title>
     <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+    <!-- Nou ajoute FontAwesome pou ti ikòn yo si w bezwen yo pi devan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS pou ti bwat dropdown "Connexion" lan */
+        .menu-icons {
+            position: relative; /* Pou pèmèt bwat la bati bò kote l */
+        }
+
+        .dropdown-connexion {
+            display: none; /* Kache pa defo */
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #0c0b09;
+            border: 1px solid #2b2518;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 140px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        .dropdown-connexion.show {
+            display: block; /* Afiche lè nou klike */
+        }
+
+        .dropdown-connexion a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .dropdown-connexion a:hover {
+            background: #1a1712;
+            color: #cca43b;
+        }
+    </style>
+</head>
+<body>
+
     <div class="header-checkout">
         <div class="logo-checkout"><span>Store</span></div>
         <div class="menu-icons">
-            <i class="fa-regular fa-bell"></i>
-            <div class="barres-menu">
+            <i class="fa-regular fa-bell" style="cursor: pointer;"></i>
+            
+            <!-- Nou mete yon id pou nou ka kontwole de bar yo nan JS -->
+            <div class="barres-menu" id="btn-menu-burger" style="cursor: pointer;">
                 <span></span>
                 <span></span>
+            </div>
+
+            <!-- Ti bwat dropdown k ap parèt si moun nan poko konekte -->
+            <div class="dropdown-connexion" id="box-connexion">
+                <a href="connexion.html">
+                    <i class="fa-solid fa-right-to-bracket" style="color: #cca43b;"></i> Connexion
+                </a>
             </div>
         </div>
     </div>
 
-
-    <div class ="soustitre">
+    <div class="soustitre">
         <h1>MW <span style="color: #D4AF37;">STORE</span></h1>
-        <p >Voici votre Marketplace premium <br> Choisi ton jeux service <br> et rechage instantanément en toute sécurité.</p>
-
+        <p>Voici votre Marketplace premium <br> Choisi ton jeux service <br> et rechage instantanément en toute sécurité.</p>
     </div>   
+
     <div class="catalogue-section">  
         <h4 class="tag-catalogue">CATALOGUE</h4>       
         <h1 class="titre-categories">CATéGORIES</h1>
@@ -31,7 +84,7 @@
 
     <div class="store-grid"> 
         <div class="streaming" onclick="streaming()" style="cursor: pointer;">
-            <img src="bing.JPG" alt="streaming background" class="card-bg-img" >
+            <img src="bing.JPG" alt="streaming background" class="card-bg-img">
             <span class="badge-dispo">4 DISPO</span>
             <div class="titre-pour-jeux">
                 <h2>streaming</h2>
@@ -60,6 +113,7 @@
             <div class="arrow-btn">→</div>
         </div> 
     </div> 
+
     <div class="temoignages-section">
         <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
         <h2>CE QUE DISENT <span style="color: #D4AF37;">NOS CLIENTS</span></h2>
@@ -67,6 +121,29 @@
     </div>
    
     <script src="script.js"></script>
-    </body> 
+
+    <!-- Ti Lojik entèlijan pou bouton Menu an -->
+    <script>
+        document.getElementById('btn-menu-burger').addEventListener('click', function(e) {
+            e.stopPropagation(); // Anpeche klik la gaye
+            
+            // Tcheke si moun nan konekte nan memwa a
+            let mounNanKonekte = localStorage.getItem("user_connecte");
+
+            if (mounNanKonekte === "true") {
+                // Si l konekte, nou voye l dirèkteman sou paj profil li
+                window.location.href = "profil.html";
+            } else {
+                // Si l poko konekte, nou switch afichaj ti kaz "Connexion" lan
+                document.getElementById('box-connexion').classList.toggle('show');
+            }
+        });
+
+        // Si moun nan klike nenpòt lòt kote nan paj la, kache ti kaz Connexion an si l te louvri
+        document.addEventListener('click', function() {
+            document.getElementById('box-connexion').classList.remove('show');
+        });
+    </script>
+</body> 
 </html>
 
