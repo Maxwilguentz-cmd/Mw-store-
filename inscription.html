@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte - MwStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header Style MwStore */
+        .header-checkout {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+
+        .logo-checkout {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo-checkout span {
+            color: #cca43b;
+        }
+
+        .menu-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-icons i {
+            font-size: 20px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .barres-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .barres-menu span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        /* Kontenè Fòm lan */
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+
+        .main-logo-center {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #cca43b;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+            margin-bottom: 25px;
+            background: #12110e;
+        }
+
+        .main-logo-center .inner-text {
+            transform: rotate(-45deg);
+            color: #cca43b;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: #8a99ad;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        /* Input Groups */
+        .input-group {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-group i.input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a99ad;
+            font-size: 1.1rem;
+        }
+
+        .input-group i.toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a99ad;
+            cursor: pointer;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 16px 16px 45px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #cca43b;
+            background: #1a1710;
+            box-shadow: 0 0 8px rgba(204, 164, 59, 0.2);
+        }
+
+        /* Bouton Submit Prensipal */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* Lyen pou tounen nan koneksyon */
+        .has-account {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #8a99ad;
+            margin-bottom: 25px;
+        }
+
+        .has-account a {
+            color: #cca43b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Separateur "ou" */
+        .separator {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+            color: #3b4b5e;
+            font-size: 0.85rem;
+        }
+
+        .separator::before, .separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #2b2518;
+        }
+
+        .separator span {
+            padding: 0 15px;
+        }
+
+        /* Bouton Google */
+        .btn-google {
+            width: 100%;
+            padding: 16px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            color: #ffffff;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-google:hover {
+            background: #1a1710;
+            border-color: #cca43b;
+        }
+
+        .btn-google img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header MwStore -->
+    <div class="header-checkout">
+        <div class="logo-checkout">Mw<span>Store</span></div>
+        <div class="menu-icons">
+            <i class="fa-regular fa-bell"></i>
+            <div class="barres-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Form Container -->
+    <main class="register-container">
+        <div class="main-logo-center">
+            <span class="inner-text">Mw</span>
+        </div>
+
+        <h1>Créer un compte</h1>
+        <p class="subtitle">Rejoins l'élite du gaming</p>
+
+        <form id="form-inscription">
+            <div class="input-group">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" id="reg-email" placeholder="Adresse email" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" id="reg-name" placeholder="Nom complet" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-phone input-icon"></i>
+                <input type="tel" id="reg-whatsapp" placeholder="WhatsApp (ex: 50912345678)" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-gift input-icon"></i>
+                <input type="text" id="reg-sponsor" placeholder="Code parrain (optionnel)">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="reg-password" placeholder="Mot de passe" required>
+                <i class="fa-regular fa-eye toggle-password" onclick="togglePass('reg-password', this)"></i>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="reg-confirm-password" placeholder="Confirmer le mot de passe" required>
+                <i class="fa-regular fa-eye toggle-password" onclick="togglePass('reg-confirm-password', this)"></i>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                S'inscrire <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <div class="has-account">
+                Ou gen yon kont deja? <a href="connexion.html">Se connecter</a>
+            </div>
+
+            <div class="separator">
+                <span>ou</span>
+            </div>
+
+            <button type="button" class="btn-google" id="btn-google-register">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google__G__Logo.svg" alt="Google">
+                Connexion avec Google
+            </button>
+        </form>
+    </main>
+
+<!-- Nou rele bilbiyotèk Firebase yo an premye (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Konfigirasyon Firebase pa w la (Menm jan ak lòt paj yo)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb"
+        };
+
+        // Inisyalize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Fonksyon pou montre/kache modpas
+        function togglePass(inputId, icon) {
+            const inputPass = document.getElementById(inputId);
+            if (inputPass.type === "password") {
+                inputPass.type = "text";
+                icon.classList.replace('fa-regular', 'fa-solid');
+            } else {
+                inputPass.type = "password";
+                icon.classList.replace('fa-solid', 'fa-regular');
+            }
+        }
+
+        // Koute lè itilizatè a klike sou bouton "S'inscrire"
+        document.getElementById('form-inscription').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Rekipere enfòmasyon nan bwat yo
+            const email = document.getElementById('reg-email').value.trim();
+            const nomComplet = document.getElementById('reg-name').value.trim();
+            const whatsapp = document.getElementById('reg-whatsapp').value.trim();
+            const codeParrain = document.getElementById('reg-sponsor').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+            const btnSubmit = document.querySelector('.btn-submit');
+
+            // 1. Verifye si de modpas yo koresponn
+            if (password !== confirmPassword) {
+                alert("Erreur: Les deux mots de passe ne sont pas identiques !");
+                return;
+            }
+
+            // Chanje eta bouton an pou kliyan an wè l ap travay
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Création du compte...";
+
+            try {
+                // 2. Kreye kont lan nan Firebase Authentication
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // 3. Anrejistre rès enfòmasyon yo nan Cloud Firestore (Koleksyon: utilisateurs)
+                await db.collection("utilisateurs").doc(user.uid).set({
+                    uid: user.uid,
+                    email: email,
+                    nom: nomComplet,
+                    whatsapp: whatsapp,
+                    code_parrain: codeParrain || "Aucun",
+                    date_inscription: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert("Compte créé avec succès ! 🎉");
+                
+                // Sove sesyon an nan localStorage pou n konnen li konekte
+                localStorage.setItem("user_connecte", "true");
+                localStorage.setItem("user_email", email);
+
+                // Voye l dirèkteman sou paj kòmand la (oswa paj akèy la)
+                window.location.href = "checkout-netflix.html";
+
+            } catch (error) {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `S'inscrire <i class="fa-solid fa-arrow-right"></i>`;
+                alert("Erreur lors de l'inscription: " + error.message);
+            }
+        });
+
+        // 4. Koneksyon ak Google
+        document.getElementById('btn-google-register').addEventListener('click', async function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // Tcheke si moun nan te deja nan Firestore pou n pa kraze done l
+                const userDoc = await db.collection("utilisateurs").doc(user.uid).get();
+                
+                if (!userDoc.exists) {
+                    // Si se premye fwa l ap konekte ak Google, nou kreye enfòmasyon de baz li
+                    await db.collection("utilisateurs").doc(user.uid).set({
+                        uid: user.uid,
+                        email: user.email,
+                        nom: user.displayName || "Utilisateur Google",
+                        whatsapp: "Non renseigné",
+                        code_parrain: "Aucun",
+                        date_inscription: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
+                localStorage.setItem("user_connecte", "true");
+                localStorage.setItem("user_email", user.email);
+                window.location.href = "connection.html";
+
+            } catch (error) {
+                alert("Erreur avec Google: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
