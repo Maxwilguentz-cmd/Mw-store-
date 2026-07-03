@@ -117,7 +117,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
             let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+            let whatsappKliyan = localStorage.getItem('user_whatsapp') || "Non spécifié";
 
             const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
             if (elSevis) elSevis.innerHTML = nonSèvis;
@@ -151,7 +151,7 @@
 
         // AKSYON KOTE NOU ENTEGRE IMEL ITILIZATÈ A ANSANM AK KÒMAND LAN
         document.getElementById('btn-finaliser').addEventListener('click', function() {
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
+            let whatsappKliyan = localStorage.getItem('user_whatsapp') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
