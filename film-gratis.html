@@ -338,7 +338,6 @@
     <script src="script.js"></script>
 
     <script>
-        // --- 1. JESYON BAZ DONE "INDEXEDDB" POU SOVE VIDEWO YO POU TOUTBON ---
         let db;
         const request = indexedDB.open("MWStoreMoviesDB", 1);
 
@@ -351,14 +350,13 @@
 
         request.onsuccess = function(e) {
             db = e.target.result;
-            loadMoviesFromDB(); // Chaje fim yo otomatikman lè paj la louvri
+            loadMoviesFromDB(); // Chaje tout fim yo depi nan baz done a lè paj la louvri
         };
 
         request.onerror = function(e) {
             console.error("Erreur IndexedDB :", e.target.error);
         };
 
-        // --- 2. KONTWÒL NAVIGASYON ---
         document.getElementById('link-connexion').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.setItem("vini_de", "film-gratis.html");
@@ -383,7 +381,6 @@
         document.getElementById('open-modal-btn').addEventListener('click', () => modal.style.display = 'flex');
         document.getElementById('close-modal-btn').addEventListener('click', () => modal.style.display = 'none');
 
-        // --- 3. AFICHE KAT FIM YO SOU EKRAN AN ---
         function kreyekatFilmHtml(name, videoUrl, desc) {
             const nouvoFilm = document.createElement('div');
             nouvoFilm.className = 'film-card';
@@ -397,33 +394,32 @@
                     <div class="download-progress">Téléchargement : 0%</div>
                     <div class="film-actions">
                         <a href="${videoUrl}" target="_blank" class="btn-action btn-watch">Regarder</a>
-                        <button class="btn-action btn-download" onclick="simuleDownload(this, '${videoUrl}', '${name}')">Télécharger</button>
+                        <button class="btn-action btn-download" onclick="realDownload(this, '${videoUrl}', '${name}')">Télécharger</button>
                     </div>
                 </div>
             `;
             document.getElementById('container-films').appendChild(nouvoFilm);
         }
 
-        // --- 4. LI DONE FIM YO NAN BAZ DONE A LÈ PAJ LA LOUVRI ---
+        // --- CHAJE FILMYO NAN DATA EPY METE YO NAN PAJ LA ---
         function loadMoviesFromDB() {
             const transaction = db.transaction(["movies"], "readonly");
             const store = transaction.objectStore("movies");
             const cursorRequest = store.openCursor();
 
-            document.getElementById('container-films').innerHTML = ''; // Netwaye grid la anvan
+            document.getElementById('container-films').innerHTML = ''; // Netwaye espas la anvan
 
             cursorRequest.onsuccess = function(e) {
                 const cursor = e.target.result;
                 if (cursor) {
-                    // Kreye yon URL tanporè pou gade fichye videyo binè (Blob) ki sove a
                     const videoUrl = URL.createObjectURL(cursor.value.videoBlob);
                     kreyekatFilmHtml(cursor.value.name, videoUrl, cursor.value.desc);
-                    cursor.continue();
+                    cursor.continue(); // Al chache pwochen fim nan nan data a jiskaske yo fini
                 }
             };
         }
 
-        // --- 5. SOVE FIM NAN ETAKAVÈK FICHER VIDEYO A LÈ YO KLIKE ENVOYER ---
+        // --- ENVOI SENKRONIZE NÈT AK KB/BYTES K AP MOUNTE YO (VITÈS REYÈL) ---
         document.getElementById('form-film').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -439,59 +435,83 @@
             uploadStatus.style.display = 'block';
             submitBtn.disabled = true;
 
-            let uploadPercent = 0;
-            const uploadInterval = setInterval(() => {
-                uploadPercent += 10;
-                uploadStatus.innerText = `Envoi en cours : ${uploadPercent}%`;
+            const reader = new FileReader();
 
-                if (uploadPercent >= 100) {
-                    clearInterval(uploadInterval);
-                    
-                    // Sove fichye videyo a nèt (kòm gwo Blob binè) nan IndexedDB
-                    const transaction = db.transaction(["movies"], "readwrite");
-                    const store = transaction.objectStore("movies");
-                    
-                    const movieData = {
-                        name: name,
-                        videoBlob: videoFile, // Fichye a ale nan baz done a la!
-                        desc: desc
-                    };
-
-                    store.add(movieData);
-
-                    transaction.oncomplete = function() {
-                        loadMoviesFromDB(); // Rafrechi grid la pou montre nouvo fim nan ki sove nèt la
-                        
-                        uploadStatus.style.display = 'none';
-                        uploadStatus.innerText = `Envoi en cours : 0%`;
-                        submitBtn.disabled = false;
-                        document.getElementById('form-film').reset();
-                        modal.style.display = 'none';
-                    };
+            // Pousantaj sa ap avanse byte pa byte selon vitès sistèm lan ap li KB yo
+            reader.onprogress = function(event) {
+                if (event.lengthComputable) {
+                    const percent = Math.round((event.loaded / event.total) * 100);
+                    uploadStatus.innerText = `Envoi en cours : ${percent}% (${Math.round(event.loaded/1024)} KB / ${Math.round(event.total/1024)} KB)`;
                 }
-            }, 200);
+            };
+
+            reader.onloadend = function() {
+                const transaction = db.transaction(["movies"], "readwrite");
+                const store = transaction.objectStore("movies");
+                
+                const movieData = {
+                    name: name,
+                    videoBlob: videoFile, // Fichye a sove anndan data a la
+                    desc: desc
+                };
+
+                store.add(movieData);
+
+                transaction.oncomplete = function() {
+                    loadMoviesFromDB(); // Al chache nouvo fim nan nan data a pou mete l nan paj la otomatikman
+                    uploadStatus.style.display = 'none';
+                    uploadStatus.innerText = `Envoi en cours : 0%`;
+                    submitBtn.disabled = false;
+                    document.getElementById('form-film').reset();
+                    modal.style.display = 'none';
+                };
+            };
+
+            reader.readAsArrayBuffer(videoFile);
         });
 
-        // --- 6. JERE TELECHAJMAN ---
-        function simuleDownload(btn, videoUrl, filename) {
+        // --- TELECHAJMAN SENKRONIZE AK VITÈS REYÈL REZO A (KB PA KB) ---
+        function realDownload(btn, videoUrl, filename) {
             const cardInfo = btn.closest('.film-info');
             const progressDiv = cardInfo.querySelector('.download-progress');
             
             btn.disabled = true;
             progressDiv.style.display = 'block';
             
-            let downloadPercent = 0;
-            const downloadInterval = setInterval(() => {
-                downloadPercent += 5;
-                progressDiv.innerText = `Téléchargement : ${downloadPercent}%`;
-                
-                if (downloadPercent >= 100) {
-                    clearInterval(downloadInterval);
+            fetch(videoUrl)
+                .then(response => {
+                    const reader = response.body.getReader();
+                    // Jwenn vrè gwosè videyo a an Bytes dirèkteman
+                    const contentLength = response.headers.get('Content-Length') || 50000000;
+                    let receivedLength = 0;
+                    let chunks = [];
+
+                    function read() {
+                        return reader.read().then(({ done, value }) => {
+                            if (done) {
+                                return chunks;
+                            }
+                            chunks.push(value);
+                            receivedLength += value.length;
+                            
+                            // Kalkile pousantaj reyèl la byte pa byte selon vitès telechajman an
+                            const percent = Math.round((receivedLength / contentLength) * 100);
+                            const finalPercent = percent > 100 ? 100 : percent;
+                            progressDiv.innerText = `Téléchargement : ${finalPercent}% (${Math.round(receivedLength/1024)} KB)`;
+                            
+                            return read();
+                        });
+                    }
+                    return read();
+                })
+                .then(chunks => {
                     progressDiv.innerText = `Téléchargement terminé !`;
                     
-                    // Deklanche fòs telechajman fichye videyo a sou aparèy kliyan an
+                    const blob = new Blob(chunks);
+                    const downloadUrl = URL.createObjectURL(blob);
+                    
                     const a = document.createElement('a');
-                    a.href = videoUrl;
+                    a.href = downloadUrl;
                     a.download = `${filename}.mp4`;
                     document.body.appendChild(a);
                     a.click();
@@ -502,8 +522,12 @@
                         progressDiv.innerText = `Téléchargement : 0%`;
                         btn.disabled = false;
                     }, 2000);
-                }
-            }, 150);
+                })
+                .catch(err => {
+                    console.error(err);
+                    progressDiv.style.display = 'none';
+                    btn.disabled = false;
+                });
         }
     </script>
 </body>
