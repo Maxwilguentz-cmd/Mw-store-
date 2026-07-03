@@ -63,6 +63,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .btn-back {
@@ -83,6 +85,37 @@
         .btn-back:hover {
             background: #cca43b;
             color: #000;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 12px 8px 35px;
+            background: #12110e;
+            border: 1px solid #2b2518;
+            color: #fff;
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+
+        .search-container input:focus {
+            border-color: #cca43b;
+            outline: none;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
         }
 
         .btn-ajouter-film {
@@ -116,14 +149,14 @@
             justify-content: space-between;
         }
 
-        .film-video-container {
+        .film-poster-container {
             position: relative;
             width: 100%;
             padding-top: 140%;
             background: #000;
         }
 
-        .film-video-container video {
+        .film-poster-container img {
             position: absolute;
             top: 0;
             left: 0;
@@ -213,6 +246,8 @@
             border-radius: 8px;
             width: 100%;
             max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-content h3 {
@@ -298,6 +333,10 @@
         <a href="index.html" class="btn-back">
             <i class="fa-solid fa-arrow-left"></i> Accueil
         </a>
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-movie-input" placeholder="Rechercher un film...">
+        </div>
         <button class="btn-ajouter-film" id="open-modal-btn">
             <i class="fa-solid fa-plus"></i> Ajouter
         </button>
@@ -319,6 +358,10 @@
                     <input type="text" id="film-name-input" required placeholder="Ex: Naruto Shippuden">
                 </div>
                 <div class="form-group">
+                    <label>Affiche / Image du film *</label>
+                    <input type="file" id="film-image-input" accept="image/*" required>
+                </div>
+                <div class="form-group">
                     <label>Sélectionner le fichier vidéo *</label>
                     <input type="file" id="film-video-input" accept="video/*" required>
                 </div>
@@ -337,25 +380,43 @@
 
     <script src="script.js"></script>
 
+    <!-- SCRIPT FIREBASE SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
     <script>
-        let db;
-        const request = indexedDB.open("MWStoreMoviesDB", 1);
-
-        request.onupgradeneeded = function(e) {
-            db = e.target.result;
-            if (!db.objectStoreNames.contains("movies")) {
-                db.createObjectStore("movies", { keyPath: "id", autoIncrement: true });
-            }
+        // --- KONFIGIRASYON FIREBASE PAW LA ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb",
+            measurementId: "G-5H72KDEHD9"
         };
+        
+        firebase.initializeApp(firebaseConfig);
+        const fbDb = firebase.firestore();
+        const fbStorage = firebase.storage();
 
-        request.onsuccess = function(e) {
-            db = e.target.result;
-            loadMoviesFromDB(); // Chaje tout fim yo depi nan baz done a lè paj la louvri
-        };
+        // --- CHARGE FILMS YO DEPI NAN FIREBASE ONLINE ---
+        function loadMoviesFromFirebase() {
+            fbDb.collection("movies").onSnapshot((snapshot) => {
+                const container = document.getElementById('container-films');
+                container.innerHTML = '';
+                
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    kreyekatFilmHtml(data.name, data.videoUrl, data.imageUrl, data.desc);
+                });
+            }, (error) => {
+                console.error("Erreur chargement Firebase :", error);
+            });
+        }
 
-        request.onerror = function(e) {
-            console.error("Erreur IndexedDB :", e.target.error);
-        };
+        loadMoviesFromFirebase();
 
         document.getElementById('link-connexion').addEventListener('click', function(e) {
             e.preventDefault();
@@ -381,12 +442,13 @@
         document.getElementById('open-modal-btn').addEventListener('click', () => modal.style.display = 'flex');
         document.getElementById('close-modal-btn').addEventListener('click', () => modal.style.display = 'none');
 
-        function kreyekatFilmHtml(name, videoUrl, desc) {
+        function kreyekatFilmHtml(name, videoUrl, imageUrl, desc) {
             const nouvoFilm = document.createElement('div');
             nouvoFilm.className = 'film-card';
+            nouvoFilm.setAttribute('data-name', name.toLowerCase());
             nouvoFilm.innerHTML = `
-                <div class="film-video-container">
-                    <video src="${videoUrl}" preload="metadata" muted loop playsinline></video>
+                <div class="film-poster-container">
+                    <img src="${imageUrl || 'https://via.placeholder.com/160x224?text=Pas+d\'image'}" alt="${name}">
                 </div>
                 <div class="film-info">
                     <h3 class="film-title">${name}</h3>
@@ -401,33 +463,31 @@
             document.getElementById('container-films').appendChild(nouvoFilm);
         }
 
-        // --- CHAJE FILMYO NAN DATA EPY METE YO NAN PAJ LA ---
-        function loadMoviesFromDB() {
-            const transaction = db.transaction(["movies"], "readonly");
-            const store = transaction.objectStore("movies");
-            const cursorRequest = store.openCursor();
 
-            document.getElementById('container-films').innerHTML = ''; // Netwaye espas la anvan
+        document.getElementById('search-movie-input').addEventListener('input', function(e) {
+            const searchText = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.film-card');
 
-            cursorRequest.onsuccess = function(e) {
-                const cursor = e.target.result;
-                if (cursor) {
-                    const videoUrl = URL.createObjectURL(cursor.value.videoBlob);
-                    kreyekatFilmHtml(cursor.value.name, videoUrl, cursor.value.desc);
-                    cursor.continue(); // Al chache pwochen fim nan nan data a jiskaske yo fini
+            cards.forEach(card => {
+                const filmName = card.getAttribute('data-name');
+                if (filmName.includes(searchText)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
                 }
-            };
-        }
+            });
+        });
 
-        // --- ENVOI SENKRONIZE NÈT AK KB/BYTES K AP MOUNTE YO (VITÈS REYÈL) ---
+        // --- ENVOI FIREBASE (STORAGE + FIRESTORE) ---
         document.getElementById('form-film').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const name = document.getElementById('film-name-input').value;
+            const imageFile = document.getElementById('film-image-input').files[0];
             const videoFile = document.getElementById('film-video-input').files[0];
             const desc = document.getElementById('film-desc-input').value || "Aucune description disponible.";
 
-            if (!videoFile) return;
+            if (!videoFile || !imageFile) return;
 
             const uploadStatus = document.getElementById('upload-status');
             const submitBtn = document.getElementById('submit-film-btn');
@@ -435,42 +495,57 @@
             uploadStatus.style.display = 'block';
             submitBtn.disabled = true;
 
-            const reader = new FileReader();
+            const timestamp = Date.now();
+            const imageRef = fbStorage.ref().child(`images/${timestamp}_${imageFile.name}`);
+            const videoRef = fbStorage.ref().child(`videos/${timestamp}_${videoFile.name}`);
 
-            // Pousantaj sa ap avanse byte pa byte selon vitès sistèm lan ap li KB yo
-            reader.onprogress = function(event) {
-                if (event.lengthComputable) {
-                    const percent = Math.round((event.loaded / event.total) * 100);
-                    uploadStatus.innerText = `Envoi en cours : ${percent}% (${Math.round(event.loaded/1024)} KB / ${Math.round(event.total/1024)} KB)`;
-                }
-            };
-
-            reader.onloadend = function() {
-                const transaction = db.transaction(["movies"], "readwrite");
-                const store = transaction.objectStore("movies");
+            uploadStatus.innerText = "Téléchargement de l'affiche...";
+            imageRef.put(imageFile).then(() => {
+                return imageRef.getDownloadURL();
+            }).then((imageUrl) => {
                 
-                const movieData = {
-                    name: name,
-                    videoBlob: videoFile, // Fichye a sove anndan data a la
-                    desc: desc
-                };
 
-                store.add(movieData);
+                const videoUploadTask = videoRef.put(videoFile);
+                
+                videoUploadTask.on('state_changed', 
+                    (snapshot) => {
+                        const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                        uploadStatus.innerText = `Envoi de la vidéo : ${percent}% (${Math.round(snapshot.bytesTransferred/1024)} KB / ${Math.round(snapshot.totalBytes/1024)} KB)`;
+                    }, 
+                    (error) => {
+                        console.error(error);
+                        uploadStatus.innerText = "Erreur gjat envoi.";
+                        submitBtn.disabled = false;
+                    }, 
+                    () => {
 
-                transaction.oncomplete = function() {
-                    loadMoviesFromDB(); // Al chache nouvo fim nan nan data a pou mete l nan paj la otomatikman
-                    uploadStatus.style.display = 'none';
-                    uploadStatus.innerText = `Envoi en cours : 0%`;
-                    submitBtn.disabled = false;
-                    document.getElementById('form-film').reset();
-                    modal.style.display = 'none';
-                };
-            };
+                        videoUploadTask.snapshot.ref.getDownloadURL().then((videoUrl) => {
+                            
 
-            reader.readAsArrayBuffer(videoFile);
+                            return fbDb.collection("movies").add({
+                                name: name,
+                                imageUrl: imageUrl,
+                                videoUrl: videoUrl,
+                                desc: desc,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+                        }).then(() => {
+                            // Reset fòm nan ak modal la
+                            uploadStatus.style.display = 'none';
+                            submitBtn.disabled = false;
+                            document.getElementById('form-film').reset();
+                            modal.style.display = 'none';
+                        });
+                    }
+                );
+            }).catch(err => {
+                console.error(err);
+                uploadStatus.innerText = "Erreur lors de l'envoi.";
+                submitBtn.disabled = false;
+            });
         });
 
-        // --- TELECHAJMAN SENKRONIZE AK VITÈS REYÈL REZO A (KB PA KB) ---
+        // --- TELECHAJMAN SENKRONIZE AK VITÈS REYÈL REZO A ---
         function realDownload(btn, videoUrl, filename) {
             const cardInfo = btn.closest('.film-info');
             const progressDiv = cardInfo.querySelector('.download-progress');
@@ -481,7 +556,6 @@
             fetch(videoUrl)
                 .then(response => {
                     const reader = response.body.getReader();
-                    // Jwenn vrè gwosè videyo a an Bytes dirèkteman
                     const contentLength = response.headers.get('Content-Length') || 50000000;
                     let receivedLength = 0;
                     let chunks = [];
@@ -494,7 +568,6 @@
                             chunks.push(value);
                             receivedLength += value.length;
                             
-                            // Kalkile pousantaj reyèl la byte pa byte selon vitès telechajman an
                             const percent = Math.round((receivedLength / contentLength) * 100);
                             const finalPercent = percent > 100 ? 100 : percent;
                             progressDiv.innerText = `Téléchargement : ${finalPercent}% (${Math.round(receivedLength/1024)} KB)`;
