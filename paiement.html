@@ -26,18 +26,18 @@
         <h1 class="titre-checkout">Finaliser ma commande</h1>
 
         <!-- Liy Etap yo -->
-        <div class="etapes-barre">
-            <div class="etape">
-                <span class="num-etape">1</span>
-                <span class="texte-etape">Informations</span>
+        <div class="etap-bar">
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Informations</span>
             </div>
-            <div class="etape active">
-                <span class="num-etape">2</span>
-                <span class="texte-etape">Paiement</span>
+            <div class="etap aktif">
+                <span class="etap-chif">2</span>
+                <span class="etap-tiks">Paiement</span>
             </div>
-            <div class="etape">
-                <span class="num-etape">3</span>
-                <span class="texte-etape">Récapitulatif</span>
+            <div class="etap ">
+                <span class="etap-chif">3</span>
+                <span class="etap-tiks">Récapitulatif</span>
             </div>
         </div>
 
@@ -53,7 +53,7 @@
             <!-- ENSTRIKSYON MONCASH -->
             <div class="bwat-instructions-peman d-none" id="bwat-moncash">
                 <h3>Instructions pour MonCash:</h3>
-                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">400 G</span> à :</p>
                 
                 <div class="nimewo-kopie">
                     <span>+509 38019657</span>
@@ -77,7 +77,7 @@
             <!-- ENSTRIKSYON NATCASH -->
             <div class="bwat-instructions-peman d-none" id="bwat-natcash">
                 <h3>Instructions pour NatCash:</h3>
-                <p class="voye-lajan">Envoyez <span class="montant-jaune">500 G</span> à :</p>
+                <p class="voye-lajan">Envoyez <span class="montant-jaune">400 G</span> à :</p>
                 
                 <div class="nimewo-kopie">
                     <span>+509 40807923</span>
@@ -87,7 +87,8 @@
 
                 <div class="boite-txn-input">
                     <label for="txn_id_natcash">Transaction ID NatCash (Txn ID)</label>
-                    <input type="text" id="txn_id_natcash" placeholder="Ex: Numéro de transaction">
+                    <input type="text" id="txn_id_natcash" placeholder="Ex: 26061871236720" maxlength="12">
+                    <span class="ti-detay-anba">12 chiffres, commence par 260.   ⚡</span>                       
                 </div>
             </div>
 
@@ -152,10 +153,13 @@
             if(txnId.length < 12 || !txnId.startsWith("003")) {
                 alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
                 return;
-            }
-        } else {
+            }}
+         else {
             txnId = document.getElementById('txn_id_natcash').value.trim();
-        }
+            if(txnId.length < 12 || !txnId.startsWith("260")) {
+                alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 260!");   
+                return         
+        }}
 
         if (txnId === "") {
             alert("Silvouplè antre Transaksyon ID la pou nou ka verifye peman an.");
@@ -165,6 +169,7 @@
         // MEN LIY KI TE MANKE YO: Sove tou de nan memwa a pibon fòma
         localStorage.setItem('metod_peman', metodChwazi);
         localStorage.setItem('txn_id_kliyan', txnId);
+
         window.location.href = "recapitulatif.html";
     });
 </script>
