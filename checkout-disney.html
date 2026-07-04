@@ -25,7 +25,7 @@
 
         <div class="etap-bar">
             <div class="etap aktif">
-                <span class="etap-chif">&#10003;</span>
+                <span class="etap-chif">1</span>
                 <span class="etap-tiks">Informations</span>
             </div>
             <div class="etap">
@@ -33,8 +33,8 @@
                 <span class="etap-tiks">Paiement</span>
             </div>
             <div class="etap">
-                <span class="num-etape">3</span>
-                <span class="texte-etape">Récapitulatif</span>
+                <span class="etap-chif">3</span>
+                <span class="texte-chif">Récapitulatif</span>
             </div>
         </div>            
 
@@ -68,8 +68,15 @@
     </div>
 
     <script>
-      // ISIT LA NOU RETIRE FIREBASE NÈT.
-      // Kòd la ap jis sere nimewo a nan memwa navigatè a epi chanje paj la.
+     // 1. BLOKAJ SEKIRITE: Nou tcheke si moun nan te konekte anvan nou kite l wè paj la
+      let mounNanKonekte = localStorage.getItem("user_connecte");
+      let imelMounNan = localStorage.getItem("user_email");
+      if (mounNanKonekte !== "true" || !imelMounNan) {
+          // Si l pa konekte, nou netwaye memwa a epi nou voye l dirèkteman al konekte
+          localStorage.clear();
+          window.location.href = "connexion-disney.html";
+      }
+
       document.getElementById('btn-continuer').addEventListener('click', function() {
           let nimewo = document.getElementById('whatsapp').value.trim();
           
@@ -79,7 +86,7 @@
           }
 
           // Sere nimewo a sèlman nan localStorage (memwa) pou paj 3 a ka pran l pita
-          localStorage.setItem('whatsapp_kliyan', nimewo);
+          localStorage.setItem('user_whatsapp', nimewo);
           
           // Ale dirèk nan paj peman an san voye anyen nan data a
           window.location.href = "paiement-disney.html";
@@ -87,6 +94,12 @@
     </script>
 </body>
 </html>   
+     
+     
+     
+     
+     
+     
      
      
      
