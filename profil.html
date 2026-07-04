@@ -1,12 +1,13 @@
+<!-- Kòd HTML paj Profil la rete menm jan an, se jis nan script Firebase la chanjman an fèt -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">   
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Compte - MwStore</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style12.css">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin.css"> <!-- Nou ajoute CSS admin nan pou bouton valider yo ka pran fòm -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -40,20 +41,6 @@
         .input-box { margin-bottom: 20px; }
         .input-box label { display: block; color: #8a99ad; font-size: 0.85rem; margin-bottom: 8px; }
         .input-box input { width: 100%; padding: 14px; background: #12110e; border: 1px solid #2b2518; border-radius: 10px; color: white; font-size: 1rem; outline: none; }
-
-        /* --- BLÒK RESPONSIV POU TELEFONN AK TABLÈT --- */
-        @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 15px; padding: 20px; text-align: center; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .dashboard-container { flex-direction: column; margin: 20px auto; gap: 20px; }
-            .sidebar { width: 100%; }
-            .menu-list { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
-            .menu-item { flex: 1; min-width: 120px; justify-content: center; font-size: 0.85rem; padding: 10px; }
-            .menu-item.active { border-left: none; border-bottom: 3px solid #cca43b; border-radius: 12px 12px 0 0; }
-            .profile-header { flex-direction: column; text-align: center; gap: 10px; }
-            .card-box { padding: 20px; }
-            .modal-box { width: 90% !important; margin: 20px auto; }
-        }
     </style>
 </head>
 <body>
@@ -63,7 +50,6 @@
         <ul class="nav-links">
             <li><a href="#">Boutique</a></li>
             <li><a href="#">Points</a></li>
-            <li><a href="#">Tutos</a></li>
             <li><a href="#">Actus</a></li>
             <li><a href="#">Support</a></li>
         </ul>
@@ -145,6 +131,7 @@
         </main>
     </div>
 
+    <!-- Modals yo mete la tou pou lè admin nan klike sou Valider/Refuser depi nan profil li pou yo ka parèt -->
     <div class="modal-overlay" id="approveModal">
         <div class="modal-box">
             <h2><i class="fa-solid fa-key" style="color: #cca43b;"></i> Livrer les accès</h2>
@@ -244,12 +231,14 @@
 
         function ekouteCommandes() {
             let qOrders;
+            // SI SE KONT PA W LA, LI VIN EN ENTÈFAS ADMIN
             if (imelMounNan === "maxwilguentz21@gmail.com") {
                 document.getElementById('text-tab-commandes').innerText = "Gestion Commandes (Admin)";
                 document.getElementById('admin-instruction').innerText = "Apwouve oswa refize kòmand kliyan yo epi voye aksè yo.";
                 document.getElementById('admin-tabs-hide').style.display = "none";
                 document.getElementById('admin-refresh-hide').style.display = "none";
                 
+                // Rale sèlman kòmand ki "encour" yo pou admin nan ka valide yo
                 qOrders = query(collection(db, "commandes"), where("status", "==", "encour"));
                 
                 onSnapshot(qOrders, (querySnapshot) => {
@@ -261,9 +250,6 @@
                     querySnapshot.forEach((documentSnap) => {
                         const komand = documentSnap.data();
                         const idKomand = documentSnap.id;
-                        
-                        let nimewoTel = komand.whatsapp || komand.phone || komand.user_phone || komand.numero || komand.telephone || "Inconnu";
-                        let idTranzaksyonKliyan = komand.transaction_id || komand.transaction || idKomand;
 
                         const card = document.createElement('div');
                         card.className = 'admin-order-card urgent';
@@ -279,12 +265,12 @@
                             </div>
                             <div style="font-size:0.9rem; color:#8a99ad; line-height:1.6;">
                                 <p><strong>Code:</strong> ${idKomand}</p>
-                                <p><strong>ID Transaction:</strong> ${idTranzaksyonKliyan}</p>
-                                <p><strong>WhatsApp:</strong> ${nimewoTel !== "Inconnu" ? `<a href="https://wa.me/509${nimewoTel}" target="_blank" style="color:#cca43b; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> ${nimewoTel}</a>` : 'Inconnu'}</p>
-                                <p><strong>Paiement:</strong> ${komand.paiement || 'moncash'} (${komand.montant || 500} G HTG)</p>
+                                <p><strong>Client:</strong> ${komand.client || 'Enkonni'}</p>
+                                <p><strong>WhatsApp:</strong> <a href="https://wa.me/509${komand.whatsapp}" target="_blank" style="color:#cca43b; text-decoration:none;"><i class="fa-brands fa-whatsapp"></i> ${komand.whatsapp || ''}</a></p>
+                                <p><strong>Paiement:</strong> ${komand.paiement || ''} (${komand.montant || 0} HTG)</p>
                             </div>
                             <div style="display:flex; gap:10px; margin-top:15px;">
-                                <button class="btn-action btn-approve" data-id="${idKomand}" data-service="${komand.service || 'Sèvis'}" style="background:#28a745; color:white; border:none; padding:8px 15px; border-radius:6px; cursor:pointer; font-weight:bold;">
+                                <button class="btn-action btn-approve" data-id="${idKomand}" data-service="${komand.service || 'Sèvis'}" style="background:#cca43b; color:black; border:none; padding:8px 15px; border-radius:6px; cursor:pointer; font-weight:bold;">
                                     <i class="fa-solid fa-check"></i> Valider
                                 </button>
                                 <button class="btn-action btn-reject" data-id="${idKomand}" style="background:#ef4444; color:white; border:none; padding:8px 15px; border-radius:6px; cursor:pointer; font-weight:bold;">
@@ -310,6 +296,7 @@
                     });
                 });
             } else {
+                // SI SE YON KLIYAN NORMAL, KÒD ISTORIK PA L LA RÈTE ENTAK
                 qOrders = query(collection(db, "commandes"), where("user_email", "==", imelMounNan));
                 onSnapshot(qOrders, (querySnapshot) => {
                     aficheKomandYo(querySnapshot);
@@ -364,9 +351,11 @@
             });
         }
 
+        // Fèmen Modals
         document.getElementById('btn-cancel-approve').addEventListener('click', () => document.getElementById('approveModal').classList.remove('show'));
         document.getElementById('btn-cancel-reject').addEventListener('click', () => document.getElementById('rejectModal').classList.remove('show'));
 
+        // Soumèt Apwobasyon depi nan paj Profil la
         document.getElementById('approveForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('approve-order-id').value;
@@ -380,6 +369,7 @@
             } catch (err) { alert("Erreur: " + err.message); }
         });
 
+        // Soumèt Refi depi nan paj Profil la
         document.getElementById('rejectForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('reject-order-id').value;
@@ -391,6 +381,7 @@
             } catch (err) { alert("Erreur: " + err.message); }
         });
 
+        // Filtraj bouton tab kliyan yo
         const tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
