@@ -23,18 +23,19 @@
     <div class="container-checkout">
         <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">commande</h1>
 
-        <div class="etapes-barre">
-            <div class="etape">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Informations</span>
+
+        <div class="etap-bar">
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Informations</span>
             </div>
-            <div class="etape">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Paiement</span>
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Paiement</span>
             </div>
-            <div class="etape active">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Récapitulatif</span>
+            <div class="etap aktif">
+                <span class="etap-chif">3</span>
+                <span class="etap-tiks">Récapitulatif</span>
             </div>
         </div>
 
@@ -42,8 +43,8 @@
             <h2 style="font-size: 1.4rem; font-weight: normal; margin-bottom: 25px;">Récapitulatif de la commande</h2>
             
             <div class="liy-recap-pwodwi">
-                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Netflix Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
-                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">500 G</span>
+                <span id="recap-non-sèvis" style="color: white; font-size: 1.1rem;">Disney Partagé <span style="color: #555; font-size: 0.9rem;">x1</span></span>
+                <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">300 G</span>
             </div>
 
             <div class="bwat-infos-streaming">
@@ -56,12 +57,12 @@
 
             <div class="liy-recap-pri" style="margin-top: 30px; border-bottom: 1px solid #111; padding-bottom: 15px;">
                 <span style="color: #555;">Sous-total</span>
-                <span id="recap-sous-total" style="color: #555;">500 G</span>
+                <span id="recap-sous-total" style="color: #555;">300 G</span>
             </div>
 
             <div class="liy-recap-pri" style="margin-top: 15px; margin-bottom: 20px;">
                 <span style="color: white; font-size: 1.3rem; font-weight: bold;">Total à payer</span>
-                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">500 G</span>
+                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">300 G</span>
             </div>
 
             <div class="boite-checkbox-rules">
@@ -70,7 +71,7 @@
             </div>
 
             <div class="goup-boutons-anba">
-                <button type="button" class="btn-retour" onclick="window.location.href='paiement-disney.html'">
+                <button type="button" class="btn-retour" onclick="window.location.href='paiement.html'">
                     <i class="fa-solid fa-arrow-left"></i> Retour
                 </button>
                 <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled>
@@ -89,7 +90,16 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Konfigirasyon Firebase pa w la nèt
+        // SOU TRAVAY: Blokaj Sekirite anvan anyen chaje sou paj la
+        let mounNanKonekte = localStorage.getItem("user_connecte");
+        let imelMounNan = localStorage.getItem("user_email");
+        
+        if (mounNanKonekte !== "true" || !imelMounNan) {
+            localStorage.clear();
+            window.location.href = "connexion.html";
+        }
+
+        // Konfigirasyon Firebase pa w la
         const firebaseConfig = {
             apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
             authDomain: "mwstore-526d1.firebaseapp.com",
@@ -107,14 +117,23 @@
         // Lè paj la fin chaje, ranmase done nan memwa pou afiche yo sou ekran an
         document.addEventListener("DOMContentLoaded", function() {
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Non spécifié";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "300 G";
+            let user_whatsapp = localStorage.getItem('user_whatsapp') || "Non spécifié";
 
-            document.getElementById('recap-non-sèvis').innerHTML = nonSèvis;
-            document.getElementById('recap-pri-anwo').innerText = priSèvis;
-            document.getElementById('recap-sous-total').innerText = priSèvis;
-            document.getElementById('recap-total-final').innerText = priSèvis;
-            document.getElementById('recap-whatsapp').innerText = whatsappKliyan;
+            const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
+            if (elSevis) elSevis.innerHTML = nonSèvis;
+
+            const elPriAnwo = document.getElementById('recap-pri-anwo');
+            if (elPriAnwo) elPriAnwo.innerText = priSèvis;
+
+            const elSousTotal = document.getElementById('recap-sous-total');
+            if (elSousTotal) elSousTotal.innerText = priSèvis;
+
+            const elTotalFinal = document.getElementById('recap-total-final');
+            if (elTotalFinal) elTotalFinal.innerText = priSèvis;
+
+            const elWhatsapp = document.getElementById('recap-whatsapp');
+            if (elWhatsapp) elWhatsapp.innerText = user_whatsapp;
         });
 
         // Kontwòl aktivasyon bouton an ak koche a
@@ -131,26 +150,29 @@
             }
         }
 
-        // AKYON LÈ KLIYAN AN KLIKE SOU "VALIDER MA COMMANDE"
+        // AKSYON KOTE NOU ENTEGRE IMEL ITILIZATÈ A ANSANM AK KÒMAND LAN
         document.getElementById('btn-finaliser').addEventListener('click', function() {
-            let whatsappKliyan = localStorage.getItem('whatsapp_kliyan') || "Inconnu";
+            let user_whatsapp = localStorage.getItem('user_whatsapp') || "Inconnu";
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Disney Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "300 G";
+            let datJodia = new Date().toISOString().split('T')[0];
 
-            // Voye tout blòk done a ansanm nan koleksyon "commandes_valibles"
-            db.collection("commandes_valides").add({
-                whatsapp: whatsappKliyan,
+            let imelKliyan = localStorage.getItem("user_email") || "Non connecté";
+
+            db.collection("commandes").add({
+                user_email: imelKliyan,
+                whatsapp: user_whatsapp,
                 service: nonSèvis,
                 montant: priSèvis,
-                methode_peman: metodPeman,
+                paiement: metodPeman,
                 transaction_id: txnId,
-                date: new Date()
+                date: datJodia,
+                status: "encour"
             })
             .then(function() {
-                localStorage.clear(); // Netwaye memwa navigatè a apre operasyon an fin reyisi
-                window.location.href = "succes.html"; // Redirije dirèkteman sou bèl paj siksè a
+                window.location.href = "succes.html"; 
             })
             .catch(function(error) {
                 alert("Erreur Firebase: " + error.message);
