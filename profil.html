@@ -14,6 +14,7 @@
         
         /* Navbar Responsive */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #0a0a0a; border-bottom: 1px solid #12110e; position: relative; z-index: 100; }
+        .logo-container { display: flex; flex-direction: column; gap: 8px; } /* Pou bouton an ka anba logo a */
         .logo { font-size: 22px; font-weight: bold; }
         .logo span { color: #cca43b; }
         .nav-links { display: flex; gap: 25px; list-style: none; }
@@ -24,7 +25,7 @@
         .user-pill i { color: #cca43b; }
         
         /* Bouton Meni pou Telefòn */
-        .menu-toggle-btn { display: none; background: #12110e; border: 1px solid #2b2518; color: #fff; padding: 10px 15px; border-radius: 8px; cursor: pointer; align-items: center; gap: 8px; font-size: 0.9rem; }
+        .menu-toggle-btn { display: none; background: #12110e; border: 1px solid #2b2518; color: #fff; padding: 8px 14px; border-radius: 8px; cursor: pointer; align-items: center; gap: 8px; font-size: 0.85rem; width: fit-content; }
         .menu-toggle-btn i { color: #cca43b; }
 
         /* Grid Dashboard Container */
@@ -58,15 +59,13 @@
 
         /* --- RESPONSIVE MEDIA QUERIES (POU TELEFÒN) --- */
         @media (max-width: 850px) {
-            .navbar { padding: 15px 20px; }
-            .nav-links { display: none; } /* Kache lyen ki pa nesesè yo sou mobil */
+            .navbar { padding: 15px 20px; align-items: flex-start; } /* Aliyen anlè pou logo ak bouton ka bèl */
+            .nav-links { display: none; }
             
-            .menu-toggle-btn { display: flex; } /* Montre bouton Meni an */
+            .menu-toggle-btn { display: flex; } /* Montre bouton Meni an anba logo a */
             
-            /* Chanje estrikti Dashboard la pou l fè yon sèl kolòn */
             .dashboard-container { grid-template-columns: 1fr; margin: 20px auto; gap: 20px; }
             
-            /* Sidebar vin yon ti fenèt k ap antre epi soti (Drawer) */
             .sidebar {
                 position: fixed;
                 top: 0;
@@ -75,13 +74,11 @@
                 width: 280px;
                 z-index: 99;
                 border-radius: 0 16px 16px 0;
-                border-y: none;
-                transform: translateX(-100%); /* Kache l sou bò gòch */
+                transform: translateX(-100%);
                 opacity: 0;
                 box-shadow: 5px 0 25px rgba(0,0,0,0.5);
             }
             
-            /* Lè ti fenèt la louvri */
             .sidebar.open {
                 transform: translateX(0);
                 opacity: 1;
@@ -102,22 +99,26 @@
 </head>
 <body>
 
-    <!-- Ti fenèt nwa ki bloke rès paj la lè meni an louvri -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <nav class="navbar">
-        <div class="logo">Mw<span>Store</span></div>
+        <!-- Mete logo a ak bouton an ansanm nan yon blòk vètikal -->
+        <div class="logo-container">
+            <div class="logo">Mw<span>Store</span></div>
+            <!-- Bouton meni an vin mete l la, egzakteman anba logo a -->
+            <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i> Meni
+            </button>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html">Boutique</a></li>
             <li><a href="#">Points</a></li>
             <li><a href="#">Actus</a></li>
             <li><a href="#">Support</a></li>
         </ul>
+        
         <div class="nav-right">
-            <!-- Bouton meni ki pral pèmèt fenèt la antre/soti -->
-            <button class="menu-toggle-btn" onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i> Meni
-            </button>
             <i class="fa-regular fa-bell" style="font-size: 1.2rem; cursor: pointer;"></i>
             <div class="user-pill">
                 <i class="fa-solid fa-user"></i>
@@ -127,7 +128,6 @@
     </nav>
 
     <div class="dashboard-container">
-        <!-- Sidebar ki modifye pou mobil -->
         <aside class="sidebar" id="dashboardSidebar">
             <div class="sidebar-title">
                 <h3>Mon Compte</h3>
@@ -196,7 +196,6 @@
         </main>
     </div>
 
-    <!-- Modals yo rete entak -->
     <div class="modal-overlay" id="approveModal">
         <div class="modal-box">
             <h2><i class="fa-solid fa-key" style="color: #cca43b;"></i> Livrer les accès</h2>
@@ -240,14 +239,12 @@
         </div>
     </div>
 
-    <!-- Ti fonksyon JS pou louvri/kache meni an san manyen Firebase -->
     <script>
         function toggleSidebar() {
             document.getElementById('dashboardSidebar').classList.toggle('open');
             document.getElementById('sidebarOverlay').classList.toggle('show');
         }
 
-        // Fèmè meni an otomatikman lè w chwazi yon tab sou mobil
         function switchTabMobile(tabName, element) {
             window.switchTab(tabName, element);
             if(window.innerWidth <= 850) {
