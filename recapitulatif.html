@@ -21,20 +21,20 @@
     </div>
 
     <div class="container-checkout">
-        <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">commande</h1>
+        <h1 class="titre-checkout" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">Récapitulatif de la commande</h1>
 
-        <div class="etapes-barre">
-            <div class="etape">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Informations</span>
+        <div class="etap-bar">
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Informations</span>
             </div>
-            <div class="etape">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Paiement</span>
+            <div class="etap aktif">
+                <span class="etap-chif">&#10003;</span>
+                <span class="etap-tiks">Paiement</span>
             </div>
-            <div class="etape active">
-                <span class="num-etape"><i class="fa-solid fa-check"></i></span>
-                <span class="texte-etape">Récapitulatif</span>
+            <div class="etap aktif">
+                <span class="etap-chif">3</span>
+                <span class="etap-tiks">Récapitulatif</span>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 <span id="recap-pri-anwo" style="color: white; font-weight: bold; font-size: 1.1rem;">500 G</span>
             </div>
 
-            <div class="bwat-infos-streaming">
+            <div class="bwat-infos-streaming"> 
                 <span class="ti-tit-bwat">INFOS STREAMING</span>
                 <div class="liy-detay-whatsapp">
                     <span style="color: #555;">WhatsApp</span>
@@ -56,12 +56,12 @@
 
             <div class="liy-recap-pri" style="margin-top: 30px; border-bottom: 1px solid #111; padding-bottom: 15px;">
                 <span style="color: #555;">Sous-total</span>
-                <span id="recap-sous-total" style="color: #555;">500 G</span>
+                <span id="recap-sous-total" style="color: #555;">400 G</span>
             </div>
 
             <div class="liy-recap-pri" style="margin-top: 15px; margin-bottom: 20px;">
                 <span style="color: white; font-size: 1.3rem; font-weight: bold;">Total à payer</span>
-                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">500 G</span>
+                <span id="recap-total-final" style="color: white; font-size: 1.3rem; font-weight: bold;">400 G</span>
             </div>
 
             <div class="boite-checkbox-rules">
@@ -116,8 +116,8 @@
         // Lè paj la fin chaje, ranmase done nan memwa pou afiche yo sou ekran an
         document.addEventListener("DOMContentLoaded", function() {
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
-            let whatsappKliyan = localStorage.getItem('user_whatsapp') || "Non spécifié";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "400 G";
+            let user_whatsapp = localStorage.getItem('user_whatsapp') || "Non spécifié";
 
             const elSevis = document.getElementById('recap-non-sèvis') || document.getElementById('recap-non-sevis');
             if (elSevis) elSevis.innerHTML = nonSèvis;
@@ -132,7 +132,7 @@
             if (elTotalFinal) elTotalFinal.innerText = priSèvis;
 
             const elWhatsapp = document.getElementById('recap-whatsapp');
-            if (elWhatsapp) elWhatsapp.innerText = whatsappKliyan;
+            if (elWhatsapp) elWhatsapp.innerText = user_whatsapp;
         });
 
         // Kontwòl aktivasyon bouton an ak koche a
@@ -155,14 +155,14 @@
             let metodPeman = localStorage.getItem('metod_peman') || "Non spécifié";
             let txnId = localStorage.getItem('txn_id_kliyan') || "Aucun ID";
             let nonSèvis = localStorage.getItem('sèvis_chwazi') || "Netflix Partagé x1";
-            let priSèvis = localStorage.getItem('pri_chwazi') || "500 G";
+            let priSèvis = localStorage.getItem('pri_chwazi') || "400 G";
             let datJodia = new Date().toISOString().split('T')[0];
 
             let imelKliyan = localStorage.getItem("user_email") || "Non connecté";
 
             db.collection("commandes").add({
                 user_email: imelKliyan,
-                whatsapp: whatsappKliyan,
+                whatsapp: user_whatsapp,
                 service: nonSèvis,
                 montant: priSèvis,
                 paiement: metodPeman,
@@ -171,7 +171,7 @@
                 status: "encour"
             })
             .then(function() {
-                localStorage.setItem("user_whatsapp", whatsappKliyan);
+                localStorage.setItem("user_whatsapp");
                 window.location.href = "succes.html"; 
             })
             .catch(function(error) {
