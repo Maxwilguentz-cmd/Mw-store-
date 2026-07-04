@@ -8,7 +8,7 @@
     padding: 0; /* Retire tout espas andedan pa defo ki sou eleman yo */
     box-sizing: border-box; /* Fè kalkil lajè eleman an enkli padding ak bordi pou anyen pa debòde */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografi jeneral si lòt yo pa chaje */
-}
+} 
 
 /* Stil pou background ak tout kò paj la (Konsève dimansyon ak espas nèt) */
 body {
