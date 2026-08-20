@@ -129,7 +129,7 @@
         </div>
 
         <div class="store-grid">
-            <div class="card-netflix" onclick="location.href='Netflix.html'">
+            <div class="card-netflix" onclick="afficheNetflix()">
                 <img src="choix2.JPG" alt="Netflix background" class="card-bg-img">
                 <span class="badge-dispo">2 DISPO</span>
                 <div class="card-texte">
@@ -177,7 +177,178 @@
         </div>
     </section>
 
+    <!-- ================= SEKSYON 3 : NETFLIX (te nan Netflix.html) ================= -->
+    <section id="section-netflix" class="hidden">
+
+        <!-- ---- SOUS-ETAP 0 : CHWAZI PLAN ---- -->
+        <div id="nf-step-plans">
+            <header class="hero-section">
+                <div class="hero-bg"></div>
+                <div class="hero-top">
+                    <button class="btn-back" onclick="afficheStreaming()">← Catégories</button>
+                </div>
+                <div class="hero-text">
+                    <span class="red-subtitle">STREAMING</span>
+                    <h1 class="main-title">NETFLIX</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <span class="red-subtitle">Netflix</span>
+                        <h2>CHOISISSEZ VOTRE PLAN</h2>
+                    </div>
+                    <span class="product-count" id="nf-plan-count">0 produits</span>
+                </div>
+                <div class="cards-container" id="nf-plans-container"></div>
+            </main>
+        </div>
+
+        <!-- ---- SOUS-ETAP 1 : CHECKOUT ---- -->
+        <div id="nf-step-checkout" class="container-checkout hidden">
+            <h1 class="titre-checkout">Finaliser ma commande</h1>
+            <div class="etap-bar" id="nf-etap-bar-checkout"></div>
+
+            <div class="bwat-livrezon">
+                <h2 class="tit-seksyon">Informations de livraison</h2>
+                <div class="boite-input-group">
+                    <span class="ti-tit-atansyon" id="nf-tag-profil-type">INFOS — PROFIL PARTAGÉ</span>
+
+                    <div class="champ-saisie">
+                        <label for="nf-whatsapp">Numéro WhatsApp</label>
+                        <input type="text" id="nf-whatsapp" placeholder="Ex: 38019657 (sans +509)">
+                    </div>
+
+                    <div class="champ-saisie hidden" id="nf-champ-profil">
+                        <label for="nf-netflix-profil">Nom du profil Netflix</label>
+                        <input type="text" id="nf-netflix-profil" placeholder="Ex: Maxime wilguentz">
+                    </div>
+
+                    <div class="champ-saisie hidden" id="nf-champ-pin">
+                        <label for="nf-pin-code">PIN (4 chiffres)</label>
+                        <input type="password" id="nf-pin-code" maxlength="4" placeholder="Ex: 1234">
+                    </div>
+                </div>
+
+                <div class="goup-boutons-anba" style="margin-top:30px; display:flex; justify-content:space-between; gap:15px;">
+                    <button type="button" class="btn-retour" onclick="nfGoToStep('plans')">
+                        <i class="fa-solid fa-arrow-left"></i> Boutiques
+                    </button>
+                    <button type="button" class="btn-continuer" onclick="nfValiderCheckout()">
+                        Continuer <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ---- SOUS-ETAP 2 : PAIEMENT ---- -->
+        <div id="nf-step-paiement" class="container-checkout hidden">
+            <h1 class="titre-checkout">Finaliser ma commande</h1>
+            <div class="etap-bar" id="nf-etap-bar-paiement"></div>
+
+            <div class="carte-formulaire">
+                <div class="boite-opsyon-peman" id="nf-btn-moncash" onclick="nfChwaziMetod('moncash')">
+                    <i class="fa-solid fa-credit-card"></i><span>MonCash ⚡</span>
+                </div>
+                <div class="bwat-instructions-peman d-none" id="nf-bwat-moncash">
+                    <h3>Instructions pour MonCash:</h3>
+                    <p class="voye-lajan">Envoyez <span class="montant-jaune" id="nf-montant-moncash">0 G</span> à :</p>
+                    <div class="nimewo-kopie">
+                        <span>+509 38019657</span>
+                        <i class="fa-regular fa-copy" onclick="nfKopieNimewo('+50938019657')" style="cursor:pointer;"></i>
+                    </div>
+                    <p class="non-moun">Nom: Maxime Wilguentz</p>
+                    <div class="boite-txn-input">
+                        <label for="nf-txn_id_moncash">Transaction ID MonCash (Txn ID)</label>
+                        <input type="text" id="nf-txn_id_moncash" placeholder="Ex: 003087615746" maxlength="12">
+                        <span class="ti-detay-anba">12 chiffres, commence par 003. ⚡</span>
+                    </div>
+                </div>
+
+                <div class="boite-opsyon-peman" id="nf-btn-natcash" onclick="nfChwaziMetod('natcash')">
+                    <i class="fa-solid fa-wallet"></i><span>NatCash ⚡</span>
+                </div>
+                <div class="bwat-instructions-peman d-none" id="nf-bwat-natcash">
+                    <h3>Instructions pour NatCash:</h3>
+                    <p class="voye-lajan">Envoyez <span class="montant-jaune" id="nf-montant-natcash">0 G</span> à :</p>
+                    <div class="nimewo-kopie">
+                        <span>+509 40807923</span>
+                        <i class="fa-regular fa-copy" onclick="nfKopieNimewo('+50940807923')" style="cursor:pointer;"></i>
+                    </div>
+                    <p class="non-moun">Nom: Maxime Wilguentz</p>
+                    <div class="boite-txn-input">
+                        <label for="nf-txn_id_natcash">Transaction ID NatCash (Txn ID)</label>
+                        <input type="text" id="nf-txn_id_natcash" placeholder="Ex: 26061871236720" maxlength="12">
+                        <span class="ti-detay-anba">12 chiffres, commence par 260. ⚡</span>
+                    </div>
+                </div>
+
+                <div class="goup-boutons-anba">
+                    <button type="button" class="btn-retour" onclick="nfGoToStep('checkout')">
+                        <i class="fa-solid fa-arrow-left"></i> Retour
+                    </button>
+                    <button type="button" class="btn-continuer-peman" onclick="nfValiderPaiement()">
+                        Continuer <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ---- SOUS-ETAP 3 : RECAPITULATIF ---- -->
+        <div id="nf-step-recap" class="container-checkout hidden">
+            <h1 class="titre-checkout" style="text-align:center;">Récapitulatif de la commande</h1>
+            <div class="etap-bar" id="nf-etap-bar-recap"></div>
+
+            <div class="carte-formulaire">
+                <div class="liy-recap-pwodwi">
+                    <span id="nf-recap-non-sevis" style="color:white; font-size:1.1rem;"></span>
+                    <span id="nf-recap-pri-anwo" style="color:white; font-weight:bold; font-size:1.1rem;"></span>
+                </div>
+
+                <div class="bwat-infos-streaming">
+                    <span class="ti-tit-bwat">INFOS STREAMING</span>
+                    <div class="liy-detay-whatsapp">
+                        <span style="color:#555;">WhatsApp</span>
+                        <span id="nf-recap-whatsapp" style="color:#888;"></span>
+                    </div>
+                </div>
+
+                <div class="liy-recap-pri" style="margin-top:30px; border-bottom:1px solid #111; padding-bottom:15px;">
+                    <span style="color:#555;">Sous-total</span>
+                    <span id="nf-recap-sous-total" style="color:#555;"></span>
+                </div>
+
+                <div class="liy-recap-pri" style="margin-top:15px; margin-bottom:20px;">
+                    <span style="color:white; font-size:1.3rem; font-weight:bold;">Total à payer</span>
+                    <span id="nf-recap-total-final" style="color:white; font-size:1.3rem; font-weight:bold;"></span>
+                </div>
+
+                <div class="boite-checkbox-rules">
+                    <input type="checkbox" id="nf-accept-rules" onchange="nfTchekeCheckbox()">
+                    <label for="nf-accept-rules">J'accepte les <a href="#" style="color:#d1b052; text-decoration:none;">règles anti-fraude</a> de MwStore.</label>
+                </div>
+
+                <div class="goup-boutons-anba">
+                    <button type="button" class="btn-retour" onclick="nfGoToStep('paiement')">
+                        <i class="fa-solid fa-arrow-left"></i> Retour
+                    </button>
+                    <button type="button" class="btn-valider-commande" id="nf-btn-finaliser" disabled onclick="nfSoumetKomand()">
+                        Valider ma commande
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="kabwa-flottant">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="badge-kabwa">1</span>
+        </div>
+    </section>
+
     <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
         function afficheStreaming(){
@@ -204,6 +375,191 @@
         document.addEventListener('click', function() {
             document.getElementById('box-connexion').classList.remove('show');
         });
+
+        /* ================= NETFLIX (SEKSYON 3) ================= */
+        function afficheNetflix(){
+            document.getElementById('section-streaming').classList.add('hidden');
+            document.getElementById('section-netflix').classList.remove('hidden');
+            nfRenderPlans();
+            nfGoToStep('plans');
+        }
+
+        const nfPlans = {
+            partage: { key:"partage", nom:"Netflix Partagé", prix:400, needsProfile:false,
+                icon:"👥", features:["✓ 1 profil partagé","✓ Catalogue complet","✓ Qualité HD","✕ Profil dédié","✕ PIN personnalisé","✕ Livraison automatique"] },
+            prive: { key:"prive", nom:"Netflix Privé", prix:800, needsProfile:true, top:true,
+                icon:"🔒", features:["✓ 1 profil dédié","✓ Catalogue complet","✓ Qualité HD","✓ Profil dédié","✓ PIN personnalisé","✕ Livraison automatique"] },
+            gift: { key:"gift", nom:"Gift Card 15$ USA", prix:2350, disabled:true,
+                icon:"🎁", features:["✓ Code cadeau Netflix","✓ Utilisation flexible","✓ Qualité HD","✓ Profil dédié","✓ PIN personnalisé","✓ Livraison automatique"] }
+        };
+        const nfState = { plan:null, whatsapp:"", profil:"", pin:"", metod:"", txnId:"" };
+        const nfSteps = ["plans","checkout","paiement","recap"];
+
+        function nfRenderPlans(){
+            const cont = document.getElementById('nf-plans-container');
+            document.getElementById('nf-plan-count').innerText = Object.keys(nfPlans).length + " produits";
+            cont.innerHTML = Object.values(nfPlans).map(p => `
+                <div class="horizontal-card ${p.top ? 'premium-card' : ''}">
+                    ${p.top ? '<div class="badge">★ TOP</div>' : ''}
+                    <div class="card-left">
+                        <span class="icon">${p.icon}</span>
+                        <p class="plan-type">POUR</p>
+                        <h3>${p.key === 'gift' ? 'GIFT CARD 15$ USA' : (p.key === 'partage' ? 'PARTAGÉ' : 'PRIVÉ')}</h3>
+                        <div class="price ${p.top ? 'premium-text' : (p.key==='gift' ? 'highlight-green' : '')}">${p.prix} <span>G</span></div>
+                    </div>
+                    <div class="card-middle">
+                        <ul>${p.features.map(f => `<li class="${f.startsWith('✓') ? (p.key==='gift' ? 'checked highlight-green' : (p.top ? 'checked premium-text':'checked')) : 'disabled'}">${f}</li>`).join('')}</ul>
+                    </div>
+                    <div class="card-right">
+                        <button class="btn-choose1 ${p.top ? 'premium-btn' : ''}" onclick="${p.disabled ? 'salut()' : `nfSelectPlan('${p.key}')`}">Choisir →</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function nfGoToStep(step){
+            nfSteps.forEach(s => document.getElementById('nf-step-' + s).classList.add('hidden'));
+            document.getElementById('nf-step-' + step).classList.remove('hidden');
+            nfRenderEtapBar(step);
+            window.scrollTo(0,0);
+        }
+
+        function nfRenderEtapBar(current){
+            if (current === "plans") return;
+            const idxCourant = ["checkout","paiement","recap"].indexOf(current);
+            const labels = [["Informations","checkout"],["Paiement","paiement"],["Récapitulatif","recap"]];
+            const html = labels.map(([label, key], i) => {
+                const idxKey = ["checkout","paiement","recap"].indexOf(key);
+                const done = idxKey < idxCourant;
+                const aktif = idxKey <= idxCourant;
+                return `<div class="etap ${aktif ? 'aktif' : ''}">
+                    <span class="etap-chif">${done ? '&#10003;' : (i+1)}</span>
+                    <span class="etap-tiks">${label}</span>
+                </div>`;
+            }).join('');
+            document.getElementById('nf-etap-bar-' + current).innerHTML = html;
+        }
+
+        function nfSelectPlan(key){
+            let mounNanKonekte = localStorage.getItem("user_connecte");
+            let imelMounNan = localStorage.getItem("user_email");
+            if (mounNanKonekte !== "true" || !imelMounNan) {
+                window.location.href = "connexion.html";
+                return;
+            }
+            nfState.plan = nfPlans[key];
+            document.getElementById('nf-champ-profil').classList.toggle('hidden', !nfState.plan.needsProfile);
+            document.getElementById('nf-champ-pin').classList.toggle('hidden', !nfState.plan.needsProfile);
+            document.getElementById('nf-tag-profil-type').innerText = nfState.plan.needsProfile ? "INFOS — PROFIL PRIVÉ" : "INFOS — PROFIL PARTAGÉ";
+            nfGoToStep('checkout');
+        }
+
+        function nfValiderCheckout(){
+            const whatsapp = document.getElementById('nf-whatsapp').value.trim();
+            if (whatsapp === "") { alert("Silvouplè antre nimewo WhatsApp ou a"); return; }
+
+            if (nfState.plan.needsProfile) {
+                const profil = document.getElementById('nf-netflix-profil').value.trim();
+                const pin = document.getElementById('nf-pin-code').value.trim();
+                if (profil === "" || pin === "") { alert("Silvouplè, ranpli tout jaden yo anvan ou kontinye."); return; }
+                if (pin.length < 4) { alert("PIN nan dwe gen 4 chif."); return; }
+                nfState.profil = profil;
+                nfState.pin = pin;
+            }
+            nfState.whatsapp = whatsapp;
+
+            document.getElementById('nf-montant-moncash').innerText = nfState.plan.prix + " G";
+            document.getElementById('nf-montant-natcash').innerText = nfState.plan.prix + " G";
+            nfGoToStep('paiement');
+        }
+
+        function nfChwaziMetod(metod){
+            nfState.metod = metod;
+            document.getElementById('nf-bwat-moncash').classList.add('d-none');
+            document.getElementById('nf-bwat-natcash').classList.add('d-none');
+            document.getElementById('nf-btn-moncash').classList.remove('aktive');
+            document.getElementById('nf-btn-natcash').classList.remove('aktive');
+
+            if (metod === 'moncash') {
+                document.getElementById('nf-bwat-moncash').classList.remove('d-none');
+                document.getElementById('nf-btn-moncash').classList.add('aktive');
+            } else {
+                document.getElementById('nf-bwat-natcash').classList.remove('d-none');
+                document.getElementById('nf-btn-natcash').classList.add('aktive');
+            }
+        }
+
+        function nfKopieNimewo(nimewo){
+            navigator.clipboard.writeText(nimewo);
+            alert("Nimewo a kopye: " + nimewo);
+        }
+
+        function nfValiderPaiement(){
+            if (nfState.metod === "") { alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!"); return; }
+
+            let txnId = "";
+            if (nfState.metod === "moncash") {
+                txnId = document.getElementById('nf-txn_id_moncash').value.trim();
+                if (txnId.length < 12 || !txnId.startsWith("003")) {
+                    alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
+                    return;
+                }
+            } else {
+                txnId = document.getElementById('nf-txn_id_natcash').value.trim();
+                if (txnId.length < 12 || !txnId.startsWith("260")) {
+                    alert("ID Transaksyon NatCash lan dwe gen 12 chif epi kòmanse pa 260!");
+                    return;
+                }
+            }
+            nfState.txnId = txnId;
+
+            document.getElementById('nf-recap-non-sevis').innerHTML = `${nfState.plan.nom} <span style="color:#555; font-size:0.9rem;">x1</span>`;
+            document.getElementById('nf-recap-pri-anwo').innerText = nfState.plan.prix + " G";
+            document.getElementById('nf-recap-sous-total').innerText = nfState.plan.prix + " G";
+            document.getElementById('nf-recap-total-final').innerText = nfState.plan.prix + " G";
+            document.getElementById('nf-recap-whatsapp').innerText = nfState.whatsapp;
+            nfGoToStep('recap');
+        }
+
+        function nfTchekeCheckbox(){
+            const checkbox = document.getElementById('nf-accept-rules');
+            const btn = document.getElementById('nf-btn-finaliser');
+            btn.disabled = !checkbox.checked;
+            btn.style.opacity = checkbox.checked ? "1" : "0.4";
+        }
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function nfSoumetKomand(){
+            const imelKliyan = localStorage.getItem("user_email") || "Non connecté";
+            const datJodia = new Date().toISOString().split('T')[0];
+
+            db.collection("commandes").add({
+                user_email: imelKliyan,
+                whatsapp: nfState.whatsapp,
+                service: nfState.plan.nom + " x1",
+                montant: nfState.plan.prix + " G",
+                paiement: nfState.metod,
+                transaction_id: nfState.txnId,
+                profil: nfState.profil || "",
+                date: datJodia,
+                status: "encour"
+            }).then(() => {
+                window.location.href = "succes.html";
+            }).catch((error) => {
+                alert("Erreur Firebase: " + error.message);
+                console.error(error);
+            });
+        }
     </script>
 </body>
 </html>
