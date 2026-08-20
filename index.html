@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MWStore-accueil</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Nou ajoute FontAwesome pou ti ikòn yo si w bezwen yo pi devan -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* CSS pou ti bwat dropdown "Connexion" lan */
-        .menu-icons {
-            position: relative; /* Pou pèmèt bwat la bati bò kote l */
-        }
+        .menu-icons { position: relative; display: flex; align-items: center; gap: 15px; }
 
         .dropdown-connexion {
-            display: none; /* Kache pa defo */
+            display: none;
             position: absolute;
             top: 40px;
             right: 0;
@@ -27,45 +23,20 @@
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
             z-index: 100;
         }
-
-        .dropdown-connexion.show {
-            display: block; /* Afiche lè nou klike */
-        }
-
+        .dropdown-connexion.show { display: block; }
         .dropdown-connexion a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: 0.3s;
+            display: flex; align-items: center; gap: 10px;
+            color: #ffffff; text-decoration: none; font-size: 0.9rem;
+            padding: 8px 12px; border-radius: 5px; transition: 0.3s;
+        }
+        .dropdown-connexion a:hover { background: #1a1712; color: #cca43b; }
+
+        .btn-film-plus {
+            color: #cca43b; font-size: 1.2rem; text-decoration: none;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
 
-        .dropdown-connexion a:hover {
-            background: #1a1712;
-            color: #cca43b;
-        }
-        /* Pou eleman yo ka aliye byen pwòp yonn akote lòt nan header a */
-.menu-icons {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px; 
-}
-
-/* Style pou ti bouton fòm plis (+) la */
-.btn-film-plus {
-    color: #cca43b;
-    font-size: 1.2rem;
-    text-decoration: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -73,19 +44,12 @@
     <div class="header-checkout">
         <div class="logo-checkout"><span>Store</span></div>
         <div class="menu-icons">
-<!-- Ti bouton fòm plis (+) pou al nan paj film-gratis.html -->
-<a class="btn-film-plus">
-    <i class="fa-solid fa-plus"></i>
-</a>            
+            <a class="btn-film-plus"><i class="fa-solid fa-plus"></i></a>
             <i class="fa-regular fa-bell" style="cursor: pointer;"></i>
-            
-            <!-- Nou mete yon id pou nou ka kontwole de bar yo nan JS -->
             <div class="barres-menu" id="btn-menu-burger" style="cursor: pointer;">
                 <span></span>
                 <span></span>
             </div>
-
-            <!-- Ti bwat dropdown k ap parèt si moun nan poko konekte -->
             <div class="dropdown-connexion" id="box-connexion">
                 <a href="connexion.html">
                     <i class="fa-solid fa-right-to-bracket" style="color: #cca43b;"></i> Connexion
@@ -94,77 +58,152 @@
         </div>
     </div>
 
-    <div class="soustitre">
-        <h1>MW <span style="color: #D4AF37;">STORE</span></h1>
-        <p>Voici votre Marketplace premium <br> Choisi ton jeux service <br> et rechage instantanément en toute sécurité.</p>
-    </div>   
+    <!-- ================= SEKSYON 1 : KATEGORI (AKÈY) ================= -->
+    <section id="section-categories">
 
-    <div class="catalogue-section">  
-        <h4 class="tag-catalogue">CATALOGUE</h4>       
-        <h1 class="titre-categories">CATéGORIES</h1>
-    </div>
-
-    <div class="store-grid"> 
-        <div class="streaming" onclick="streaming()" style="cursor: pointer;">
-            <img src="bing.JPG" alt="streaming background" class="card-bg-img">
-            <span class="badge-dispo">4 DISPO</span>
-            <div class="titre-pour-jeux">
-                <h2>streaming</h2>
-                <h6>Netflix Disney primevideo...</h6>
-            </div>
-            <div class="arrow-btn">→</div>
-        </div>
- 
-        <div class="jeux" onclick="jeux()" style="cursor: pointer;">
-            <img src="jeuxt.JPG" alt="jeux background" class="card-bg-img">
-            <span class="badge-dispo">3 DISPO</span>
-            <div class="titre-pour-jeux">
-                <h2>jeux</h2>
-                <h6>pubg Freefire...</h6>
-            </div>
-            <div class="arrow-btn">→</div>
+        <div class="soustitre">
+            <h1>MW <span style="color: #D4AF37;">STORE</span></h1>
+            <p>Voici votre Marketplace premium <br> Choisi ton jeux service <br> et rechage instantanément en toute sécurité.</p>
         </div>
 
-        <div class="cartedebit" onclick="cartedebit()" style="cursor: pointer;">
-            <img src="carte-de-credit.JPG" alt="cartedebit background" class="card-bg-img">
-            <span class="badge-dispo">1 DISPO</span>
-            <div class="titre-pour-jeux">
-                 <h2>Carte De Debit</h2>
-                <h6>gift...</h6>
-            </div>
-            <div class="arrow-btn">→</div>
-        </div> 
-    </div> 
+        <div class="catalogue-section">
+            <h4 class="tag-catalogue">CATALOGUE</h4>
+            <h1 class="titre-categories">CATéGORIES</h1>
+        </div>
 
-    <div class="temoignages-section">
-        <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
-        <h2>CE QUE DISENT <span style="color: #D4AF37;">NOS CLIENTS</span></h2>
-        <p style="color: #555; font-size: 0.9em; margin-top: 5px;">+500 commandes traitées • Livraison instantanée</p>
-    </div>
-   
+        <div class="store-grid">
+            <div class="streaming" onclick="afficheStreaming()" style="cursor: pointer;">
+                <img src="bing.JPG" alt="streaming background" class="card-bg-img">
+                <span class="badge-dispo">4 DISPO</span>
+                <div class="titre-pour-jeux">
+                    <h2>streaming</h2>
+                    <h6>Netflix Disney primevideo...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+
+            <div class="jeux" onclick="jeux()" style="cursor: pointer;">
+                <img src="jeuxt.JPG" alt="jeux background" class="card-bg-img">
+                <span class="badge-dispo">3 DISPO</span>
+                <div class="titre-pour-jeux">
+                    <h2>jeux</h2>
+                    <h6>pubg Freefire...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+
+            <div class="cartedebit" onclick="cartedebit()" style="cursor: pointer;">
+                <img src="carte-de-credit.JPG" alt="cartedebit background" class="card-bg-img">
+                <span class="badge-dispo">1 DISPO</span>
+                <div class="titre-pour-jeux">
+                    <h2>Carte De Debit</h2>
+                    <h6>gift...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+        </div>
+
+        <div class="temoignages-section">
+            <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
+            <h2>CE QUE DISENT <span style="color: #D4AF37;">NOS CLIENTS</span></h2>
+            <p style="color: #555; font-size: 0.9em; margin-top: 5px;">+500 commandes traitées • Livraison instantanée</p>
+        </div>
+    </section>
+
+    <!-- ================= SEKSYON 2 : STREAMING (te nan page-de-streaming.html) ================= -->
+    <section id="section-streaming" class="hidden">
+        <header class="hero-section">
+            <div class="hero-top">
+                <button class="btn-back" onclick="afficheCategories()">← Accueil</button>
+            </div>
+        </header>
+
+        <div class="soustitre">
+            <h1>MW <span style="color: #D4AF37;">STORE</span></h1>
+            <p>Voici votre Marketplace premium <br> Choisi ton jeux service <br> et rechage instantanément en toute sécurité.</p>
+        </div>
+
+        <div class="catalogue-section">
+            <h4 class="tag-catalogue">CATALOGUE</h4>
+            <h1 class="titre-categories">STREAMING</h1>
+        </div>
+
+        <div class="store-grid">
+            <div class="card-netflix" onclick="location.href='Netflix.html'">
+                <img src="choix2.JPG" alt="Netflix background" class="card-bg-img">
+                <span class="badge-dispo">2 DISPO</span>
+                <div class="card-texte">
+                    <h2>NETFLIX</h2>
+                    <h6>Netflix, Serie...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+
+            <div class="card-disney" onclick="location.href='disney.html'">
+                <img src="disneychoix01.JPG" alt="disney background" class="card-bg-img">
+                <span class="badge-dispo">5 DISPO</span>
+                <div class="card-texte">
+                    <h2>DISNEY+</h2>
+                    <h6>Disney, Marvel, Star Wars...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+
+            <div class="card-prime" onclick="location.href='prime.html'">
+                <img src="primechoix1.JPG" alt="primevideo background" class="card-bg-img">
+                <span class="badge-dispo">3 DISPO</span>
+                <div class="card-texte">
+                    <h2>PRIME VIDEO</h2>
+                    <h6>Amazon Prime Movies...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+
+            <div class="card-crunchyroll" onclick="location.href='crunchyroll.html'">
+                <img src="crunchoix1.JPG" alt="Crunchyroll background" class="card-bg-img">
+                <span class="badge-dispo">4 DISPO</span>
+                <div class="card-texte">
+                    <h2>CRUNCHYROLL</h2>
+                    <h6>Animes, Manga...</h6>
+                </div>
+                <div class="arrow-btn">→</div>
+            </div>
+        </div>
+
+        <div class="temoignages-section">
+            <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
+            <h2>CE QUE DISENT <span style="color: #D4AF37;">NOS CLIENTS</span></h2>
+            <p style="color: #555; font-size: 0.9em; margin-top: 5px;">+500 commandes traitées • Livraison instantanée</p>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 
-    <!-- Ti Lojik entèlijan pou bouton Menu an -->
     <script>
-        document.getElementById('btn-menu-burger').addEventListener('click', function(e) {
-            e.stopPropagation(); // Anpeche klik la gaye
-            
-            // Tcheke si moun nan konekte nan memwa a
-            let mounNanKonekte = localStorage.getItem("user_connecte");
+        function afficheStreaming(){
+            document.getElementById('section-categories').classList.add('hidden');
+            document.getElementById('section-streaming').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+        function afficheCategories(){
+            document.getElementById('section-streaming').classList.add('hidden');
+            document.getElementById('section-categories').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
 
+        document.getElementById('btn-menu-burger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            let mounNanKonekte = localStorage.getItem("user_connecte");
             if (mounNanKonekte === "true") {
-                // Si l konekte, nou voye l dirèkteman sou paj profil li
                 window.location.href = "profil.html";
             } else {
-                // Si l poko konekte, nou switch afichaj ti kaz "Connexion" lan
                 document.getElementById('box-connexion').classList.toggle('show');
             }
         });
 
-        // Si moun nan klike nenpòt lòt kote nan paj la, kache ti kaz Connexion an si l te louvri
         document.addEventListener('click', function() {
             document.getElementById('box-connexion').classList.remove('show');
         });
     </script>
-</body> 
+</body>
 </html>
