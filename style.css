@@ -678,8 +678,7 @@ body {
     z-index: 999;
 }
 
-/* Chak blòk (gòch, mitan, dwat) rete alinye sou menm liy lan */
-.bloc-gauche,
+/* Chak blòk (mitan, dwat) rete alinye sou menm liy lan */
 .bloc-milieu,
 .bloc-droite {
     display: flex;
