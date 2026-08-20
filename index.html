@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MWStore-accueil</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="adm.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -45,6 +46,7 @@
         <div class="logo-checkout"><span>Store</span></div>
         <div class="menu-icons">
             <a class="btn-film-plus"><i class="fa-solid fa-plus"></i></a>
+            <i class="fa-solid fa-clock-rotate-left" style="cursor: pointer; color: #cca43b;" onclick="requireLogin(afficheIstorik)"></i>
             <i class="fa-regular fa-bell" style="cursor: pointer;"></i>
             <div class="barres-menu" id="btn-menu-burger" style="cursor: pointer;">
                 <span></span>
@@ -386,6 +388,38 @@
         </main>
     </section>
 
+    <!-- ================= SEKSYON 5 : ISTORIK KÒMAND ================= -->
+    <section id="section-istorik" class="hidden">
+        <header class="header-historik">
+            <div class="logo">
+                <span class="logo-caox">MW</span><span class="logo-store"> Store</span>
+            </div>
+            <div class="header-right">
+                <button class="btn-notif" onclick="afficheCategories()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="btn-notif"><i class="fa-regular fa-bell"></i></button>
+            </div>
+        </header>
+
+        <main class="container-historik">
+            <p class="instruction-text">Suivez l'état de vos achats et retrouvez vos codes livrés.</p>
+
+            <div class="tabs-container">
+                <button class="tab-btn active" data-filter="toutes" onclick="istFiltrer('toutes', this)">Toutes</button>
+                <button class="tab-btn" data-filter="valide" onclick="istFiltrer('valide', this)">Validées</button>
+                <button class="tab-btn" data-filter="encour" onclick="istFiltrer('encour', this)">En cours</button>
+                <button class="tab-btn" data-filter="refuse" onclick="istFiltrer('refuse', this)">Refusées</button>
+            </div>
+
+            <div class="refresh-container">
+                <button class="btn-refresh" onclick="istChajeKomand()"><i class="fa-solid fa-arrows-rotate"></i></button>
+            </div>
+
+            <div class="orders-list" id="ist-orders-list">
+                <p style="text-align: center; color: #64748b;">Chajman kòmand yo...</p>
+            </div>
+        </main>
+    </section>
+
     <script src="script.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -435,7 +469,7 @@
         function afficheConnexion(callback){
             pendingApresConeksyon = callback || null;
             document.getElementById('box-connexion').classList.remove('show');
-            ["section-categories","section-streaming","section-netflix"].forEach(id => document.getElementById(id).classList.add('hidden'));
+            ["section-categories","section-streaming","section-netflix","section-istorik"].forEach(id => document.getElementById(id).classList.add('hidden'));
             document.getElementById('section-connexion').classList.remove('hidden');
             window.scrollTo(0,0);
         }
@@ -474,6 +508,126 @@
                 alert("Erreur de connexion: Email ou mot de passe incorrect.");
             }
         });
+
+        /* ================= ISTORIK (SEKSYON 5) ================= */
+        let istFiltreAktyèl = "toutes";
+        let istUnsubscribe = null;
+
+        function afficheIstorik(){
+            document.getElementById('box-connexion').classList.remove('show');
+            ["section-categories","section-streaming","section-netflix","section-connexion"].forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById('section-istorik').classList.remove('hidden');
+            window.scrollTo(0,0);
+            istChajeKomand();
+        }
+
+        function istFiltrer(filtre, btn){
+            istFiltreAktyèl = filtre;
+            document.querySelectorAll('#section-istorik .tab-btn').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('#section-istorik .order-card').forEach(card => {
+                const status = card.getAttribute('data-status');
+                card.style.display = (istFiltreAktyèl === 'toutes' || status === istFiltreAktyèl) ? 'block' : 'none';
+            });
+        }
+
+        function istChajeKomand(){
+            const imelMounNan = localStorage.getItem("user_email");
+            const cont = document.getElementById('ist-orders-list');
+            if (!imelMounNan) { cont.innerHTML = `<p style="text-align:center; color:#64748b;">Konekte pou wè istorik ou.</p>`; return; }
+
+            if (istUnsubscribe) { istUnsubscribe(); }
+
+            const q = db.collection("commandes").where("user_email", "==", imelMounNan);
+            istUnsubscribe = q.onSnapshot((snapshot) => {
+                istAficheKomandYo(snapshot);
+            }, (error) => {
+                console.error("Erreur Firebase istorik:", error);
+                cont.innerHTML = `<p style="text-align:center; color:#ff4d4d;">Erreur pandan chajman istorik la.</p>`;
+            });
+        }
+
+        function istAficheKomandYo(snapshot){
+            const cont = document.getElementById('ist-orders-list');
+            cont.innerHTML = "";
+
+            if (snapshot.empty) {
+                cont.innerHTML = `<p style="text-align:center; color:#64748b;">Ou pa gen okenn kòmand.</p>`;
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const komand = doc.data();
+                const idKomand = doc.id;
+                const estati = komand.status || "encour";
+
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.setAttribute('data-status', estati);
+                card.style.display = (istFiltreAktyèl === 'toutes' || estati === istFiltreAktyèl) ? 'block' : 'none';
+
+                let badjEstati = "", bwatInfoVert = "", bwatDetay = "";
+
+                if (estati === "encour") {
+                    badjEstati = `<div class="status-badge status-validation">⏳ Validation...</div>`;
+                    bwatInfoVert = `
+                        <div class="info-box-green">
+                            <div class="info-title"><i class="fa-solid fa-mailbox"></i> Commande en cours de traitement</div>
+                            <p class="info-desc">Notre équipe prépare votre commande. Contactez-nous pour finaliser la livraison.</p>
+                            <a href="https://wa.me/50938019657?text=Bonjou%20Mw%20Store,%20mwen%20gen%20yon%20pwoblèm%20ak%20kòmand%20${idKomand}" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>`;
+                    bwatDetay = `<p>Kòmand ou ap disponib touswit apre verifikasyon admin lan.</p>`;
+                } else if (estati === "valide") {
+                    badjEstati = `<div class="status-badge status-valide">✅ Validée</div>`;
+                    bwatDetay = `
+                        <div class="data-delivered">
+                            <h3>🔑 Enfòmasyon Kont Ou:</h3>
+                            <div class="account-field"><strong>Email:</strong> ${komand.email || ''}</div>
+                            <div class="account-field"><strong>Modpas:</strong> ${komand.password || ''}</div>
+                            <div class="account-field"><strong>Profil:</strong> ${komand.profil || 'Profil Paj'}</div>
+                        </div>`;
+                } else if (estati === "refuse") {
+                    badjEstati = `<div class="status-badge status-refuse">❌ Refusée</div>`;
+                    bwatDetay = `
+                        <div class="data-rejected">
+                            <p style="color:#ff9999; margin:0;"><strong>Rezon Refize:</strong> ${komand.raison || 'Tranzaksyon anile.'}</p>
+                        </div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div class="service-info">
+                            <h2>${komand.service || 'Sèvis'}</h2>
+                            <span class="order-id-date">${idKomand} | ${komand.date || ''}</span>
+                        </div>
+                        ${badjEstati}
+                    </div>
+                    <div class="order-meta">
+                        <div class="meta-item"><span class="meta-label">Montant</span><span class="meta-value">${komand.montant || '0'}</span></div>
+                        <div class="meta-item"><span class="meta-label">Paiement</span><span class="meta-value">${komand.paiement || 'Panyen'}</span></div>
+                    </div>
+                    ${bwatInfoVert}
+                    <button class="btn-details-toggle">
+                        <i class="fa-regular fa-eye"></i> Voir les détails
+                    </button>
+                    <div class="order-details-dropdown">
+                        <div class="details-content">${bwatDetay}</div>
+                    </div>
+                `;
+
+                const toggleBtn = card.querySelector('.btn-details-toggle');
+                const dropdown = card.querySelector('.order-details-dropdown');
+                toggleBtn.addEventListener('click', () => {
+                    dropdown.classList.toggle('open');
+                    toggleBtn.innerHTML = dropdown.classList.contains('open') ?
+                        '<i class="fa-regular fa-eye-slash"></i> Masquer les détails' : '<i class="fa-regular fa-eye"></i> Voir les détails';
+                });
+
+                cont.appendChild(card);
+            });
+        }
 
         /* ================= NETFLIX (SEKSYON 3) ================= */
         function afficheNetflix(){
