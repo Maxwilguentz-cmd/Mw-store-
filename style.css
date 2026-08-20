@@ -652,6 +652,88 @@ body {
     }
 }
 
+/* ==========================================================================
+   BA NAVIGASYON ANBA (FOOTER) — page-de-jeux.html
+   Klas sa yo pa t gen CSS ditou, sèlman yon override nan media query a.
+   ========================================================================== */
+
+/* Kontenè jeneral ba a: fikse anba ekran an, tankou yon dòk */
+.barre-nav {
+    position: fixed;
+    bottom: 15px;
+    left: 5%;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 20px;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid #222;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+/* Chak blòk (gòch, mitan, dwat) rete alinye sou menm liy lan */
+.bloc-gauche,
+.bloc-milieu,
+.bloc-droite {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Bouton mitan yo (Paramèt / Sold) */
+.btn-milieu {
+    background-color: #050505;
+    color: white;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-milieu:hover {
+    background-color: #111;
+    border-color: #D4AF37;
+}
+
+/* Lyen rezo sosyal yo nan bò dwat ba a */
+.icon-social {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 10px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.icon-social:hover {
+    color: #D4AF37;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* Sou telefòn, kache tèks la epi kenbe eleman yo pi kwense */
+@media (max-width: 480px) {
+    .barre-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        bottom: 8px;
+    }
+}
+
 
 
 /* ==========================================================================
@@ -1349,4 +1431,3 @@ body {
 .champ-saisie input::placeholder {
     color: #444444;
 }
-
