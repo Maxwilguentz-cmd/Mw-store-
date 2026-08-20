@@ -1,17 +1,34 @@
-<!DOCTYPE html> 
-<html lang="fr"> 
-    <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Boutique - MWStore</title> 
-    <link rel="stylesheet" href="style12.css"> </head>
-<body> 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney - MwStore</title>
+<link rel="stylesheet" href="style12.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="header-checkout">
+    <div class="logo-checkout">Mw<span>Store</span></div>
+    <div class="menu-icons">
+        <i class="fa-regular fa-bell"></i>
+        <div class="barres-menu"><span></span><span></span></div>
+    </div>
+</div>
+
+<!-- ================= STEP 0 : CHWAZI PLAN ================= -->
+<section id="step-plans">
     <header class="hero-section">
-        <div class="hero-bg-disney"></div> 
+        <div class="hero-bg-disney"></div>
         <div class="hero-top">
-            <button class="btn-back" onclick="location.href='page-de-streaming.html'">← Catégories</button> </div>
+            <button class="btn-back" onclick="location.href='page-de-streaming.html'">← Catégories</button>
+        </div>
         <div class="hero-text">
-            <span class="bleu-subtitle">STREAMING</span> <h1 class="main-title">Disney</h1> </div>
+            <span class="bleu-subtitle">STREAMING</span>
+            <h1 class="main-title">Disney</h1>
+        </div>
     </header>
 
     <main class="main-content">
@@ -20,74 +37,16 @@
                 <span class="bleu-subtitle">Disney</span>
                 <h2>CHOISISSEZ VOTRE PLAN</h2>
             </div>
-            <span class="product-count">3produits</span> </div>
+            <span class="product-count" id="plan-count">0 produits</span>
+        </div>
 
-        <div class="cards-container">
-            
-            <div class="horizontal-card" onclick="location.href='#'">
-                <span class="badge-dispo">2 DISPO</span> <div class="card-left">
-                    <span class="icon">👥</span> <p class="plan-type">POUR</p>
-                    <h3>PARTAGÉ</h3>
-                    <div class="price">500 <span>G</span></div> </div>
-                
-                <div class="card-middle">
-                    <ul>
-                        <li class="checked">✓ 1 profil partagé</li>
-                        <li class="checked">✓ Catalogue complet</li>
-                        <li class="checked">✓ Qualité HD</li>
-                        <li class="disabled">✕ Profil dédié</li>
-                        <li class="disabled">✕ PIN personnalisé</li>
-                        <li class="disabled">✕ Livraison automatique</li>
-                    </ul>
-                </div>
+        <div class="cards-container" id="plans-container"></div>
+    </main>
 
-                <div class="card-right">
-                    <button class="btn-choose1" onclick="chekdisney()">Choisir →</button> </div>
-
-            </div> 
-            <div class="horizontal-card premium-card-disney">
-                <div class="badge">★ TOP</div> <div class="card-left">
-                    <span class="icon">🔒</span> <p class="plan-type">POUR</p>
-                    <h3>PRIVÉ</h3>
-                    <div class="price premium-text">800 <span>G</span></div> 
-                </div>
-                
-                <div class="card-middle">
-                    <ul>
-                        <li class="checked premium-text">✓ 1 profil dédié</li>
-                        <li class="checked premium-text">✓ Catalogue complet</li>
-                        <li class="checked premium-text">✓ Qualité HD</li>
-                        <li class="checked premium-text">✓ Profil dédié</li>
-                        <li class="checked premium-text">✓ PIN personnalisé</li>
-                        <li class="disabled">✕ Livraison automatique</li>
-                    </ul>
-                </div>
-                
-                <div class="card-right">
-                    <button class="btn-choose1 premium-btn" onclick="chekdisneypremium()" >Choisir →</button>
-                </div>
-            </div> 
-            <div class="horizontal-card"> <div class="card-left"> <span class="icon">🎁</span> <p class="plan-type">LE</p> <h3>GIFT CARD 15$ USA</h3> <div class="price highlight-green">2 350 <span>G</span></div> </div>
-                
-                <div class="card-middle"> <ul>
-                        <li class="checked highlight-green">✓ Code cadeau Netflix</li> <li class="checked highlight-green">✓ Utilisation flexible</li>
-                        <li class="checked highlight-green">✓ Qualité HD</li>
-                        <li class="checked highlight-green">✓ Profil dédié</li>
-                        <li class="checked highlight-green">✓ PIN personnalisé</li>
-                        <li class="checked highlight-green">✓ Livraison automatique</li>
-                    </ul>
-                </div>
-                
-                <div class="card-right"> 
-                    <button class="btn-choose1" onclick="salut()">Choisir →</button> </div>
-            </div> 
-        </div> 
-        </main>    
-
-    <div class="temoignages-section" style="padding: 40px 20px; text-align: center;">
-        <h4 style="color: #7a6e4d; font-size: 0.8em; letter-spacing: 2px; margin-bottom: 5px;">TÉMOIGNAGES</h4>
-        <h2>CE QUE DISENT <span style="color: #D4AF37;">NOS CLIENTS</span></h2>
-        <p style="color: #555; font-size: 0.9em; margin-top: 5px;">+500 commandes traitées • Livraison instantanée</p>
+    <div class="temoignages-section" style="padding:40px 20px; text-align:center;">
+        <h4 style="color:#7a6e4d; font-size:0.8em; letter-spacing:2px; margin-bottom:5px;">TÉMOIGNAGES</h4>
+        <h2>CE QUE DISENT <span style="color:#D4AF37;">NOS CLIENTS</span></h2>
+        <p style="color:#555; font-size:0.9em; margin-top:5px;">+500 commandes traitées • Livraison instantanée</p>
     </div>
 
     <footer class="barre-nav">
@@ -103,8 +62,344 @@
             <a href="https://www.instagram.com" target="_blank" class="icon-social">📸 Instagram</a>
             <a href="#" class="icon-social">✈️ Telegram</a>
         </div>
-    </footer> 
+    </footer>
+</section>
 
-    <script src="script.js"></script> 
+<!-- ================= STEP 1 : CHECKOUT (INFOS) ================= -->
+<section id="step-checkout" class="container-checkout hidden">
+    <h1 class="titre-checkout">Finaliser ma commande</h1>
+    <div class="etap-bar" id="etap-bar-checkout"></div>
+
+    <div class="bwat-livrezon">
+        <h2 class="tit-seksyon">Informations de livraison</h2>
+        <div class="boite-input-group">
+            <span class="ti-tit-atansyon" id="tag-profil-type">INFOS — PROFIL PARTAGÉ</span>
+
+            <div class="champ-saisie">
+                <label for="whatsapp">Numéro WhatsApp</label>
+                <input type="text" id="whatsapp" placeholder="Ex: 38019657 (sans +509)">
+            </div>
+
+            <div class="champ-saisie hidden" id="champ-profil">
+                <label for="disney-profil">Nom du profil Disney</label>
+                <input type="text" id="disney-profil" placeholder="Ex: Maxime wilguentz">
+            </div>
+
+            <div class="champ-saisie hidden" id="champ-pin">
+                <label for="pin-code">PIN (4 chiffres)</label>
+                <input type="password" id="pin-code" maxlength="4" placeholder="Ex: 1234">
+            </div>
+        </div>
+
+        <div class="goup-boutons-anba" style="margin-top:30px; display:flex; justify-content:space-between; gap:15px;">
+            <button type="button" class="btn-retour" onclick="goToStep('plans')">
+                <i class="fa-solid fa-arrow-left"></i> Boutiques
+            </button>
+            <button type="button" class="btn-continuer" onclick="validerCheckout()">
+                Continuer <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= STEP 2 : PAIEMENT ================= -->
+<section id="step-paiement" class="container-checkout hidden">
+    <h1 class="titre-checkout">Finaliser ma commande</h1>
+    <div class="etap-bar" id="etap-bar-paiement"></div>
+
+    <div class="carte-formulaire">
+        <div class="boite-opsyon-peman" id="btn-moncash" onclick="chwaziMetod('moncash')">
+            <i class="fa-solid fa-credit-card"></i><span>MonCash ⚡</span>
+        </div>
+        <div class="bwat-instructions-peman d-none" id="bwat-moncash">
+            <h3>Instructions pour MonCash:</h3>
+            <p class="voye-lajan">Envoyez <span class="montant-jaune" id="montant-moncash">0 G</span> à :</p>
+            <div class="nimewo-kopie">
+                <span>+509 38019657</span>
+                <i class="fa-regular fa-copy" onclick="kopieNimewo('+50938019657')" style="cursor:pointer;"></i>
+            </div>
+            <p class="non-moun">Nom: Maxime Wilguentz</p>
+            <div class="boite-txn-input">
+                <label for="txn_id_moncash">Transaction ID MonCash (Txn ID)</label>
+                <input type="text" id="txn_id_moncash" placeholder="Ex: 003087615746" maxlength="12">
+                <span class="ti-detay-anba">12 chiffres, commence par 003. ⚡</span>
+            </div>
+        </div>
+
+        <div class="boite-opsyon-peman" id="btn-natcash" onclick="chwaziMetod('natcash')">
+            <i class="fa-solid fa-wallet"></i><span>NatCash ⚡</span>
+        </div>
+        <div class="bwat-instructions-peman d-none" id="bwat-natcash">
+            <h3>Instructions pour NatCash:</h3>
+            <p class="voye-lajan">Envoyez <span class="montant-jaune" id="montant-natcash">0 G</span> à :</p>
+            <div class="nimewo-kopie">
+                <span>+509 40807923</span>
+                <i class="fa-regular fa-copy" onclick="kopieNimewo('+50940807923')" style="cursor:pointer;"></i>
+            </div>
+            <p class="non-moun">Nom: Maxime Wilguentz</p>
+            <div class="boite-txn-input">
+                <label for="txn_id_natcash">Transaction ID NatCash (Txn ID)</label>
+                <input type="text" id="txn_id_natcash" placeholder="Ex: 26061871236720" maxlength="12">
+                <span class="ti-detay-anba">12 chiffres, commence par 260. ⚡</span>
+            </div>
+        </div>
+
+        <div class="goup-boutons-anba">
+            <button type="button" class="btn-retour" onclick="goToStep('checkout')">
+                <i class="fa-solid fa-arrow-left"></i> Retour
+            </button>
+            <button type="button" class="btn-continuer-peman" onclick="validerPaiement()">
+                Continuer <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= STEP 3 : RECAPITULATIF ================= -->
+<section id="step-recap" class="container-checkout hidden">
+    <h1 class="titre-checkout" style="text-align:center;">Récapitulatif de la commande</h1>
+    <div class="etap-bar" id="etap-bar-recap"></div>
+
+    <div class="carte-formulaire">
+        <div class="liy-recap-pwodwi">
+            <span id="recap-non-sevis" style="color:white; font-size:1.1rem;"></span>
+            <span id="recap-pri-anwo" style="color:white; font-weight:bold; font-size:1.1rem;"></span>
+        </div>
+
+        <div class="bwat-infos-streaming">
+            <span class="ti-tit-bwat">INFOS STREAMING</span>
+            <div class="liy-detay-whatsapp">
+                <span style="color:#555;">WhatsApp</span>
+                <span id="recap-whatsapp" style="color:#888;"></span>
+            </div>
+        </div>
+
+        <div class="liy-recap-pri" style="margin-top:30px; border-bottom:1px solid #111; padding-bottom:15px;">
+            <span style="color:#555;">Sous-total</span>
+            <span id="recap-sous-total" style="color:#555;"></span>
+        </div>
+
+        <div class="liy-recap-pri" style="margin-top:15px; margin-bottom:20px;">
+            <span style="color:white; font-size:1.3rem; font-weight:bold;">Total à payer</span>
+            <span id="recap-total-final" style="color:white; font-size:1.3rem; font-weight:bold;"></span>
+        </div>
+
+        <div class="boite-checkbox-rules">
+            <input type="checkbox" id="accept-rules" onchange="tchekeCheckbox()">
+            <label for="accept-rules">J'accepte les <a href="#" style="color:#d1b052; text-decoration:none;">règles anti-fraude</a> de MwStore.</label>
+        </div>
+
+        <div class="goup-boutons-anba">
+            <button type="button" class="btn-retour" onclick="goToStep('paiement')">
+                <i class="fa-solid fa-arrow-left"></i> Retour
+            </button>
+            <button type="button" class="btn-valider-commande" id="btn-finaliser" disabled onclick="soumetKomand()">
+                Valider ma commande
+            </button>
+        </div>
+    </div>
+</section>
+
+<div class="kabwa-flottant">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span class="badge-kabwa">1</span>
+</div>
+
+<style>.hidden{display:none;}</style>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<script>
+/* ===== DONE PLAN YO (SEL KOTE POU MODIFYE PRI/PLAN) ===== */
+const plans = {
+    partage: { key:"partage", nom:"Disney Partagé", prix:500, needsProfile:false,
+        icon:"👥", features:["✓ 1 profil partagé","✓ Catalogue complet","✓ Qualité HD","✕ Profil dédié","✕ PIN personnalisé","✕ Livraison automatique"] },
+    prive: { key:"prive", nom:"Disney Privé", prix:800, needsProfile:true, top:true,
+        icon:"🔒", features:["✓ 1 profil dédié","✓ Catalogue complet","✓ Qualité HD","✓ Profil dédié","✓ PIN personnalisé","✕ Livraison automatique"] },
+    gift: { key:"gift", nom:"Gift Card 15$ USA", prix:2350, disabled:true,
+        icon:"🎁", features:["✓ Code cadeau Netflix","✓ Utilisation flexible","✓ Qualité HD","✓ Profil dédié","✓ PIN personnalisé","✓ Livraison automatique"] }
+};
+
+const state = { plan:null, whatsapp:"", profil:"", pin:"", metod:"", txnId:"" };
+const steps = ["plans","checkout","paiement","recap"];
+
+/* ===== JENERASYON KAT PLAN YO (DINAMIK) ===== */
+function renderPlans(){
+    const cont = document.getElementById('plans-container');
+    document.getElementById('plan-count').innerText = Object.keys(plans).length + " produits";
+    cont.innerHTML = Object.values(plans).map(p => `
+        <div class="horizontal-card ${p.top ? 'premium-card-disney' : ''}">
+            ${p.top ? '<div class="badge">★ TOP</div>' : ''}
+            <div class="card-left">
+                <span class="icon">${p.icon}</span>
+                <p class="plan-type">POUR</p>
+                <h3>${p.key === 'gift' ? 'GIFT CARD 15$ USA' : (p.key === 'partage' ? 'PARTAGÉ' : 'PRIVÉ')}</h3>
+                <div class="price ${p.top ? 'premium-text' : (p.key==='gift' ? 'highlight-green' : '')}">${p.prix} <span>G</span></div>
+            </div>
+            <div class="card-middle">
+                <ul>${p.features.map(f => `<li class="${f.startsWith('✓') ? (p.key==='gift' ? 'checked highlight-green' : (p.top ? 'checked premium-text':'checked')) : 'disabled'}">${f}</li>`).join('')}</ul>
+            </div>
+            <div class="card-right">
+                <button class="btn-choose1 ${p.top ? 'premium-btn' : ''}" onclick="${p.disabled ? 'salut()' : `selectPlan('${p.key}')`}">Choisir →</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function salut(){ alert("Sèvis sa poko disponib"); }
+
+/* ===== CHANJMAN ETAP ===== */
+function goToStep(step){
+    steps.forEach(s => document.getElementById('step-' + s).classList.add('hidden'));
+    document.getElementById('step-' + step).classList.remove('hidden');
+    renderEtapBar(step);
+    window.scrollTo(0,0);
+}
+
+function renderEtapBar(current){
+    if (current === "plans") return;
+    const idxCourant = ["checkout","paiement","recap"].indexOf(current);
+    const labels = [["Informations","checkout"],["Paiement","paiement"],["Récapitulatif","recap"]];
+    const html = labels.map(([label, key], i) => {
+        const idxKey = ["checkout","paiement","recap"].indexOf(key);
+        const done = idxKey < idxCourant;
+        const aktif = idxKey <= idxCourant;
+        return `<div class="etap ${aktif ? 'aktif' : ''}">
+            <span class="etap-chif">${done ? '&#10003;' : (i+1)}</span>
+            <span class="etap-tiks">${label}</span>
+        </div>`;
+    }).join('');
+    document.getElementById('etap-bar-' + current).innerHTML = html;
+}
+
+/* ===== ETAP 1 : CHECKOUT ===== */
+function selectPlan(key){
+    let mounNanKonekte = localStorage.getItem("user_connecte");
+    let imelMounNan = localStorage.getItem("user_email");
+    if (mounNanKonekte !== "true" || !imelMounNan) {
+        window.location.href = "connexion-disney.html";
+        return;
+    }
+    state.plan = plans[key];
+    document.getElementById('champ-profil').classList.toggle('hidden', !state.plan.needsProfile);
+    document.getElementById('champ-pin').classList.toggle('hidden', !state.plan.needsProfile);
+    document.getElementById('tag-profil-type').innerText = state.plan.needsProfile ? "INFOS — PROFIL PRIVÉ" : "INFOS — PROFIL PARTAGÉ";
+    goToStep('checkout');
+}
+
+function validerCheckout(){
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    if (whatsapp === "") { alert("Silvouplè antre nimewo WhatsApp ou a"); return; }
+
+    if (state.plan.needsProfile) {
+        const profil = document.getElementById('disney-profil').value.trim();
+        const pin = document.getElementById('pin-code').value.trim();
+        if (profil === "" || pin === "") { alert("Silvouplè, ranpli tout jaden yo anvan ou kontinye."); return; }
+        if (pin.length < 4) { alert("PIN nan dwe gen 4 chif."); return; }
+        state.profil = profil;
+        state.pin = pin;
+    }
+    state.whatsapp = whatsapp;
+
+    document.getElementById('montant-moncash').innerText = state.plan.prix + " G";
+    document.getElementById('montant-natcash').innerText = state.plan.prix + " G";
+    goToStep('paiement');
+}
+
+/* ===== ETAP 2 : PAIEMENT ===== */
+function chwaziMetod(metod){
+    state.metod = metod;
+    document.getElementById('bwat-moncash').classList.add('d-none');
+    document.getElementById('bwat-natcash').classList.add('d-none');
+    document.getElementById('btn-moncash').classList.remove('aktive');
+    document.getElementById('btn-natcash').classList.remove('aktive');
+
+    if (metod === 'moncash') {
+        document.getElementById('bwat-moncash').classList.remove('d-none');
+        document.getElementById('btn-moncash').classList.add('aktive');
+    } else {
+        document.getElementById('bwat-natcash').classList.remove('d-none');
+        document.getElementById('btn-natcash').classList.add('aktive');
+    }
+}
+
+function kopieNimewo(nimewo){
+    navigator.clipboard.writeText(nimewo);
+    alert("Nimewo a kopye: " + nimewo);
+}
+
+function validerPaiement(){
+    if (state.metod === "") { alert("Silvouplè chwazi yon fason pou w peye (MonCash oswa NatCash)!"); return; }
+
+    let txnId = "";
+    if (state.metod === "moncash") {
+        txnId = document.getElementById('txn_id_moncash').value.trim();
+        if (txnId.length < 12 || !txnId.startsWith("003")) {
+            alert("ID Transaksyon MonCash lan dwe gen 12 chif epi kòmanse pa 003!");
+            return;
+        }
+    } else {
+        txnId = document.getElementById('txn_id_natcash').value.trim();
+        if (txnId.length < 12 || !txnId.startsWith("260")) {
+            alert("ID Transaksyon NatCash lan dwe gen 12 chif epi kòmanse pa 260!");
+            return;
+        }
+    }
+    state.txnId = txnId;
+
+    document.getElementById('recap-non-sevis').innerHTML = `${state.plan.nom} <span style="color:#555; font-size:0.9rem;">x1</span>`;
+    document.getElementById('recap-pri-anwo').innerText = state.plan.prix + " G";
+    document.getElementById('recap-sous-total').innerText = state.plan.prix + " G";
+    document.getElementById('recap-total-final').innerText = state.plan.prix + " G";
+    document.getElementById('recap-whatsapp').innerText = state.whatsapp;
+    goToStep('recap');
+}
+
+/* ===== ETAP 3 : RECAPITULATIF ===== */
+function tchekeCheckbox(){
+    const checkbox = document.getElementById('accept-rules');
+    const btn = document.getElementById('btn-finaliser');
+    btn.disabled = !checkbox.checked;
+    btn.style.opacity = checkbox.checked ? "1" : "0.4";
+}
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+    authDomain: "mwstore-526d1.firebaseapp.com",
+    projectId: "mwstore-526d1",
+    storageBucket: "mwstore-526d1.firebasestorage.app",
+    messagingSenderId: "901851187874",
+    appId: "1:901851187874:web:a5936637da5cfa925325fb"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function soumetKomand(){
+    const imelKliyan = localStorage.getItem("user_email") || "Non connecté";
+    const datJodia = new Date().toISOString().split('T')[0];
+
+    db.collection("commandes").add({
+        user_email: imelKliyan,
+        whatsapp: state.whatsapp,
+        service: state.plan.nom + " x1",
+        montant: state.plan.prix + " G",
+        paiement: state.metod,
+        transaction_id: state.txnId,
+        profil: state.profil || "",
+        date: datJodia,
+        status: "encour"
+    }).then(() => {
+        window.location.href = "succes.html";
+    }).catch((error) => {
+        alert("Erreur Firebase: " + error.message);
+        console.error(error);
+    });
+}
+
+/* ===== DEMARAJ ===== */
+renderPlans();
+</script>
+
 </body>
-</html> 
+</html>
