@@ -1430,3 +1430,23 @@ body {
 .champ-saisie input::placeholder {
     color: #444444;
 }
+
+
+/* ==========================================================================
+   BOUTON RETOU (← Accueil / ← Catégories) — soti nan style12.css
+   ========================================================================== */
+
+/* Zòn anlè nèt kote bouton retou a chita */
+.hero-top {
+    padding-left: 20px; /* Pouse bouton an pou l pa kole sou bò gòch ekran an */
+}
+
+.btn-back {
+    background: rgba(0, 0, 0, 0.6); /* Background nwa transparan */
+    border: 1px solid #444; /* Ti bordi gri */
+    color: white; /* Tèks bouton an blan */
+    padding: 8px 16px; /* Espas andedan bouton an */
+    border-radius: 20px; /* Fè kwen bouton an won */
+    font-size: 1rem; /* Gwosè tèks la */
+    cursor: pointer; /* Fè sourit la tounen yon ti men lè w pase sou li */
+}
