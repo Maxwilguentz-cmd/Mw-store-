@@ -51,7 +51,7 @@
                 <span></span>
             </div>
             <div class="dropdown-connexion" id="box-connexion">
-                <a href="connexion.html">
+                <a href="#" onclick="afficheConnexion(); return false;">
                     <i class="fa-solid fa-right-to-bracket" style="color: #cca43b;"></i> Connexion
                 </a>
             </div>
@@ -346,11 +346,64 @@
         </div>
     </section>
 
+    <!-- ================= SEKSYON 4 : KONEKSYON (parèt otomatik si pa konekte) ================= -->
+    <section id="section-connexion" class="hidden">
+        <div class="header-checkout" style="max-width:450px; margin:0 auto;">
+            <div class="logo-checkout">Mw<span>Store</span></div>
+        </div>
+
+        <div class="info-banner" style="width:100%; max-width:450px; margin:0 auto 30px auto; background:rgba(18,17,14,0.8); border:1px solid #2b2518; border-radius:12px; padding:15px; text-align:center; font-size:0.95rem; color:#e2e8f0;">
+            Connecte-toi pour commander.
+        </div>
+
+        <main class="login-container" style="width:100%; max-width:450px; margin:0 auto; display:flex; flex-direction:column; align-items:center; padding-bottom:40px;">
+            <div class="main-logo-center" style="width:50px; height:50px; border:2px solid #cca43b; border-radius:12px; display:flex; align-items:center; justify-content:center; transform:rotate(45deg); margin-bottom:25px; background:#12110e;">
+                <span class="inner-text" style="transform:rotate(-45deg); color:#cca43b; font-weight:bold; font-size:0.9rem;">Mw</span>
+            </div>
+
+            <h1>Bon retour</h1>
+            <p class="subtitle" style="color:#8a99ad; margin-bottom:30px;">Se connecter à MW STORE</p>
+
+            <form id="form-connexion" style="width:100%;">
+                <div class="input-group" style="position:relative; margin-bottom:16px;">
+                    <i class="fa-regular fa-envelope input-icon" style="position:absolute; left:15px; top:50%; transform:translateY(-50%); color:#8a99ad;"></i>
+                    <input type="email" id="cx-email" placeholder="Adresse email" required style="width:100%; padding:16px 16px 16px 45px; background:#12110e; border:1px solid #2b2518; border-radius:12px; color:#fff; font-size:1rem; outline:none;">
+                </div>
+
+                <div class="input-group" style="position:relative; margin-bottom:16px;">
+                    <i class="fa-solid fa-lock input-icon" style="position:absolute; left:15px; top:50%; transform:translateY(-50%); color:#8a99ad;"></i>
+                    <input type="password" id="cx-password" placeholder="Mot de passe" required style="width:100%; padding:16px 16px 16px 45px; background:#12110e; border:1px solid #2b2518; border-radius:12px; color:#fff; font-size:1rem; outline:none;">
+                </div>
+
+                <button type="submit" class="btn-submit" style="width:100%; padding:16px; background:#fff; color:#000; border:none; border-radius:30px; font-size:1.05rem; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
+                    Connexion <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <div class="no-account" style="text-align:center; font-size:0.95rem; color:#8a99ad; margin-bottom:25px;">
+                    Poko gen yon kont? <a href="inscription.html" style="color:#cca43b; text-decoration:none; font-weight:600;">S'inscrire</a>
+                </div>
+            </form>
+        </main>
+    </section>
+
     <script src="script.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
+            authDomain: "mwstore-526d1.firebaseapp.com",
+            projectId: "mwstore-526d1",
+            storageBucket: "mwstore-526d1.firebasestorage.app",
+            messagingSenderId: "901851187874",
+            appId: "1:901851187874:web:a5936637da5cfa925325fb"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
         function afficheStreaming(){
             document.getElementById('section-categories').classList.add('hidden');
             document.getElementById('section-streaming').classList.remove('hidden');
@@ -374,6 +427,52 @@
 
         document.addEventListener('click', function() {
             document.getElementById('box-connexion').classList.remove('show');
+        });
+
+        /* ================= KONEKSYON (SEKSYON 4) ================= */
+        let pendingApresConeksyon = null;
+
+        function afficheConnexion(callback){
+            pendingApresConeksyon = callback || null;
+            document.getElementById('box-connexion').classList.remove('show');
+            ["section-categories","section-streaming","section-netflix"].forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById('section-connexion').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function requireLogin(callback){
+            let mounNanKonekte = localStorage.getItem("user_connecte");
+            let imelMounNan = localStorage.getItem("user_email");
+            if (mounNanKonekte === "true" && imelMounNan) {
+                callback();
+            } else {
+                afficheConnexion(callback);
+            }
+        }
+
+        document.getElementById('form-connexion').addEventListener('submit', async function(e){
+            e.preventDefault();
+            const email = document.getElementById('cx-email').value.trim();
+            const password = document.getElementById('cx-password').value;
+            const btnSubmit = e.target.querySelector('.btn-submit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Vérification...";
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                localStorage.setItem("user_connecte", "true");
+                localStorage.setItem("user_email", email);
+                document.getElementById('section-connexion').classList.add('hidden');
+                if (pendingApresConeksyon) {
+                    pendingApresConeksyon();
+                    pendingApresConeksyon = null;
+                } else {
+                    document.getElementById('section-categories').classList.remove('hidden');
+                }
+            } catch (error) {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `Connexion <i class="fa-solid fa-arrow-right"></i>`;
+                alert("Erreur de connexion: Email ou mot de passe incorrect.");
+            }
         });
 
         /* ================= NETFLIX (SEKSYON 3) ================= */
@@ -441,17 +540,13 @@
         }
 
         function nfSelectPlan(key){
-            let mounNanKonekte = localStorage.getItem("user_connecte");
-            let imelMounNan = localStorage.getItem("user_email");
-            if (mounNanKonekte !== "true" || !imelMounNan) {
-                window.location.href = "connexion.html";
-                return;
-            }
-            nfState.plan = nfPlans[key];
-            document.getElementById('nf-champ-profil').classList.toggle('hidden', !nfState.plan.needsProfile);
-            document.getElementById('nf-champ-pin').classList.toggle('hidden', !nfState.plan.needsProfile);
-            document.getElementById('nf-tag-profil-type').innerText = nfState.plan.needsProfile ? "INFOS — PROFIL PRIVÉ" : "INFOS — PROFIL PARTAGÉ";
-            nfGoToStep('checkout');
+            requireLogin(function(){
+                nfState.plan = nfPlans[key];
+                document.getElementById('nf-champ-profil').classList.toggle('hidden', !nfState.plan.needsProfile);
+                document.getElementById('nf-champ-pin').classList.toggle('hidden', !nfState.plan.needsProfile);
+                document.getElementById('nf-tag-profil-type').innerText = nfState.plan.needsProfile ? "INFOS — PROFIL PRIVÉ" : "INFOS — PROFIL PARTAGÉ";
+                nfGoToStep('checkout');
+            });
         }
 
         function nfValiderCheckout(){
@@ -527,17 +622,6 @@
             btn.disabled = !checkbox.checked;
             btn.style.opacity = checkbox.checked ? "1" : "0.4";
         }
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCLI1saOnC901wS54bR57Pni6qr5C4PrzM",
-            authDomain: "mwstore-526d1.firebaseapp.com",
-            projectId: "mwstore-526d1",
-            storageBucket: "mwstore-526d1.firebasestorage.app",
-            messagingSenderId: "901851187874",
-            appId: "1:901851187874:web:a5936637da5cfa925325fb"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
 
         function nfSoumetKomand(){
             const imelKliyan = localStorage.getItem("user_email") || "Non connecté";
